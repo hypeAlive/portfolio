@@ -1,0 +1,9 @@
+<label class="swap swap-rotate btn btn-ghost btn-circle hover:bg-transparent active:scale-110" #nativeElement>
+
+  <!-- this hidden checkbox controls the state -->
+  <input type="checkbox" #checkbox (change)="this.next()"/>
+
+  <ng-icon class="swap-on" #onIcon/>
+  <ng-icon class="swap-off" #offIcon/>
+
+</label>

@@ -5,6 +5,9 @@ import { routes } from './app.routes';
 import {HttpClient} from "@angular/common/http";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {BrowserModule} from "@angular/platform-browser";
+import {NgIconsModule} from "@ng-icons/core";
+import {featherMenu} from "@ng-icons/feather-icons";
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -14,6 +17,6 @@ export const appConfig: ApplicationConfig = {
       BrowserModule,
       BrowserAnimationsModule
     ),
-    provideRouter(routes)
+    provideRouter(routes), provideAnimationsAsync()
   ]
 };

@@ -1,13 +1,13 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import {Button} from "primeng/button";
 import {ThemeService} from "./shared/theme/theme.service";
 import {Themes} from "./shared/theme/Themes";
+import {HeaderModule} from "./header/header.module";
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, Button],
+  imports: [RouterOutlet, HeaderModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
@@ -18,6 +18,7 @@ export class AppComponent {
   }
 
   protected toggleTheme() {
-    this.themeService.getTheme() === Themes.LARA_DARK_PURPLE ? this.themeService.switchTheme(Themes.LARA_LIGHT_PURPLE) : this.themeService.switchTheme(Themes.LARA_DARK_PURPLE);
+    this.themeService.getTheme() === Themes.DARK ? this.themeService.switchTheme(Themes.LIGHT) : this.themeService.switchTheme(Themes.DARK);
   }
+
 }

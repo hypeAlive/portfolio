@@ -1,0 +1,35 @@
+<header class="container m-auto ">
+  <div class="navbar bg-base-100">
+    <div class="navbar-start">
+      <button class="icon-medium">
+        N
+      </button>
+    </div>
+    <div class="navbar-center flex-col relative" #navbarCenter>
+      <div class="flex">
+        <a href="#" class="btn btn-ghost custom-link" #customLink>
+          About
+        </a>
+        <a href="#" class="btn btn-ghost custom-link" #customLink>
+          Experience
+        </a>
+        <a href="#" class="btn btn-ghost custom-link" #customLink>
+          Projects
+        </a>
+        <a href="#" class="btn btn-ghost custom-link" #customLink>
+          Contact
+        </a>
+      </div>
+      <div class="underline" #underline></div>
+    </div>
+    <div class="navbar-end">
+      <div tabindex="0">
+        <btn-swap
+          class="icon-medium"
+          [icons]="this.getThemeSwitchIcons()"
+          #themeSwitch
+        />
+      </div>
+    </div>
+  </div>
+</header>
