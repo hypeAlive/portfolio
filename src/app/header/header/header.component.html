@@ -1,5 +1,5 @@
-<header class="container m-auto ">
-  <div class="navbar bg-base-100">
+<header class="fixed z-50 w-full transition-all duration-500" [ngClass]="{'header-bg': this.screenTop > 20}">
+  <div class="container m-auto navbar">
     <div class="navbar-start">
       <button class="icon-medium">
         N
@@ -7,16 +7,35 @@
     </div>
     <div class="navbar-center flex-col relative" #navbarCenter>
       <div class="flex">
-        <a href="#" i18n class="btn btn-ghost custom-link" #customLink>
+        <a href="#"
+           i18n
+           class="btn btn-ghost custom-link transition-all"
+           [ngClass]="{'font-size': this.screenTop < 20}"
+           #customLink>
           Über mich
         </a>
-        <a href="#" i18n class="btn btn-ghost custom-link" #customLink>
+        <a href="#"
+           i18n
+           [ngClass]="{'font-size': this.screenTop < 20}"
+           class="btn btn-ghost
+           custom-link"
+           #customLink>
           Erfahrung
         </a>
-        <a href="#" i18n class="btn btn-ghost custom-link" #customLink>
+        <a href="#"
+           i18n
+           [ngClass]="{'font-size': this.screenTop < 20}"
+           class="btn btn-ghost
+           custom-link"
+           #customLink>
           Projekte
         </a>
-        <a href="#" i18n class="btn btn-ghost custom-link" #customLink>
+        <a href="#"
+           i18n
+           [ngClass]="{'font-size': this.screenTop < 20}"
+           class="btn btn-ghost
+           custom-link"
+           #customLink>
           Kontakt
         </a>
       </div>

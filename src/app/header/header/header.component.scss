@@ -16,6 +16,10 @@ $transition-duration: 0.3s;
   }
 }
 
+.header-bg {
+  @apply backdrop-blur-sm bg-base-300 bg-opacity-70 drop-shadow-2xl;
+}
+
 .underline {
   position: absolute;
   height: 2px;
@@ -24,4 +28,8 @@ $transition-duration: 0.3s;
   transform: translateX(-50%);
   background-color: oklch(var(--bc));
   transition: width $transition-duration ease-in-out, left $transition-duration ease-in-out;
+}
+
+.font-size {
+  transform: scale(1.1);
 }

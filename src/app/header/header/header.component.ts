@@ -1,9 +1,9 @@
 import {
   AfterViewInit,
   Component,
-  ElementRef,
+  ElementRef, HostListener, Inject,
   OnDestroy,
-  OnInit,
+  OnInit, PLATFORM_ID,
   QueryList,
   ViewChild,
   ViewChildren
@@ -21,6 +21,8 @@ import {ThemeService} from "../../shared/theme/theme.service";
 import {Subscription} from "rxjs";
 import {Themes} from "../../shared/theme/Themes";
 import {SwapComponent} from "../../shared/swap/swap.component";
+import {state} from "@angular/animations";
+import {isPlatformBrowser} from "@angular/common";
 
 @Component({
   selector: 'app-header',
@@ -28,7 +30,7 @@ import {SwapComponent} from "../../shared/swap/swap.component";
   styleUrl: './header.component.scss',
   providers: [provideIcons({featherMenu, heroSun, heroMoon, heroXMarkSolid, heroBars3Solid})]
 })
-export class HeaderComponent implements AfterViewInit, OnDestroy {
+export class HeaderComponent implements AfterViewInit, OnDestroy, OnInit {
 
   @ViewChild('themeSwitch') themeSwitch!: SwapComponent;
   @ViewChild('underline') underlineElement!: ElementRef;
@@ -37,7 +39,15 @@ export class HeaderComponent implements AfterViewInit, OnDestroy {
 
   private themeIconSubscription!: Subscription;
 
-  constructor(private themeService: ThemeService) {
+  protected screenTop = 0;
+
+  constructor(private themeService: ThemeService, @Inject(PLATFORM_ID) private platformId: Object) {
+  }
+
+  @HostListener('window:scroll', [])
+  onScroll(): void {
+    if (!isPlatformBrowser(this.platformId)) return;
+    this.screenTop = window.scrollY || document.documentElement.scrollTop || document.body.scrollTop || 0;
   }
 
   ngAfterViewInit(): void {
@@ -88,6 +98,10 @@ export class HeaderComponent implements AfterViewInit, OnDestroy {
     this.underlineElement.nativeElement.style.width = `${rect.width}px`;
     this.underlineElement.nativeElement.style.left = `${rect.left - navbarRect.left + rect.width / 2}px`;
     this.underlineElement.nativeElement.style.transformOrigin = 'center';
+  }
+
+  ngOnInit(): void {
+    this.onScroll();
   }
 
 }
