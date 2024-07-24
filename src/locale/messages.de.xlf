@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+  <file source-language="en" datatype="plaintext" original="ng2.template">
+    <body>
+      <trans-unit id="5534079326129790974" datatype="html">
+        <source> test
+        </source>
+        <target> Prüfung </target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/app.component.html</context>
+          <context context-type="linenumber">3,5</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8197921676324803850" datatype="html">
+        <source> About </source>
+        <target> Über mich </target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/header/header/header.component.html</context>
+          <context context-type="linenumber">11</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7899363614744571742" datatype="html">
+        <source> Experience </source>
+        <target> Erfahrung </target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/header/header/header.component.html</context>
+          <context context-type="linenumber">14</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7571931095853268764" datatype="html">
+        <source> Projects </source>
+        <target> Projekte </target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/header/header/header.component.html</context>
+          <context context-type="linenumber">17</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8478716983552743608" datatype="html">
+        <source> Contact </source>
+        <target> Kontakt </target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/header/header/header.component.html</context>
+          <context context-type="linenumber">20</context>
+        </context-group>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>
