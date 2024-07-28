@@ -1,28 +1,26 @@
 import {
   AfterViewInit,
   Component,
-  ElementRef, HostListener, Inject,
+  ElementRef,
+  HostListener,
+  Inject,
   OnDestroy,
-  OnInit, PLATFORM_ID,
+  OnInit,
+  PLATFORM_ID,
   QueryList,
   ViewChild,
   ViewChildren
 } from '@angular/core';
 import {provideIcons} from "@ng-icons/core";
-import {
-  featherMenu,
-  featherMoon,
-  featherSun,
-  featherX
-} from "@ng-icons/feather-icons";
-import {heroSun, heroMoon} from "@ng-icons/heroicons/outline";
+import {featherMenu} from "@ng-icons/feather-icons";
+import {heroMoon, heroSun} from "@ng-icons/heroicons/outline";
 import {heroBars3Solid, heroXMarkSolid} from "@ng-icons/heroicons/solid";
 import {ThemeService} from "../../shared/theme/theme.service";
 import {Subscription} from "rxjs";
 import {Themes} from "../../shared/theme/Themes";
 import {SwapComponent} from "../../shared/swap/swap.component";
-import {state} from "@angular/animations";
 import {isPlatformBrowser} from "@angular/common";
+import {Direction, ParallaxBuilder} from "../../shared/parallax.directive";
 
 @Component({
   selector: 'app-header',
@@ -37,6 +35,18 @@ export class HeaderComponent implements AfterViewInit, OnDestroy, OnInit {
   @ViewChildren('customLink', { read: ElementRef }) customLinks!: QueryList<ElementRef>;
   @ViewChild('navbarCenter') navbarCenter!: ElementRef;
 
+
+  protected opacityParallax = ParallaxBuilder.fromConfig({
+    scrollStart: 0,
+    direction: Direction.POSITIVE,
+    valueName: 'opacity',
+    maxValue: 1,
+    position: 'absolute',
+    minValue: 0.5,
+    startValue: 0,
+    unit: ' ',
+    strength: 0.004,
+  });
   private themeIconSubscription!: Subscription;
 
   protected screenTop = 0;
@@ -104,6 +114,7 @@ export class HeaderComponent implements AfterViewInit, OnDestroy, OnInit {
     this.onScroll();
   }
 
+  protected readonly ParallaxBuilder = ParallaxBuilder;
 }
 
 /**

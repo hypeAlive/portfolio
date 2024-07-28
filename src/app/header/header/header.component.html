@@ -1,4 +1,8 @@
-<header class="fixed z-50 w-full transition-all duration-500" [ngClass]="{'header-bg': this.screenTop > 20}">
+<header
+  class="fixed z-50 w-full transition-all duration-500"
+>
+  <div [parallax]="opacityParallax" class="header-bg" style="width: 100vw; height: 100%; top: 0; left: 0; z-index: -1;">
+  </div>
   <div class="container m-auto navbar">
     <div class="navbar-start">
       <button class="icon-medium">

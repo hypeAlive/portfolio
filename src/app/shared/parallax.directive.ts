@@ -11,32 +11,47 @@ import {
 } from '@angular/core';
 import {isPlatformBrowser} from "@angular/common";
 import {DeviceDetectorService} from "ngx-device-detector";
+import {LoggerService} from "./logger/logger.service";
 
 /**
  * Enum für die Richtung des Parallax-Effekts.
  */
 export enum Direction {
-  positive = "+",
-  negative = "-"
+  POSITIVE = "+",
+  NEGATIVE = "-"
+}
+
+export type ParallaxConfig = {
+  valueName: string,
+  startValue: number,
+  position?: 'absolute' | 'relative',
+  maxValue?: number,
+  minValue?: number,
+  unit: string,
+  direction: Direction,
+  strength: number,
+  scrollStart: number
 }
 
 export class ParallaxBuilder {
 
     public static Direction = Direction;
 
-    public static fromConfig(config: {
-      valueName: string,
-      position: number,
-      direction: Direction,
-      strength: number,
-      scrollStart: number
-    }): ParallaxBuilder {
-      return new ParallaxBuilder()
+    public static fromConfig(config: ParallaxConfig): ParallaxBuilder {
+
+      const builder = new ParallaxBuilder()
         .setValueName(config.valueName)
-        .setPosition(config.position)
+        .setStartValue(config.startValue)
         .setDirection(config.direction)
         .setStrength(config.strength)
         .setScrollStart(config.scrollStart);
+
+      if(config.maxValue !== undefined) builder.setMaxValue(config.maxValue)
+      if(config.minValue !== undefined) builder.setMinValue(config.minValue)
+      if (config.unit !== undefined) builder.setUnit(config.unit);
+      if(config.position !== undefined) builder.setPosition(config.position)
+
+      return builder;
     }
 
     public static create(): ParallaxBuilder {
@@ -47,16 +62,12 @@ export class ParallaxBuilder {
       return new ParallaxBuilder();
     }
 
-    private config: {
-      valueName: string,
-      position: number,
-      direction: Direction,
-      strength: number,
-      scrollStart: number
-    } = {
+    private config: ParallaxConfig = {
       valueName: "top",
-      position: 0,
-      direction: Direction.positive,
+      startValue: 0,
+      unit: "px",
+      direction: Direction.POSITIVE,
+      position: "relative",
       strength: 1,
       scrollStart: 0
     };
@@ -66,7 +77,27 @@ export class ParallaxBuilder {
       return this;
     }
 
-    public setPosition(position: number): ParallaxBuilder {
+    public setStartValue(value: number): ParallaxBuilder {
+      this.config.startValue = value;
+      return this;
+    }
+
+    public setMaxValue(value: number): ParallaxBuilder {
+      this.config.maxValue = value;
+      return this;
+    }
+
+    public setMinValue(value: number): ParallaxBuilder {
+      this.config.minValue = value;
+      return this;
+    }
+
+    public setUnit(unit: string): ParallaxBuilder {
+      this.config.unit = unit;
+      return this;
+    }
+
+    public setPosition(position: 'absolute' | 'relative'): ParallaxBuilder {
       this.config.position = position;
       return this;
     }
@@ -86,19 +117,13 @@ export class ParallaxBuilder {
       return this;
     }
 
-    public build(): {
-      valueName: string,
-      position: number,
-      direction: Direction,
-      strength: number,
-      scrollStart: number
-    } {
+    public build(): ParallaxConfig {
       return this.config;
     }
 }
 
 @Directive({
-  selector: '[heroParallax]',
+  selector: '[parallax]',
   standalone: true
 })
 export class ParallaxDirective implements OnInit, OnDestroy {
@@ -113,15 +138,9 @@ export class ParallaxDirective implements OnInit, OnDestroy {
    * @param {number} strength - Die Stärke des Parallax-Effekts.
    * @param {number} scrollStart - Der Scroll-Wert, bei dem der Parallax-Effekt beginnt.
    */
-  @Input('heroParallax') builder: ParallaxBuilder | undefined;
+  @Input('parallax') builder: ParallaxBuilder | undefined;
 
-  private config: {
-    valueName: string,
-    position: number,
-    direction: Direction,
-    strength: number,
-    scrollStart: number
-  } | undefined;
+  private config: ParallaxConfig | undefined;
 
   /**
    * Gibt an, ob die Direktive aktiv ist.
@@ -147,10 +166,11 @@ export class ParallaxDirective implements OnInit, OnDestroy {
     let style = (window.getComputedStyle(this.ele.nativeElement) as any);
     let value2 :number = parseInt(style[valueName].slice(0, -2))
 
-    if(value2 !== this.config.position) {
+    if(value2 !== this.config.startValue) {
       let number:number = value2;
-      if(number < this.config.position + 80 || number > this.config.position - 80) {
-        this.renderer.setStyle(this.ele.nativeElement, this.config.valueName, this.config.position + "px");
+      if(number < this.config.startValue + 80 || number > this.config.startValue - 80) {
+        this.renderer.setStyle(this.ele.nativeElement, this.config.valueName, this.config.startValue + this.config.unit || "px");
+        console.debug()
       }
     }
 
@@ -160,10 +180,12 @@ export class ParallaxDirective implements OnInit, OnDestroy {
     }
 
     let value = `${
-      this.config.direction === Direction.positive ?
-        this.config.position + scrollY * this.config.strength :
-        this.config.position - scrollY * this.config.strength
-    }px`;
+      this.config.direction === Direction.POSITIVE ?
+        this.config.startValue + scrollY * this.config.strength :
+        this.config.startValue - scrollY * this.config.strength
+    }` + this.config.unit;
+
+    this.logger.debug("setting style ", valueName, value, " with unit ", this.config.unit)
 
     this.renderer.setStyle(this.ele.nativeElement, this.config.valueName, value);
   }
@@ -171,6 +193,7 @@ export class ParallaxDirective implements OnInit, OnDestroy {
   constructor(
     @Inject(PLATFORM_ID) private platformId: Object,
     private ele: ElementRef,
+    private logger: LoggerService,
     private device: DeviceDetectorService,
     private renderer: Renderer2) {
     this.config = this.builder?.build();
@@ -185,8 +208,8 @@ export class ParallaxDirective implements OnInit, OnDestroy {
 
     if(this.config === undefined) return;
 
-    this.renderer.setStyle(this.ele.nativeElement, "position", "relative");
-    this.renderer.setStyle(this.ele.nativeElement, "top", this.config.position + "px");
+    this.renderer.setStyle(this.ele.nativeElement, "position", this.config.position || "relative");
+    this.renderer.setStyle(this.ele.nativeElement, this.config.valueName, this.config.startValue + this.config.unit || "px");
 
     if(isPlatformBrowser(this.platformId))
       this.onWindowScroll(null);
