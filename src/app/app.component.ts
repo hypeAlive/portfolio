@@ -4,11 +4,12 @@ import {ThemeService} from "./shared/theme/theme.service";
 import {Themes} from "./shared/theme/Themes";
 import {HeaderModule} from "./header/header.module";
 import {NgOptimizedImage} from "@angular/common";
+import {FooterComponent} from "./footer/footer.component";
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, HeaderModule, NgOptimizedImage],
+  imports: [RouterOutlet, HeaderModule, NgOptimizedImage, FooterComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
