@@ -18,5 +18,13 @@
   box-sizing: border-box;
 }
 
+.my-clickable {
+  @apply cursor-pointer;
+  transition: color 0.3s ease-in-out;
+  &:hover, &:active {
+    color: oklch(var(--bc) / 0.75);
+  }
+}
+
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
