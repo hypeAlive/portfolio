@@ -42,9 +42,9 @@ export class HeaderComponent implements AfterViewInit, OnDestroy, OnInit {
     valueName: 'opacity',
     maxValue: 1,
     position: 'absolute',
-    minValue: 0.5,
+    minValue: 0,
     startValue: 0,
-    unit: ' ',
+    unit: '',
     strength: 0.004,
   });
   private themeIconSubscription!: Subscription;

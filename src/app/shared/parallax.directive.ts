@@ -27,7 +27,7 @@ export type ParallaxConfig = {
   position?: 'absolute' | 'relative',
   maxValue?: number,
   minValue?: number,
-  unit: string,
+  unit: string ,
   direction: Direction,
   strength: number,
   scrollStart: number
@@ -164,30 +164,32 @@ export class ParallaxDirective implements OnInit, OnDestroy {
     let valueName:string = this.config.valueName;
 
     let style = (window.getComputedStyle(this.ele.nativeElement) as any);
-    let value2 :number = parseInt(style[valueName].slice(0, -2))
-
-    if(value2 !== this.config.startValue) {
-      let number:number = value2;
-      if(number < this.config.startValue + 80 || number > this.config.startValue - 80) {
-        this.renderer.setStyle(this.ele.nativeElement, this.config.valueName, this.config.startValue + this.config.unit || "px");
-        console.debug()
-      }
-    }
+    let value2 :number = parseFloat(style.getPropertyValue(this.config.valueName).replace(this.config.unit || false, ""))
 
     let scrollY = window.scrollY - this.config.scrollStart;
     if(scrollY < 0)  {
       return;
     }
 
-    let value = `${
-      this.config.direction === Direction.POSITIVE ?
-        this.config.startValue + scrollY * this.config.strength :
-        this.config.startValue - scrollY * this.config.strength
-    }` + this.config.unit;
+    let rawVal = this.config.direction === Direction.POSITIVE ?
+      this.config.startValue + scrollY * this.config.strength :
+      this.config.startValue - scrollY * this.config.strength;
 
-    this.logger.debug("setting style ", valueName, value, " with unit ", this.config.unit)
+    if(this.config.maxValue && rawVal >= this.config.maxValue) {
+      if(value2 === this.config.maxValue) return;
+      rawVal = this.config.maxValue;
+    }
+    if(this.config.minValue && rawVal < this.config.minValue) {
+      if (value2 === this.config.minValue) return;
+      rawVal = this.config.minValue;
+    }
 
-    this.renderer.setStyle(this.ele.nativeElement, this.config.valueName, value);
+
+    let strVal = rawVal + this.config.unit;
+
+    this.logger.debug("setting style", valueName, "to", strVal)
+
+    this.renderer.setStyle(this.ele.nativeElement, this.config.valueName, strVal);
   }
 
   constructor(
