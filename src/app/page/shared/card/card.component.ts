@@ -7,7 +7,7 @@ import {
   diJavascriptOriginal,
   diPythonOriginal, diTypescriptOriginal
 } from "@ng-icons/devicon/original";
-import {NgForOf} from "@angular/common";
+import {NgClass, NgForOf} from "@angular/common";
 
 export enum PROGRAMMING_LANGUAGES {
   ANGULAR = diAngularOriginal,
@@ -23,7 +23,8 @@ export enum PROGRAMMING_LANGUAGES {
   standalone: true,
   imports: [
     NgIcon,
-    NgForOf
+    NgForOf,
+    NgClass
   ],
   templateUrl: './card.component.html',
   styleUrl: './card.component.scss',
@@ -38,8 +39,17 @@ export enum PROGRAMMING_LANGUAGES {
 export class CardComponent {
   @Input('languages') languages: PROGRAMMING_LANGUAGES[] = [];
 
+  protected active = false;
+
   protected getLangauges(): string[] {
     return this.languages as any as string[];
   }
+
+  // card component
+  // https://codepen.io/katywellington91/pen/PoGVzwZ
+
+  // carousel
+  // https://codepen.io/aybukeceylan/pen/RwrRPoO
+
 
 }

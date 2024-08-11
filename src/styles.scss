@@ -26,5 +26,17 @@
   }
 }
 
+h1 {
+  font-weight: 700 !important;
+}
+
+h2 {
+  font-weight: 500 !important;
+}
+
+.extra-bold {
+  font-weight: 900 !important;
+}
+
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
