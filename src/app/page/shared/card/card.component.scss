@@ -51,7 +51,7 @@ figure.active:before {
         transform: translateY(0px);
         @for $i from 1 through 10 {
           &:nth-child(#{$i}) {
-            transition-delay: $i * 0.05s;
+            transition-delay: $i * 0.02s;
           }
         }
       }
@@ -70,9 +70,9 @@ figure.active:before {
   }
 }
 .card:before{
-  opacity: 0.3;
-  transition: opacity 0.3s ease-in-out;
+  opacity: 0.8;
+  transition: opacity 0.8s ease-in-out;
 }
 .card.active:before {
-  opacity: 0.6;
+  opacity: 0.5;
 }

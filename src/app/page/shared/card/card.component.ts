@@ -8,6 +8,7 @@ import {
   diPythonOriginal, diTypescriptOriginal
 } from "@ng-icons/devicon/original";
 import {NgClass, NgForOf} from "@angular/common";
+import {MouseLightEffectDirective} from "../mouse-light-effect.directive";
 
 export enum PROGRAMMING_LANGUAGES {
   ANGULAR = diAngularOriginal,
@@ -24,7 +25,8 @@ export enum PROGRAMMING_LANGUAGES {
   imports: [
     NgIcon,
     NgForOf,
-    NgClass
+    NgClass,
+    MouseLightEffectDirective
   ],
   templateUrl: './card.component.html',
   styleUrl: './card.component.scss',
@@ -44,6 +46,9 @@ export class CardComponent {
   protected getLangauges(): string[] {
     return this.languages as any as string[];
   }
+
+
+
 
   // card component
   // https://codepen.io/katywellington91/pen/PoGVzwZ
