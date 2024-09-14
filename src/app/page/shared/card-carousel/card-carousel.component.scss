@@ -31,7 +31,7 @@ input[type="radio"] {
     top: -5%;
     left: -5%;
     background-color: var(--fallback-b1, oklch(var(--b1) / 1));
-    opacity: 0.5;
+    opacity: 0.3;
     filter: blur(10px);
     transition: opacity 0.5s ease;
     z-index: 1;
@@ -63,7 +63,7 @@ input[type="radio"] {
   transform: translateX(100%) scale(0.6);
   z-index: 0;
   &::before {
-    opacity: 0.8;
+    opacity: 0.6;
   }
 }
 
