@@ -38,5 +38,10 @@ h2 {
   font-weight: 900 !important;
 }
 
+.text-glow {
+  -webkit-filter: drop-shadow(0 0 0.5rem oklch(var(--nc)));
+  filter: drop-shadow(0 0 0.5rem oklch(var(--nc)));
+}
+
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

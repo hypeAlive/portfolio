@@ -1,24 +1,24 @@
-<div mouseLightEffect class="card bg-base-100 image-full w-96 shadow-xl overflow-hidden" [ngClass]="{'active': this.active}">
+<div mouseLightEffect class="card bg-base-100 image-full w-96 shadow-2xl overflow-hidden" [ngClass]="{'active': this.active}">
   <figure [ngClass]="{'active': this.active}">
     <img
       src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
       alt="Shoes" />
-    <h1 class="absolute">
-      PREISCXN
+    <h1 class="absolute uppercase bg-text">
+      PreisCxn
     </h1>
   </figure>
   <div class="card-body mt-52" [ngClass]="{'active': this.active}">
-    <h2 class="card-title justify-center" style="margin: 0;">
+    <h2 class="card-title justify-center drop-shadow-2xl" style="margin: 0;">
       PreisCxn
     </h2>
     <div class="card-actions justify-center">
       <ng-container *ngFor="let language of getLangauges()">
-        <div class="text-2xl">
+        <div class="text-2xl text-glow">
           <ng-icon [svg]="language"></ng-icon>
         </div>
       </ng-container>
     </div>
-    <p class="text-center">If a dog chews shoes whose shoes does he choose?</p>
+    <p class="text-center" style="color: oklch(var(--bc))">If a dog chews shoes whose shoes does he choose?</p>
     <div class="card-actions justify-center">
       <button class="btn">
         View Project

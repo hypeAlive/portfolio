@@ -41,7 +41,7 @@ export class MouseLightEffectDirective implements AfterViewInit {
     const height = this.el.nativeElement.offsetHeight;
 
     if (e.offsetX >= 0 && e.offsetX <= width && e.offsetY >= 0 && e.offsetY <= height) {
-      const style = `radial-gradient(circle at ${x}px ${y}px, oklch(var(--nc)), rgba(0,0,0,0))`;
+      const style = `radial-gradient(circle at ${x}px ${y}px, oklch(var(--bc)), rgba(0,0,0,0))`;
       this.renderer.setStyle(this.mask, 'background', style);
       this.renderer.setStyle(this.mask, '-webkit-mask-image', style); // Use gradient as mask image
       this.renderer.setStyle(this.mask, 'opacity', '0.2');

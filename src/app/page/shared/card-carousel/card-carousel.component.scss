@@ -1,0 +1,69 @@
+:host {
+  display: block;
+}
+.carousel-container {
+  width: 100%;
+  height: 100%;
+}
+
+input[type="radio"] {
+  display: none;
+}
+
+.carousel-cards {
+  display: flex;
+  transition: transform 0.5s ease;
+  position: relative;
+}
+
+.carousel-card {
+  max-width: max-content;
+  transition: transform 0.5s ease, opacity 0.5s ease;
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin: auto;
+  opacity: 0.5;
+  transform: scale(0.8);
+}
+
+#item-1:checked ~ .carousel-cards label:nth-child(1),
+#item-2:checked ~ .carousel-cards label:nth-child(2),
+#item-3:checked ~ .carousel-cards label:nth-child(3) {
+  opacity: 1;
+  transform: scale(1);
+  z-index: 1;
+}
+
+#item-1:checked ~ .carousel-cards label:nth-child(2),
+#item-2:checked ~ .carousel-cards label:nth-child(3),
+#item-3:checked ~ .carousel-cards label:nth-child(1) {
+  transform: translateX(100%) scale(0.8);
+  z-index: 0;
+}
+
+#item-1:checked ~ .carousel-cards label:nth-child(3),
+#item-2:checked ~ .carousel-cards label:nth-child(1),
+#item-3:checked ~ .carousel-cards label:nth-child(2) {
+  transform: translateX(-100%) scale(0.8);
+  z-index: 0;
+}
+
+.carousel-navigation {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+.nav-button {
+  width: 10px;
+  height: 10px;
+  background-color: #ccc;
+  border-radius: 50%;
+  margin: 0 5px;
+  cursor: pointer;
+}
+
+input[type="radio"]:checked + .nav-button {
+  background-color: #333;
+}
