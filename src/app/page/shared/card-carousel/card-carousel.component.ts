@@ -46,33 +46,27 @@ export class CardCarouselComponent {
   onRadioChange(goToIndex: number): void {
     if (this.blocked) return;
 
-    if(goToIndex === this.plusLoop() || goToIndex === this.minusLoop()) {
+    const nextIndex = this.plusLoop();
+    const prevIndex = this.minusLoop();
+    const nextNextIndex = this.plusLoop(nextIndex);
+    const prevPrevIndex = this.minusLoop(prevIndex);
+
+    if (goToIndex === nextIndex || goToIndex === prevIndex) {
       this.selectedIndex = goToIndex;
       return;
     }
 
-    if(goToIndex === this.plusLoop(this.plusLoop())) {
+    if (goToIndex === nextNextIndex || goToIndex === prevPrevIndex) {
       this.blocked = true;
-      this.selectedIndex = this.plusLoop();
+      this.selectedIndex = goToIndex === nextNextIndex ? nextIndex : prevIndex;
       setTimeout(() => {
-        this.selectedIndex = this.plusLoop();
+        this.selectedIndex = goToIndex;
         this.blocked = false;
-      },250);
-      return;
-    }
-
-    if(goToIndex === this.minusLoop(this.minusLoop())) {
-      this.blocked = true;
-      this.selectedIndex = this.minusLoop();
-      setTimeout(() => {
-        this.selectedIndex = this.minusLoop();
-        this.blocked = false;
-      },250);
+      }, 250);
       return;
     }
 
     throw new Error('Invalid index');
-
   }
 
 }
