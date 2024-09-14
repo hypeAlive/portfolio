@@ -23,30 +23,52 @@ input[type="radio"] {
   left: 0;
   right: 0;
   margin: auto;
-  opacity: 0.5;
+  &::before {
+    content: '';
+    position: absolute;
+    width: 110%;
+    height: 110%;
+    top: -5%;
+    left: -5%;
+    background-color: var(--fallback-b1, oklch(var(--b1) / 1));
+    opacity: 0.5;
+    filter: blur(10px);
+    transition: opacity 0.5s ease;
+    z-index: 1;
+  }
   transform: scale(0.8);
 }
 
-#item-1:checked ~ .carousel-cards label:nth-child(1),
-#item-2:checked ~ .carousel-cards label:nth-child(2),
-#item-3:checked ~ .carousel-cards label:nth-child(3) {
+.carousel-card.active {
   opacity: 1;
   transform: scale(1);
+  z-index: 2;
+  &::before {
+    opacity: 0;
+  }
+}
+
+.carousel-card.next {
+  transform: translateX(65%) scale(0.8);
   z-index: 1;
 }
 
-#item-1:checked ~ .carousel-cards label:nth-child(2),
-#item-2:checked ~ .carousel-cards label:nth-child(3),
-#item-3:checked ~ .carousel-cards label:nth-child(1) {
-  transform: translateX(100%) scale(0.8);
-  z-index: 0;
+.carousel-card.prev {
+  transform: translateX(-65%) scale(0.8);
+  z-index: 1;
 }
 
-#item-1:checked ~ .carousel-cards label:nth-child(3),
-#item-2:checked ~ .carousel-cards label:nth-child(1),
-#item-3:checked ~ .carousel-cards label:nth-child(2) {
-  transform: translateX(-100%) scale(0.8);
+.carousel-card.next-next,
+.carousel-card.prev-prev {
+  transform: translateX(100%) scale(0.6);
   z-index: 0;
+  &::before {
+    opacity: 0.8;
+  }
+}
+
+.carousel-card.prev-prev {
+  transform: translateX(-100%) scale(0.6);
 }
 
 .carousel-navigation {

@@ -1,6 +1,7 @@
 @tailwind base;
 @tailwind utilities;
 @tailwind components;
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap');
 
 .icon-large {
   @apply text-5xl;
@@ -41,6 +42,10 @@ h2 {
 .text-glow {
   -webkit-filter: drop-shadow(0 0 0.5rem oklch(var(--nc)));
   filter: drop-shadow(0 0 0.5rem oklch(var(--nc)));
+}
+
+.jetbrains-mono {
+  font-family: "JetBrains Mono", monospace !important;
 }
 
 html, body { height: 100%; }
