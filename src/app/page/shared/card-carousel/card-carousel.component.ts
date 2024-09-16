@@ -3,26 +3,31 @@ import {CardComponent, PROGRAMMING_LANGUAGES, ProjectCard} from "../card/card.co
 import {NgClass, NgForOf} from "@angular/common";
 
 const TEST_ITEMS: ProjectCard[] = [{
+  id: "preicxn",
   title: "PreisCxn",
   languages: [PROGRAMMING_LANGUAGES.ANGULAR, PROGRAMMING_LANGUAGES.JAVA],
   description: "A platform for comparing prices of different products.",
   imgUrl: "https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
 }, {
+  id: "ngicons",
   title: "Ng-Icons",
   languages: [PROGRAMMING_LANGUAGES.TYPESCRIPT, PROGRAMMING_LANGUAGES.JAVASCRIPT],
   description: "A library for using icons in Angular applications.",
   imgUrl: "https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
 }, {
+  id: "socketgames",
   title: "Socket Games",
   languages: [PROGRAMMING_LANGUAGES.JAVASCRIPT, PROGRAMMING_LANGUAGES.EXPRESS],
   description: "A platform for playing games with friends.",
   imgUrl: "https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
 }, {
+  id: "holidayexporter",
   title: "Holiday Exporter",
   languages: [PROGRAMMING_LANGUAGES.PYTHON],
   description: "A tool for exporting holidays to an excel file.",
   imgUrl: "https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
 }, {
+  id: "daisyui",
   title: "DaisyUI",
   languages: [PROGRAMMING_LANGUAGES.JAVASCRIPT],
   description: "A library for creating responsive web designs.",

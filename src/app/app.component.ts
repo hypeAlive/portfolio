@@ -5,6 +5,8 @@ import {Themes} from "./shared/theme/Themes";
 import {HeaderModule} from "./header/header.module";
 import {NgOptimizedImage} from "@angular/common";
 import {FooterComponent} from "./footer/footer.component";
+import {HTTP_INTERCEPTORS} from "@angular/common/http";
+import {APIInterceptor} from "./shared/api.interceptor";
 
 @Component({
   selector: 'app-root',

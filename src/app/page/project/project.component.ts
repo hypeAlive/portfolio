@@ -1,20 +1,29 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {CardComponent, PROGRAMMING_LANGUAGES} from "../shared/card/card.component";
 import {MouseLightEffectDirective} from "../shared/mouse-light-effect.directive";
 import {CardCarouselComponent} from "../shared/card-carousel/card-carousel.component";
+import {NGXLogger} from "ngx-logger";
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'app-project',
   standalone: true,
+  templateUrl: './project.component.html',
   imports: [
-    CardComponent,
-    MouseLightEffectDirective,
     CardCarouselComponent
   ],
-  templateUrl: './project.component.html',
   styleUrl: './project.component.scss'
 })
-export class ProjectComponent {
+export class ProjectComponent implements OnInit {
 
-    protected readonly PROGRAMMING_LANGUAGES = PROGRAMMING_LANGUAGES;
+  constructor(private logger: NGXLogger, private activatedRoute: ActivatedRoute) {
+  }
+
+  ngOnInit(): void {
+    this.logger.log(this.activatedRoute.snapshot.data);
+    this.logger.info('ProjectComponent initialized');
+  }
+
+
+
 }

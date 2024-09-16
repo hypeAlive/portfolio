@@ -1,5 +1,6 @@
 import {Routes} from "@angular/router";
 import {HomeComponent} from "./home/home.component";
+import {ProjectResolver} from "./project.resolver";
 import {ProjectComponent} from "./project/project.component";
 
 export const routes: Routes = [
@@ -9,6 +10,9 @@ export const routes: Routes = [
   },
   {
     path: 'project',
-    component: ProjectComponent
+    component: ProjectComponent,
+    resolve: {
+      resolvedData: ProjectResolver
+    }
   }
 ];

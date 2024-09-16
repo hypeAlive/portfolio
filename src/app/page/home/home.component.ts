@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {CardComponent, PROGRAMMING_LANGUAGES} from "../shared/card/card.component";
 import {CardCarouselComponent} from "../shared/card-carousel/card-carousel.component";
+import {ProjectService} from "../shared/project.service";
 
 @Component({
   selector: 'app-home',
@@ -12,7 +13,15 @@ import {CardCarouselComponent} from "../shared/card-carousel/card-carousel.compo
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
-export class HomeComponent {
+export class HomeComponent implements OnInit {
 
-    protected readonly PROGRAMMING_LANGUAGES = PROGRAMMING_LANGUAGES;
+  constructor(private project: ProjectService) {
+
+  }
+
+  ngOnInit(): void {
+    this.project.testing(false);
+  }
+
+  protected readonly PROGRAMMING_LANGUAGES = PROGRAMMING_LANGUAGES;
 }

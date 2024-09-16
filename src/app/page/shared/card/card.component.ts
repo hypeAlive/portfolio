@@ -10,6 +10,7 @@ import {
 import {NgClass, NgForOf, NgOptimizedImage} from "@angular/common";
 import {MouseLightEffectDirective} from "../mouse-light-effect.directive";
 import {NGXLogger} from "ngx-logger";
+import {Router} from "@angular/router";
 
 export enum PROGRAMMING_LANGUAGES {
   ANGULAR = diAngularOriginal,
@@ -21,6 +22,7 @@ export enum PROGRAMMING_LANGUAGES {
 }
 
 export type ProjectCard = {
+  id: string;
   title: string;
   languages: PROGRAMMING_LANGUAGES[];
   description: string;
@@ -50,14 +52,14 @@ export type ProjectCard = {
 })
 export class CardComponent {
   @Input('card') infos: ProjectCard = {
+    id: "unknown",
     title: "Project",
     languages: [],
     description: "Description",
     imgUrl: "https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
   };
 
-  constructor(private logger: NGXLogger) {
-    this.logger.info('CardComponent created');
+  constructor(private logger: NGXLogger, private router: Router) {
   }
 
   protected active = false;
@@ -73,6 +75,16 @@ export class CardComponent {
 
   public deactivate(): void {
     this.active = false;
+  }
+
+  protected navigateToProject(): void {
+    this.router.navigate(['project'], {
+      queryParams: {id: this.infos.id},
+      state: {data: this.infos}
+    })
+      .catch(err => {
+        this.logger.error('Error while navigating to project:', err);
+      });
   }
 
 
