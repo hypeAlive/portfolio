@@ -2,6 +2,10 @@
   display: inline-block;
 }
 
+.card {
+  min-height: 30rem;
+}
+
 figure:before {
   content: '';
   position: absolute;
@@ -95,4 +99,8 @@ figure.active:before {
   filter: blur(5px);
   opacity: 0.5;
   mix-blend-mode: overlay;
+}
+
+.card-body {
+  margin-top: auto;
 }

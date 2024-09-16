@@ -6,7 +6,7 @@
   <div class="carousel-cards">
     <ng-container *ngFor="let item of items; let i = index">
       <label class="carousel-card" [for]="'item-' + (i)" [ngClass]="getCardClasses(i)">
-        <project-card></project-card>
+        <project-card [card]="item"></project-card>
       </label>
     </ng-container>
   </div>
