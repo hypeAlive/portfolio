@@ -1,6 +1,33 @@
-import {Component, QueryList, ViewChild, ViewChildren} from '@angular/core';
+import {Component, Input, QueryList, ViewChild, ViewChildren} from '@angular/core';
 import {CardComponent, PROGRAMMING_LANGUAGES, ProjectCard} from "../card/card.component";
 import {NgClass, NgForOf} from "@angular/common";
+
+const TEST_ITEMS: ProjectCard[] = [{
+  title: "PreisCxn",
+  languages: [PROGRAMMING_LANGUAGES.ANGULAR, PROGRAMMING_LANGUAGES.JAVA],
+  description: "A platform for comparing prices of different products.",
+  imgUrl: "https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
+}, {
+  title: "Ng-Icons",
+  languages: [PROGRAMMING_LANGUAGES.TYPESCRIPT, PROGRAMMING_LANGUAGES.JAVASCRIPT],
+  description: "A library for using icons in Angular applications.",
+  imgUrl: "https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
+}, {
+  title: "Socket Games",
+  languages: [PROGRAMMING_LANGUAGES.JAVASCRIPT, PROGRAMMING_LANGUAGES.EXPRESS],
+  description: "A platform for playing games with friends.",
+  imgUrl: "https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
+}, {
+  title: "Holiday Exporter",
+  languages: [PROGRAMMING_LANGUAGES.PYTHON],
+  description: "A tool for exporting holidays to an excel file.",
+  imgUrl: "https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
+}, {
+  title: "DaisyUI",
+  languages: [PROGRAMMING_LANGUAGES.JAVASCRIPT],
+  description: "A library for creating responsive web designs.",
+  imgUrl: "https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
+}];
 
 @Component({
   selector: 'card-carousel',
@@ -15,42 +42,14 @@ import {NgClass, NgForOf} from "@angular/common";
 })
 export class CardCarouselComponent {
 
-  protected static TEST_ITEMS: ProjectCard[] = [{
-    title: "PreisCxn",
-    languages: [PROGRAMMING_LANGUAGES.ANGULAR, PROGRAMMING_LANGUAGES.JAVA],
-    description: "A platform for comparing prices of different products.",
-    imgUrl: "https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
-  }, {
-    title: "Ng-Icons",
-    languages: [PROGRAMMING_LANGUAGES.TYPESCRIPT, PROGRAMMING_LANGUAGES.JAVASCRIPT],
-    description: "A library for using icons in Angular applications.",
-    imgUrl: "https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
-  }, {
-    title: "Socket Games",
-    languages: [PROGRAMMING_LANGUAGES.JAVASCRIPT, PROGRAMMING_LANGUAGES.EXPRESS],
-    description: "A platform for playing games with friends.",
-    imgUrl: "https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
-  }, {
-    title: "Holiday Exporter",
-    languages: [PROGRAMMING_LANGUAGES.PYTHON],
-    description: "A tool for exporting holidays to an excel file.",
-    imgUrl: "https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
-  }, {
-    title: "DaisyUI",
-    languages: [PROGRAMMING_LANGUAGES.JAVASCRIPT],
-    description: "A library for creating responsive web designs.",
-    imgUrl: "https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
-  }];
-
   @ViewChildren('cards') cards!: QueryList<CardComponent>;
+  @Input('cards') private items!: ProjectCard[];
 
-  selectedIndex = 2;
-  blocked = false;
+  private selectedIndex = 2;
+  private blocked = false;
 
-  protected readonly PROGRAMMING_LANGUAGES = PROGRAMMING_LANGUAGES;
-
-  getCardClasses(index: number): { [key: string]: boolean } {
-    const length = CardCarouselComponent.TEST_ITEMS.length;
+  protected getCardClasses(index: number): { [key: string]: boolean } {
+    const length = this.getItems().length;
     return {
       'active': index === this.selectedIndex,
       'next': index === (this.selectedIndex + 1) % length,
@@ -60,18 +59,24 @@ export class CardCarouselComponent {
     };
   }
 
-  minusLoop(currentIndex: number = this.selectedIndex): number {
-    const length = CardCarouselComponent.TEST_ITEMS.length;
+  private minusLoop(currentIndex: number = this.selectedIndex): number {
+    const length = this.getItems().length;
     return (currentIndex - 1 + length) % length;
   }
 
-  plusLoop(currentIndex: number = this.selectedIndex): number {
-    const length = CardCarouselComponent.TEST_ITEMS.length;
-    return (currentIndex + 1) % length;
+  private plusLoop(currentIndex: number = this.selectedIndex): number {
+    return (currentIndex + 1) % this.getItems().length;
   }
 
+  protected isSelected(index: number) {
+    return index === this.selectedIndex;
+  }
 
-  onRadioChange(goToIndex: number): void {
+  protected getItems() {
+    return this.items || TEST_ITEMS;
+  }
+
+  protected onRadioChange(goToIndex: number): void {
     if (this.blocked) return;
 
     const currentCard = this.cards.get(this.selectedIndex);
