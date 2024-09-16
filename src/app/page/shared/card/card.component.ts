@@ -71,11 +71,4 @@ export class CardComponent {
   }
 
 
-  // card component
-  // https://codepen.io/katywellington91/pen/PoGVzwZ
-
-  // carousel
-  // https://codepen.io/aybukeceylan/pen/RwrRPoO
-
-
 }

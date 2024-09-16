@@ -15,7 +15,7 @@ import {NgClass, NgForOf} from "@angular/common";
 })
 export class CardCarouselComponent {
 
-  items: ProjectCard[] = [{
+  protected static TEST_ITEMS: ProjectCard[] = [{
     title: "PreisCxn",
     languages: [PROGRAMMING_LANGUAGES.ANGULAR, PROGRAMMING_LANGUAGES.JAVA],
     description: "A platform for comparing prices of different products.",
@@ -50,7 +50,7 @@ export class CardCarouselComponent {
   protected readonly PROGRAMMING_LANGUAGES = PROGRAMMING_LANGUAGES;
 
   getCardClasses(index: number): { [key: string]: boolean } {
-    const length = this.items.length;
+    const length = CardCarouselComponent.TEST_ITEMS.length;
     return {
       'active': index === this.selectedIndex,
       'next': index === (this.selectedIndex + 1) % length,
@@ -61,12 +61,12 @@ export class CardCarouselComponent {
   }
 
   minusLoop(currentIndex: number = this.selectedIndex): number {
-    const length = this.items.length;
+    const length = CardCarouselComponent.TEST_ITEMS.length;
     return (currentIndex - 1 + length) % length;
   }
 
   plusLoop(currentIndex: number = this.selectedIndex): number {
-    const length = this.items.length;
+    const length = CardCarouselComponent.TEST_ITEMS.length;
     return (currentIndex + 1) % length;
   }
 
