@@ -11,7 +11,7 @@ import {
 } from '@angular/core';
 import {isPlatformBrowser} from "@angular/common";
 import {DeviceDetectorService} from "ngx-device-detector";
-import {LoggerService} from "./logger/logger.service";
+import {NGXLogger} from "ngx-logger";
 
 /**
  * Enum für die Richtung des Parallax-Effekts.
@@ -195,7 +195,7 @@ export class ParallaxDirective implements OnInit, OnDestroy {
   constructor(
     @Inject(PLATFORM_ID) private platformId: Object,
     private ele: ElementRef,
-    private logger: LoggerService,
+    private logger: NGXLogger,
     private device: DeviceDetectorService,
     private renderer: Renderer2) {
     this.config = this.builder?.build();

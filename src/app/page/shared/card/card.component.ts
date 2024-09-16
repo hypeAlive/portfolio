@@ -9,6 +9,7 @@ import {
 } from "@ng-icons/devicon/original";
 import {NgClass, NgForOf, NgOptimizedImage} from "@angular/common";
 import {MouseLightEffectDirective} from "../mouse-light-effect.directive";
+import {NGXLogger} from "ngx-logger";
 
 export enum PROGRAMMING_LANGUAGES {
   ANGULAR = diAngularOriginal,
@@ -54,6 +55,10 @@ export class CardComponent {
     description: "Description",
     imgUrl: "https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
   };
+
+  constructor(private logger: NGXLogger) {
+    this.logger.info('CardComponent created');
+  }
 
   protected active = false;
 
