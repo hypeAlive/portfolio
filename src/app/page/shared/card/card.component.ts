@@ -62,6 +62,13 @@ export class CardComponent {
   }
 
 
+  public activate(): void {
+    this.active = true;
+  }
+
+  public deactivate(): void {
+    this.active = false;
+  }
 
 
   // card component

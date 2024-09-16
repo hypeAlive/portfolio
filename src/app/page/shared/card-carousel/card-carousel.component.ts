@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, QueryList, ViewChild, ViewChildren} from '@angular/core';
 import {CardComponent, PROGRAMMING_LANGUAGES, ProjectCard} from "../card/card.component";
 import {NgClass, NgForOf} from "@angular/common";
 
@@ -41,6 +41,9 @@ export class CardCarouselComponent {
     description: "A library for creating responsive web designs.",
     imgUrl: "https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
   }];
+
+  @ViewChildren('cards') cards!: QueryList<CardComponent>;
+
   selectedIndex = 2;
   blocked = false;
 
@@ -71,19 +74,27 @@ export class CardCarouselComponent {
   onRadioChange(goToIndex: number): void {
     if (this.blocked) return;
 
+    const currentCard = this.cards.get(this.selectedIndex);
+    const nextCard = this.cards.get(goToIndex);
+    if (!currentCard || !nextCard) throw new Error('Could not find card');
+
     const nextIndex = this.plusLoop();
     const prevIndex = this.minusLoop();
     const nextNextIndex = this.plusLoop(nextIndex);
     const prevPrevIndex = this.minusLoop(prevIndex);
 
     if (goToIndex === nextIndex || goToIndex === prevIndex) {
+      currentCard.deactivate();
       this.selectedIndex = goToIndex;
+      nextCard.activate();
       return;
     }
 
     if (goToIndex === nextNextIndex || goToIndex === prevPrevIndex) {
       this.blocked = true;
+      currentCard.deactivate();
       this.selectedIndex = goToIndex === nextNextIndex ? nextIndex : prevIndex;
+      nextCard.activate();
       setTimeout(() => {
         this.selectedIndex = goToIndex;
         this.blocked = false;
