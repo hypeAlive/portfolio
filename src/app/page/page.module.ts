@@ -4,7 +4,7 @@ import {RouterModule} from "@angular/router";
 import {routes} from "./page.routes";
 import {ProjectResolver} from "./project.resolver";
 import {HTTP_INTERCEPTORS, provideHttpClient} from "@angular/common/http";
-import {APIInterceptor} from "../shared/api.interceptor";
+import {EnsureHttpInterceptor} from "../shared/ensure-http-interceptor.service";
 
 @NgModule({
     declarations: [],

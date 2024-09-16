@@ -6,7 +6,7 @@ import {HeaderModule} from "./header/header.module";
 import {NgOptimizedImage} from "@angular/common";
 import {FooterComponent} from "./footer/footer.component";
 import {HTTP_INTERCEPTORS} from "@angular/common/http";
-import {APIInterceptor} from "./shared/api.interceptor";
+import {EnsureHttpInterceptor} from "./shared/ensure-http-interceptor.service";
 
 @Component({
   selector: 'app-root',

@@ -1,27 +1,20 @@
-import {ApplicationConfig, importProvidersFrom, provideZoneChangeDetection} from '@angular/core';
-import { provideRouter } from '@angular/router';
+import {ApplicationConfig, importProvidersFrom} from '@angular/core';
+import {provideRouter} from '@angular/router';
 
-import { routes } from './app.routes';
-import {
-  HTTP_INTERCEPTORS,
-  HttpClient,
-  HttpClientModule,
-  provideHttpClient,
-  withInterceptorsFromDi
-} from "@angular/common/http";
+import {routes} from './app.routes';
+import {provideHttpClient, withInterceptorsFromDi} from "@angular/common/http";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
-import {bootstrapApplication, BrowserModule} from "@angular/platform-browser";
-import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import {BrowserModule} from "@angular/platform-browser";
+import {provideAnimationsAsync} from '@angular/platform-browser/animations/async';
 import {LoggerModule, NgxLoggerLevel} from "ngx-logger";
-import { environment } from '../environments/environment';
-import {APIInterceptor} from "./shared/api.interceptor";
-
+import {httpInterceptorProviders} from "./http-interceptors";
+import {environment} from "../environments/environment";
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideRouter(routes),
     provideHttpClient(withInterceptorsFromDi()),
-    { provide: HTTP_INTERCEPTORS, useClass: APIInterceptor, multi: true },
+    httpInterceptorProviders,
     importProvidersFrom(
       BrowserModule,
       LoggerModule.forRoot({

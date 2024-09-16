@@ -5,7 +5,7 @@ import {NGXLogger} from "ngx-logger";
 import {Router} from "@angular/router";
 
 @Injectable()
-export class APIInterceptor implements HttpInterceptor {
+export class EnsureHttpInterceptor implements HttpInterceptor {
 
   constructor(private logger: NGXLogger, private router: Router) { }
 
