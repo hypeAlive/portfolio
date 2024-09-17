@@ -1,20 +1,20 @@
-import { Injectable, OnInit } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { NGXLogger } from 'ngx-logger';
-import {GET_PROJECT_CARDS} from "../../environments/mock-data";
 
 @Injectable()
 export class MockInterceptor implements HttpInterceptor {
 
+  //@ts-ignore
   private mockRoutes: { [key: string]: { [method: string]: any } } = environment.mockRoutes;
 
   constructor(private logger: NGXLogger) { }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    if (!environment.useMockApiCalls || !this.mockRoutes) {
-      this.logger.error('MockInterceptor isn\'t configured correctly', 'Tried to use MockInterceptor, but environment.useMockApiCalls is set to false');
+    if (!this.mockRoutes) {
+      this.logger.error('MockInterceptor isn\'t configured correctly', 'Tried to use MockInterceptor, but could not find mockRoutes in environment.ts');
       return next.handle(req);
     }
 
