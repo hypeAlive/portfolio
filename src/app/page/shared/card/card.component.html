@@ -6,16 +6,16 @@
 </div>
 
 <ng-template #cardContent>
-  <div mouseLightEffect class="skeleton card bg-base-100 image-full w-96 shadow-2xl overflow-hidden" [ngClass]="{'active': this.active}">
+  <div mouseLightEffect class="card bg-base-100 image-full w-96 shadow-2xl overflow-hidden" [ngClass]="{'active': this.active}">
     <figure [ngClass]="{'active': this.active}">
-      <img src="{{ infos.imgUrl }}" alt="card" />
+      <img src="{{ infos?.imgUrl }}" alt="card" />
       <h1 class="absolute uppercase bg-text jetbrains-mono">
-        {{ infos.title }}
+        {{ infos?.title }}
       </h1>
     </figure>
     <div class="card-body" [ngClass]="{'active': this.active}">
-      <h2 class="skeleton card-title justify-center drop-shadow-2xl jetbrains-mono text-center" style="margin: 0;">
-        {{ infos.title }}
+      <h2 class="card-title justify-center drop-shadow-2xl jetbrains-mono text-center" style="margin: 0;">
+        {{ infos?.title }}
       </h2>
       <div class="card-actions justify-center">
         <ng-container *ngFor="let language of getLanguages()">
@@ -25,7 +25,7 @@
         </ng-container>
       </div>
       <p class="text-center jetbrains-mono" style="color: oklch(var(--bc))">
-        {{ infos.description }}
+        {{ infos?.description }}
       </p>
       <div class="card-actions justify-center">
         <button class="btn" (click)="navigateToProject()">

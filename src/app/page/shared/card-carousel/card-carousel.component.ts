@@ -16,7 +16,7 @@ import {NgClass, NgForOf} from "@angular/common";
 export class CardCarouselComponent {
 
   @ViewChildren('cards') cards!: QueryList<CardComponent>;
-  @Input('cards') items!: ProjectCard[];
+  @Input('cards') items: ProjectCard[] | undefined = undefined;
 
   private selectedIndex = 2;
   private blocked = false;
@@ -46,7 +46,7 @@ export class CardCarouselComponent {
   }
 
   protected getItems() {
-    return this.items || new Array(5).fill(0);
+    return this.items || new Array(5).fill(undefined);
   }
 
   protected onRadioChange(goToIndex: number): void {

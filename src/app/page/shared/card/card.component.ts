@@ -52,7 +52,7 @@ export type ProjectCard = {
   })]
 })
 export class CardComponent {
-  @Input('card') infos!: ProjectCard;
+  @Input('card') infos: ProjectCard | undefined = undefined;
 
   constructor(private logger: NGXLogger, private router: Router) {
   }
@@ -60,7 +60,7 @@ export class CardComponent {
   protected active = false;
 
   protected getLanguages(): string[] {
-    return this.infos.languages as any as string[];
+    return this.infos?.languages as any as string[];
   }
 
 
@@ -73,12 +73,12 @@ export class CardComponent {
   }
 
   protected isLoaded(): boolean {
-    return false;
+    return this.infos !== undefined;
   }
 
   protected navigateToProject(): void {
     this.router.navigate(['project'], {
-      queryParams: {id: this.infos.id},
+      queryParams: {id: this.infos?.id},
       state: {data: this.infos}
     })
       .catch(err => {

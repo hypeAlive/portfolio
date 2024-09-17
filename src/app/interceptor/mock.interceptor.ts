@@ -31,7 +31,7 @@ export class MockInterceptor implements HttpInterceptor {
         setTimeout(() => {
           observer.next(new HttpResponse({ status: 200, body: matchedRoute }));
           observer.complete();
-        }, 100);
+        }, 10);
       }
     });
   }

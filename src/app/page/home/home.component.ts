@@ -15,7 +15,7 @@ import {ProjectService} from "../shared/project.service";
 })
 export class HomeComponent implements OnInit {
 
-  private projectCards: ProjectCard[] = [];
+  protected projectCards: ProjectCard[] | undefined = undefined;
 
   constructor(private project: ProjectService) {
 
