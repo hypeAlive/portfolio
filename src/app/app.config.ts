@@ -7,7 +7,7 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {BrowserModule} from "@angular/platform-browser";
 import {provideAnimationsAsync} from '@angular/platform-browser/animations/async';
 import {LoggerModule, NgxLoggerLevel} from "ngx-logger";
-import {httpInterceptorProviders} from "./http-interceptors";
+import {httpInterceptorProviders} from "./interceptor/http-interceptors";
 import {environment} from "../environments/environment";
 
 export const appConfig: ApplicationConfig = {

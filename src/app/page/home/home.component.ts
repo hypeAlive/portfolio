@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {CardComponent, PROGRAMMING_LANGUAGES} from "../shared/card/card.component";
+import {CardComponent, PROGRAMMING_LANGUAGES, ProjectCard} from "../shared/card/card.component";
 import {CardCarouselComponent} from "../shared/card-carousel/card-carousel.component";
 import {ProjectService} from "../shared/project.service";
 
@@ -15,12 +15,15 @@ import {ProjectService} from "../shared/project.service";
 })
 export class HomeComponent implements OnInit {
 
+  private projectCards: ProjectCard[] = [];
+
   constructor(private project: ProjectService) {
 
   }
 
   ngOnInit(): void {
-    this.project.testing(false);
+    this.project.getProjectCards()
+      .then(cards => this.projectCards = cards);
   }
 
   protected readonly PROGRAMMING_LANGUAGES = PROGRAMMING_LANGUAGES;

@@ -7,7 +7,7 @@ import {
   diJavascriptOriginal,
   diPythonOriginal, diTypescriptOriginal
 } from "@ng-icons/devicon/original";
-import {NgClass, NgForOf, NgOptimizedImage} from "@angular/common";
+import {NgClass, NgForOf, NgIf, NgOptimizedImage} from "@angular/common";
 import {MouseLightEffectDirective} from "../mouse-light-effect.directive";
 import {NGXLogger} from "ngx-logger";
 import {Router} from "@angular/router";
@@ -22,7 +22,7 @@ export enum PROGRAMMING_LANGUAGES {
 }
 
 export type ProjectCard = {
-  id: string;
+  id: number;
   title: string;
   languages: PROGRAMMING_LANGUAGES[];
   description: string;
@@ -37,7 +37,8 @@ export type ProjectCard = {
     NgForOf,
     NgClass,
     MouseLightEffectDirective,
-    NgOptimizedImage
+    NgOptimizedImage,
+    NgIf
   ],
   templateUrl: './card.component.html',
   styleUrl: './card.component.scss',
@@ -51,13 +52,7 @@ export type ProjectCard = {
   })]
 })
 export class CardComponent {
-  @Input('card') infos: ProjectCard = {
-    id: "unknown",
-    title: "Project",
-    languages: [],
-    description: "Description",
-    imgUrl: "https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
-  };
+  @Input('card') infos!: ProjectCard;
 
   constructor(private logger: NGXLogger, private router: Router) {
   }
@@ -75,6 +70,10 @@ export class CardComponent {
 
   public deactivate(): void {
     this.active = false;
+  }
+
+  protected isLoaded(): boolean {
+    return false;
   }
 
   protected navigateToProject(): void {

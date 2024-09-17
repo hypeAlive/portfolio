@@ -1,29 +1,37 @@
-<div mouseLightEffect class="card bg-base-100 image-full w-96 shadow-2xl overflow-hidden" [ngClass]="{'active': this.active}">
-  <figure [ngClass]="{'active': this.active}">
-    <img
-      src="{{infos.imgUrl}}"
-      alt="card"
-      />
-    <h1 class="absolute uppercase bg-text jetbrains-mono">
-      {{ infos.title }}
-    </h1>
-  </figure>
-  <div class="card-body" [ngClass]="{'active': this.active}">
-    <h2 class="card-title justify-center drop-shadow-2xl jetbrains-mono text-center" style="margin: 0;">
-      {{ infos.title }}
-    </h2>
-    <div class="card-actions justify-center">
-      <ng-container *ngFor="let language of getLanguages()">
-        <div class="text-2xl text-glow">
-          <ng-icon [svg]="language"></ng-icon>
-        </div>
-      </ng-container>
-    </div>
-    <p class="text-center jetbrains-mono" style="color: oklch(var(--bc))">If a dog chews shoes whose shoes does he choose?</p>
-    <div class="card-actions justify-center">
-      <button class="btn" (click)="navigateToProject()">
-        View Project
-      </button>
-    </div>
+<div *ngIf="!isLoaded(); else cardContent" class="skeleton card bg-base-100 image-full w-96 shadow-2xl overflow-hidden">
+  <div class="skeleton h-48 w-full"></div>
+  <div class="card-body">
+    <div class="skeleton h-10 w-3/4 mb-20 m-auto"></div>
   </div>
 </div>
+
+<ng-template #cardContent>
+  <div mouseLightEffect class="skeleton card bg-base-100 image-full w-96 shadow-2xl overflow-hidden" [ngClass]="{'active': this.active}">
+    <figure [ngClass]="{'active': this.active}">
+      <img src="{{ infos.imgUrl }}" alt="card" />
+      <h1 class="absolute uppercase bg-text jetbrains-mono">
+        {{ infos.title }}
+      </h1>
+    </figure>
+    <div class="card-body" [ngClass]="{'active': this.active}">
+      <h2 class="skeleton card-title justify-center drop-shadow-2xl jetbrains-mono text-center" style="margin: 0;">
+        {{ infos.title }}
+      </h2>
+      <div class="card-actions justify-center">
+        <ng-container *ngFor="let language of getLanguages()">
+          <div class="text-2xl text-glow">
+            <ng-icon [svg]="language"></ng-icon>
+          </div>
+        </ng-container>
+      </div>
+      <p class="text-center jetbrains-mono" style="color: oklch(var(--bc))">
+        {{ infos.description }}
+      </p>
+      <div class="card-actions justify-center">
+        <button class="btn" (click)="navigateToProject()">
+          View Project
+        </button>
+      </div>
+    </div>
+  </div>
+</ng-template>
