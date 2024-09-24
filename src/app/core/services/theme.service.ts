@@ -21,9 +21,6 @@ export class ThemeService implements OnDestroy{
 
   public switchTheme(theme: Themes) {
 
-    console.log('switchTheme', theme)
-    console.log('this.theme', this.theme)
-
     let themeLink = this.document.getElementById('app-theme');
     if(!themeLink) return;
 
