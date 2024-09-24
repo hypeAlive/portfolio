@@ -1,4 +1,4 @@
-import {PROGRAMMING_LANGUAGES, ProjectCard} from "../app/page/shared/card/card.component";
+import {PROGRAMMING_LANGUAGES, ProjectCard} from "../app/features/home/components/card/card.component";
 
 export const GET_PROJECT_CARDS: ProjectCard[] = [{
     id: 0,

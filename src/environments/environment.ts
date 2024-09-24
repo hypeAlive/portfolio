@@ -1,6 +1,6 @@
 import {NgxLoggerLevel} from "ngx-logger";
 import {GET_PROJECT_CARDS} from "./mock-data";
-import {MockInterceptor} from "../app/interceptor/mock.interceptor";
+import {MockInterceptor} from "../app/core/interceptors/mock.interceptor";
 
 export const environment = {
   production: false,
