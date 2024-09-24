@@ -14,7 +14,7 @@ export class ProjectResolver implements Resolve<Promise<any>> {
 
   async resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Promise<any> {
     this.logger.info('ProjectResolver initialized');
-    const id = route.paramMap.get('id');
+    const id = route.params['id'];
 
     return await this.project.testing(true);
   }
