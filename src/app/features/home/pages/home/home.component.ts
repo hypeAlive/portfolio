@@ -13,7 +13,7 @@ import {ProjectService} from "../../../project/services/project.service";
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
-export class HomeComponent implements OnInit {
+export default class HomeComponent implements OnInit {
 
   protected projectCards: ProjectCard[] | undefined = undefined;
 

@@ -13,7 +13,7 @@ import {ActivatedRoute} from "@angular/router";
   ],
   styleUrl: './project.component.scss'
 })
-export class ProjectComponent implements OnInit {
+export default class ProjectComponent implements OnInit {
 
   constructor(private logger: NGXLogger, private activatedRoute: ActivatedRoute) {
   }
