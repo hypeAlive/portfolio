@@ -9,6 +9,7 @@ import {provideAnimationsAsync} from '@angular/platform-browser/animations/async
 import {LoggerModule} from "ngx-logger";
 import {environment} from "../environments/environment";
 import {CoreModule, provideCoreServices} from "./core/core.module";
+import {provideToastr} from "ngx-toastr";
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -22,6 +23,7 @@ export const appConfig: ApplicationConfig = {
       BrowserAnimationsModule
     ),
     provideCoreServices(),
+    provideToastr(),
     provideAnimationsAsync()
   ]
 };
