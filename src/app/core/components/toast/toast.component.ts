@@ -11,7 +11,7 @@ import {NGXLogger} from "ngx-logger";
     NgIf
   ],
   templateUrl: './toast.component.html',
-  styleUrl: './toast.component.scss'
+  styles: []
 })
 export class ToastComponent extends Toast {
 
@@ -21,7 +21,6 @@ export class ToastComponent extends Toast {
     private logger: NGXLogger
   ) {
     super(toastrService, toastPackage);
-    console.log(this.getType());
   }
 
   getType(): string {
