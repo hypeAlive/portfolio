@@ -3,6 +3,7 @@ import {RouterOutlet} from "@angular/router";
 import {CoreModule} from "./core/core.module";
 import {ToastrService} from "ngx-toastr";
 import {ToastComponent} from "./core/components/toast/toast.component";
+import {NotifyService} from "./core/services/notify.service";
 
 
 @Component({
@@ -15,14 +16,6 @@ import {ToastComponent} from "./core/components/toast/toast.component";
 export class AppComponent {
   title = 'portfolio';
 
-  constructor(private toast: ToastrService) {
-    this.toast.error('Welcome to my portfolio!', '', {
-      timeOut: 10000,
-      toastComponent: ToastComponent,
-      positionClass: 'toast-bottom-right',
-      toastClass: '',
-      closeButton: true
-    });
-  }
+  constructor() { }
 
 }

@@ -12,6 +12,9 @@ import {environment} from "../../environments/environment";
 import {ParallaxDirective} from "../shared/directives/parallax.directive";
 import {SwapComponent} from "../shared/components/swap/swap.component";
 import {NgIcon} from "@ng-icons/core";
+import {provideToastr} from "ngx-toastr";
+import {ToastComponent} from "./components/toast/toast.component";
+import {NotifyService} from "./services/notify.service";
 
 const httpInterceptorProviders = [
   { provide: HTTP_INTERCEPTORS, useClass: EnsureHttpInterceptor, multi: true },
@@ -24,7 +27,13 @@ const httpInterceptorProviders = [
 export const provideCoreServices = () => [
   ...httpInterceptorProviders,
   HeaderService,
-  ThemeService
+  ThemeService,
+  provideToastr({
+    toastComponent: ToastComponent,
+    positionClass: 'toast-bottom-right',
+    toastClass: '',
+  }),
+  NotifyService
 ];
 
 @NgModule({
