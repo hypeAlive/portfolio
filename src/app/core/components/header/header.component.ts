@@ -32,7 +32,7 @@ export class HeaderComponent implements AfterViewInit, OnDestroy, OnInit {
 
   @ViewChild('themeSwitch') themeSwitch!: SwapComponent;
   @ViewChild('underline') underlineElement!: ElementRef;
-  @ViewChildren('customLink', { read: ElementRef }) customLinks!: QueryList<ElementRef>;
+  @ViewChildren('customLink', {read: ElementRef}) customLinks!: QueryList<ElementRef>;
   @ViewChild('navbarCenter') navbarCenter!: ElementRef;
 
 

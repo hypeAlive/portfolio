@@ -27,7 +27,7 @@ export type ParallaxConfig = {
   position?: 'absolute' | 'relative',
   maxValue?: number,
   minValue?: number,
-  unit: string ,
+  unit: string,
   direction: Direction,
   strength: number,
   scrollStart: number
@@ -35,91 +35,91 @@ export type ParallaxConfig = {
 
 export class ParallaxBuilder {
 
-    public static Direction = Direction;
+  public static Direction = Direction;
 
-    public static fromConfig(config: ParallaxConfig): ParallaxBuilder {
+  public static fromConfig(config: ParallaxConfig): ParallaxBuilder {
 
-      const builder = new ParallaxBuilder()
-        .setValueName(config.valueName)
-        .setStartValue(config.startValue)
-        .setDirection(config.direction)
-        .setStrength(config.strength)
-        .setScrollStart(config.scrollStart);
+    const builder = new ParallaxBuilder()
+      .setValueName(config.valueName)
+      .setStartValue(config.startValue)
+      .setDirection(config.direction)
+      .setStrength(config.strength)
+      .setScrollStart(config.scrollStart);
 
-      if(config.maxValue !== undefined) builder.setMaxValue(config.maxValue)
-      if(config.minValue !== undefined) builder.setMinValue(config.minValue)
-      if (config.unit !== undefined) builder.setUnit(config.unit);
-      if(config.position !== undefined) builder.setPosition(config.position)
+    if (config.maxValue !== undefined) builder.setMaxValue(config.maxValue)
+    if (config.minValue !== undefined) builder.setMinValue(config.minValue)
+    if (config.unit !== undefined) builder.setUnit(config.unit);
+    if (config.position !== undefined) builder.setPosition(config.position)
 
-      return builder;
-    }
+    return builder;
+  }
 
-    public static create(): ParallaxBuilder {
-      return new ParallaxBuilder();
-    }
+  public static create(): ParallaxBuilder {
+    return new ParallaxBuilder();
+  }
 
-    public static defaultConfig(): ParallaxBuilder {
-      return new ParallaxBuilder();
-    }
+  public static defaultConfig(): ParallaxBuilder {
+    return new ParallaxBuilder();
+  }
 
-    private config: ParallaxConfig = {
-      valueName: "top",
-      startValue: 0,
-      unit: "px",
-      direction: Direction.POSITIVE,
-      position: "relative",
-      strength: 1,
-      scrollStart: 0
-    };
+  private config: ParallaxConfig = {
+    valueName: "top",
+    startValue: 0,
+    unit: "px",
+    direction: Direction.POSITIVE,
+    position: "relative",
+    strength: 1,
+    scrollStart: 0
+  };
 
-    public setValueName(valueName: string): ParallaxBuilder {
-      this.config.valueName = valueName;
-      return this;
-    }
+  public setValueName(valueName: string): ParallaxBuilder {
+    this.config.valueName = valueName;
+    return this;
+  }
 
-    public setStartValue(value: number): ParallaxBuilder {
-      this.config.startValue = value;
-      return this;
-    }
+  public setStartValue(value: number): ParallaxBuilder {
+    this.config.startValue = value;
+    return this;
+  }
 
-    public setMaxValue(value: number): ParallaxBuilder {
-      this.config.maxValue = value;
-      return this;
-    }
+  public setMaxValue(value: number): ParallaxBuilder {
+    this.config.maxValue = value;
+    return this;
+  }
 
-    public setMinValue(value: number): ParallaxBuilder {
-      this.config.minValue = value;
-      return this;
-    }
+  public setMinValue(value: number): ParallaxBuilder {
+    this.config.minValue = value;
+    return this;
+  }
 
-    public setUnit(unit: string): ParallaxBuilder {
-      this.config.unit = unit;
-      return this;
-    }
+  public setUnit(unit: string): ParallaxBuilder {
+    this.config.unit = unit;
+    return this;
+  }
 
-    public setPosition(position: 'absolute' | 'relative'): ParallaxBuilder {
-      this.config.position = position;
-      return this;
-    }
+  public setPosition(position: 'absolute' | 'relative'): ParallaxBuilder {
+    this.config.position = position;
+    return this;
+  }
 
-    public setDirection(direction: Direction): ParallaxBuilder {
-      this.config.direction = direction;
-      return this;
-    }
+  public setDirection(direction: Direction): ParallaxBuilder {
+    this.config.direction = direction;
+    return this;
+  }
 
-    public setStrength(strength: number): ParallaxBuilder {
-      this.config.strength = strength;
-      return this;
-    }
+  public setStrength(strength: number): ParallaxBuilder {
+    this.config.strength = strength;
+    return this;
+  }
 
-    public setScrollStart(scrollStart: number): ParallaxBuilder {
-      this.config.scrollStart = scrollStart;
-      return this;
-    }
+  public setScrollStart(scrollStart: number): ParallaxBuilder {
+    this.config.scrollStart = scrollStart;
+    return this;
+  }
 
-    public build(): ParallaxConfig {
-      return this.config;
-    }
+  public build(): ParallaxConfig {
+    return this.config;
+  }
 }
 
 @Directive({
@@ -152,22 +152,22 @@ export class ParallaxDirective implements OnInit, OnDestroy {
    * @param {Event} event - Das Scroll-Ereignis.
    */
   @HostListener("window:scroll", ["$event"]) onWindowScroll(event: Event | null) {
-    if(this.device.isMobile() || this.device.isTablet()) return;
+    if (this.device.isMobile() || this.device.isTablet()) return;
 
-    if(!this.active || this.config === undefined) {
+    if (!this.active || this.config === undefined) {
       return;
     }
     if ((event !== null && this.isOutsideViewport(this.ele)) && window.scrollY > 50) {
       return;
     }
 
-    let valueName:string = this.config.valueName;
+    let valueName: string = this.config.valueName;
 
     let style = (window.getComputedStyle(this.ele.nativeElement) as any);
-    let value2 :number = parseFloat(style.getPropertyValue(this.config.valueName).replace(this.config.unit || false, ""))
+    let value2: number = parseFloat(style.getPropertyValue(this.config.valueName).replace(this.config.unit || false, ""))
 
     let scrollY = window.scrollY - this.config.scrollStart;
-    if(scrollY < 0)  {
+    if (scrollY < 0) {
       return;
     }
 
@@ -175,11 +175,11 @@ export class ParallaxDirective implements OnInit, OnDestroy {
       this.config.startValue + scrollY * this.config.strength :
       this.config.startValue - scrollY * this.config.strength;
 
-    if(this.config.maxValue && rawVal >= this.config.maxValue) {
-      if(value2 === this.config.maxValue) return;
+    if (this.config.maxValue && rawVal >= this.config.maxValue) {
+      if (value2 === this.config.maxValue) return;
       rawVal = this.config.maxValue;
     }
-    if(this.config.minValue && rawVal < this.config.minValue) {
+    if (this.config.minValue && rawVal < this.config.minValue) {
       if (value2 === this.config.minValue) return;
       rawVal = this.config.minValue;
     }
@@ -208,21 +208,21 @@ export class ParallaxDirective implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.config = this.builder?.build();
 
-    if(this.config === undefined) return;
+    if (this.config === undefined) return;
 
     this.renderer.setStyle(this.ele.nativeElement, "position", this.config.position || "relative");
     this.renderer.setStyle(this.ele.nativeElement, this.config.valueName, this.config.startValue + this.config.unit || "px");
 
-    if(isPlatformBrowser(this.platformId))
+    if (isPlatformBrowser(this.platformId))
       this.onWindowScroll(null);
 
     ParallaxDirective.INSTANCES.push(this);
   }
 
   public static recalculateAll() {
-      ParallaxDirective.INSTANCES.forEach(instance => {
-        instance.onWindowScroll(null);
-      });
+    ParallaxDirective.INSTANCES.forEach(instance => {
+      instance.onWindowScroll(null);
+    });
   }
 
   /**

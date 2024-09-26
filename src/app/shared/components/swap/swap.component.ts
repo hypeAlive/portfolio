@@ -13,7 +13,7 @@ export type SwapState = 'active' | 'disabled';
   templateUrl: './swap.component.html',
   styleUrl: './swap.component.scss'
 })
-export class SwapComponent implements AfterViewInit, OnDestroy{
+export class SwapComponent implements AfterViewInit, OnDestroy {
 
   @ViewChild('checkbox') checkbox!: ElementRef;
   @ViewChild('onIcon') onIcon!: NgIconComponent;
@@ -60,7 +60,7 @@ export class SwapComponent implements AfterViewInit, OnDestroy{
     return this.stateChange.subscribe(callback);
   }
 
-  protected next(){
+  protected next() {
     console.log('next', this.isChecked())
     this.stateChange.next(this.isChecked() ? 'active' : 'disabled');
   }

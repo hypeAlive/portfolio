@@ -1,8 +1,8 @@
-import { Injectable } from '@angular/core';
-import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent, HttpResponse } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { environment } from '../../../environments/environment';
-import { NGXLogger } from 'ngx-logger';
+import {Injectable} from '@angular/core';
+import {HttpEvent, HttpHandler, HttpInterceptor, HttpRequest, HttpResponse} from '@angular/common/http';
+import {Observable} from 'rxjs';
+import {environment} from '../../../environments/environment';
+import {NGXLogger} from 'ngx-logger';
 
 @Injectable()
 export class MockInterceptor implements HttpInterceptor {
@@ -10,7 +10,8 @@ export class MockInterceptor implements HttpInterceptor {
   //@ts-ignore
   private mockRoutes: { [key: string]: { [method: string]: any } } = environment.mockRoutes;
 
-  constructor(private logger: NGXLogger) { }
+  constructor(private logger: NGXLogger) {
+  }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     if (!this.mockRoutes) {
@@ -29,7 +30,7 @@ export class MockInterceptor implements HttpInterceptor {
         });
       } else {
         setTimeout(() => {
-          observer.next(new HttpResponse({ status: 200, body: matchedRoute }));
+          observer.next(new HttpResponse({status: 200, body: matchedRoute}));
           observer.complete();
         }, 10);
       }

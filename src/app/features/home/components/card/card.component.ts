@@ -5,7 +5,8 @@ import {
   diExpressOriginal,
   diJavaOriginal,
   diJavascriptOriginal,
-  diPythonOriginal, diTypescriptOriginal
+  diPythonOriginal,
+  diTypescriptOriginal
 } from "@ng-icons/devicon/original";
 import {NgClass, NgForOf, NgIf, NgOptimizedImage} from "@angular/common";
 import {MouseLightEffectDirective} from "../../../../shared/directives/mouse-light-effect.directive";

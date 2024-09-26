@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {Toast, ToastPackage, ToastrService} from "ngx-toastr";
 import {NgClass, NgIf} from "@angular/common";
 import {NGXLogger} from "ngx-logger";

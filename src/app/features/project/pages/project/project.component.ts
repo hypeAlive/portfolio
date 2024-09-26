@@ -7,8 +7,7 @@ import {ActivatedRoute} from "@angular/router";
   selector: 'app-project',
   standalone: true,
   templateUrl: './project.component.html',
-  imports: [
-  ],
+  imports: [],
   styleUrl: './project.component.scss'
 })
 export default class ProjectComponent implements OnInit {

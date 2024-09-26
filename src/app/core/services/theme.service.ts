@@ -13,7 +13,8 @@ export class ThemeService implements OnDestroy {
 
   private observer: Subject<Themes> = new Subject<Themes>();
 
-  constructor(@Inject(DOCUMENT) private document: Document) { }
+  constructor(@Inject(DOCUMENT) private document: Document) {
+  }
 
   ngOnDestroy(): void {
     this.observer.unsubscribe();
@@ -22,7 +23,7 @@ export class ThemeService implements OnDestroy {
   public switchTheme(theme: Themes) {
 
     let themeLink = this.document.getElementById('app-theme');
-    if(!themeLink) return;
+    if (!themeLink) return;
 
     themeLink.setAttribute('data-theme', theme);
     this.theme = theme;

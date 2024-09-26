@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {RouterOutlet} from "@angular/router";
 import {CoreModule} from "./core/core.module";
 
@@ -13,6 +13,7 @@ import {CoreModule} from "./core/core.module";
 export class AppComponent {
   title = 'portfolio';
 
-  constructor() { }
+  constructor() {
+  }
 
 }

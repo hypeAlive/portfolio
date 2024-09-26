@@ -13,11 +13,12 @@ import {NotifyService} from "../../../../core/services/notify.service";
   templateUrl: './contact.component.html',
   styles: []
 })
-export class ContactComponent implements OnInit{
+export class ContactComponent implements OnInit {
 
   protected contactForm!: FormGroup;
 
-  constructor(private fb: FormBuilder, private notify: NotifyService) { }
+  constructor(private fb: FormBuilder, private notify: NotifyService) {
+  }
 
   ngOnInit(): void {
     this.contactForm = this.fb.group({

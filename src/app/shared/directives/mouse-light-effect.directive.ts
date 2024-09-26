@@ -1,4 +1,4 @@
-import {Directive, ElementRef, Renderer2, AfterViewInit, HostListener} from '@angular/core';
+import {AfterViewInit, Directive, ElementRef, HostListener, Renderer2} from '@angular/core';
 
 @Directive({
   selector: '[mouseLightEffect]',

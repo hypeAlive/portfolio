@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {ToastrService} from "ngx-toastr";
 
 export type NotifyOptions = {
@@ -11,7 +11,8 @@ export type NotifyOptions = {
 })
 export class NotifyService {
 
-  constructor(private toast: ToastrService) { }
+  constructor(private toast: ToastrService) {
+  }
 
   public success(message: string, opt: Partial<NotifyOptions>) {
     this.toast.success(message, '', opt);

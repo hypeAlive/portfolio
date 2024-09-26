@@ -1,5 +1,5 @@
 import {NgModule, Optional, SkipSelf} from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {CommonModule} from '@angular/common';
 import {FooterComponent} from "./components/footer/footer.component";
 import {HeaderComponent} from "./components/header/header.component";
 import {HeaderService} from "./services/header.service";
@@ -18,11 +18,15 @@ import {NotifyService} from "./services/notify.service";
 import {TitleService} from "./services/title.service";
 
 const httpInterceptorProviders = [
-  { provide: HTTP_INTERCEPTORS, useClass: EnsureHttpInterceptor, multi: true },
-  { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
-  { provide: HTTP_INTERCEPTORS, useClass: LoggerInterceptor, multi: true },
+  {provide: HTTP_INTERCEPTORS, useClass: EnsureHttpInterceptor, multi: true},
+  {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},
+  {provide: HTTP_INTERCEPTORS, useClass: LoggerInterceptor, multi: true},
   //@ts-ignore
-  ...(environment.mockInterceptor ? [{ provide: HTTP_INTERCEPTORS, useClass: environment.mockInterceptor, multi: true }] : [])
+  ...(environment.mockInterceptor ? [{
+    provide: HTTP_INTERCEPTORS,
+    useClass: environment.mockInterceptor,
+    multi: true
+  }] : [])
 ];
 
 export const provideCoreServices = () => [

@@ -48,11 +48,13 @@ figure.active:before {
     transition: opacity 0.4s ease-in-out 0.1s, transform 0.5s ease-in-out;
     transition-delay: 0s;
   }
+
   &.active {
     h2 {
       transform: translateY(0px);
       transition-delay: 0s;
     }
+
     .card-actions {
       div {
         opacity: 1;
@@ -64,6 +66,7 @@ figure.active:before {
         }
       }
     }
+
     button {
       opacity: 1;
       transform: translateY(0px);
@@ -78,11 +81,12 @@ figure.active:before {
   }
 }
 
-.card:before{
+.card:before {
   background-color: oklch(var(--b1));
   opacity: 0.8;
   transition: opacity 0.8s ease-in-out;
 }
+
 .card.active:before {
   opacity: 0.5;
 }
