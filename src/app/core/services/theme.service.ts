@@ -7,7 +7,7 @@ import {Themes} from "../models/themes";
 @Injectable({
   providedIn: CoreModule
 })
-export class ThemeService implements OnDestroy{
+export class ThemeService implements OnDestroy {
 
   private theme: Themes = Themes.DARK;
 
