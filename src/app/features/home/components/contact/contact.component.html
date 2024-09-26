@@ -1,8 +1,8 @@
-<form [formGroup]="contactForm" (ngSubmit)="submitForm()" class="flex flex-col max-w-3xl gap-3">
+<form [formGroup]="contactForm" (ngSubmit)="submitForm()" class="flex flex-col max-w-3xl gap-3 m-auto">
   <div class="flex">
     <input type="text" formControlName="name" placeholder="Your Name" class="input input-bordered w-full mr-3" />
     <input type="text" formControlName="email" placeholder="Your Email" class="input input-bordered w-full" />
   </div>
-  <textarea formControlName="message" class="textarea textarea-lg textarea-bordered w-full resize-none" placeholder="Your Message"></textarea>
+  <textarea formControlName="message" class="textarea textarea-lg textarea-bordered w-full resize-none h-40" placeholder="Your Message"></textarea>
   <button type="submit" class="btn btn-primary btn-wide self-center" [ngClass]="{'btn-disabled': !isValid()}"> Send </button>
 </form>
