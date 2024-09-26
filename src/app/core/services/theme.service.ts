@@ -1,8 +1,8 @@
 import {Inject, Injectable, OnDestroy} from '@angular/core';
 import {DOCUMENT} from "@angular/common";
 import {Subject, Subscription} from "rxjs";
-import {CoreModule} from "../core.module";
 import {Themes} from "../models/themes";
+import {CoreModule} from "../core.module";
 
 @Injectable({
   providedIn: CoreModule

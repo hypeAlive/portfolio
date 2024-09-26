@@ -2,6 +2,7 @@ import {Injectable, OnDestroy} from '@angular/core';
 import {ActivatedRoute, NavigationEnd, Router} from "@angular/router";
 import {BehaviorSubject, filter, Observable, Subject, Subscription} from "rxjs";
 import {isEqual} from "lodash";
+import {CoreModule} from "../core.module";
 
 export type HeaderConfig = {
     showMenu: boolean,
@@ -15,7 +16,7 @@ export enum HeaderBackground {
 }
 
 @Injectable({
-    providedIn: 'root'
+    providedIn: CoreModule
 })
 export class HeaderService implements OnDestroy {
 
