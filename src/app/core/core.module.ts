@@ -15,6 +15,7 @@ import {NgIcon} from "@ng-icons/core";
 import {provideToastr} from "ngx-toastr";
 import {ToastComponent} from "./components/toast/toast.component";
 import {NotifyService} from "./services/notify.service";
+import {TitleService} from "./services/title.service";
 
 const httpInterceptorProviders = [
   { provide: HTTP_INTERCEPTORS, useClass: EnsureHttpInterceptor, multi: true },
@@ -28,6 +29,7 @@ export const provideCoreServices = () => [
   ...httpInterceptorProviders,
   HeaderService,
   ThemeService,
+  TitleService,
   provideToastr({
     toastComponent: ToastComponent,
     positionClass: 'toast-bottom-right',
