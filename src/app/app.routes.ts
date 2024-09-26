@@ -7,6 +7,7 @@ export const routes: Routes = [
   {
     path: "",
     loadComponent: () => import("./features/home/pages/home/home.component"),
+    title: "Home",
     data: {
       header: {
         showMenu: true,
@@ -17,6 +18,7 @@ export const routes: Routes = [
   {
     path: "project/:id",
     loadComponent: () => import("./features/project/pages/project/project.component"),
+    title: "Project",
     data: {
       header: {
         showMenu: false,

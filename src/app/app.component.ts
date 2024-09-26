@@ -11,7 +11,6 @@ import {CoreModule} from "./core/core.module";
   styleUrl: './app.component.scss'
 })
 export class AppComponent {
-  title = 'portfolio';
 
   constructor() {
   }
