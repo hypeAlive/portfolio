@@ -1,5 +1,5 @@
-import {Component, Input, OnInit, QueryList, ViewChild, ViewChildren} from '@angular/core';
-import {CardComponent, PROGRAMMING_LANGUAGES, ProjectCard} from "../card/card.component";
+import {Component, Input, QueryList, ViewChildren} from '@angular/core';
+import {CardComponent, ProjectCard} from "../card/card.component";
 import {NgClass, NgForOf} from "@angular/common";
 
 @Component({

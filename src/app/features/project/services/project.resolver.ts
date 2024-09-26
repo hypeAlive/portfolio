@@ -1,6 +1,5 @@
 import {Injectable} from '@angular/core';
 import {Resolve, ActivatedRouteSnapshot, RouterStateSnapshot, Router} from '@angular/router';
-import {firstValueFrom, Observable, of} from 'rxjs';
 import {NGXLogger} from "ngx-logger";
 import {ProjectService} from "./project.service";
 

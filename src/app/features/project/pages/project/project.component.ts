@@ -1,7 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {CardComponent, PROGRAMMING_LANGUAGES, ProjectCard} from "../../../home/components/card/card.component";
-import {MouseLightEffectDirective} from "../../../../shared/directives/mouse-light-effect.directive";
-import {CardCarouselComponent} from "../../../home/components/card-carousel/card-carousel.component";
+import {ProjectCard} from "../../../home/components/card/card.component";
 import {NGXLogger} from "ngx-logger";
 import {ActivatedRoute} from "@angular/router";
 
