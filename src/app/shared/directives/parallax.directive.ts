@@ -139,13 +139,9 @@ export class ParallaxDirective implements OnInit, OnDestroy {
    * @param {number} scrollStart - Der Scroll-Wert, bei dem der Parallax-Effekt beginnt.
    */
   @Input('parallax') builder: ParallaxBuilder | undefined;
+  @Input('active') active: boolean = true;
 
   private config: ParallaxConfig | undefined;
-
-  /**
-   * Gibt an, ob die Direktive aktiv ist.
-   */
-  private active: boolean = true;
 
   /**
    * Event-Listener für das Scroll-Ereignis.

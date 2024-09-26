@@ -1,6 +1,7 @@
 import {Injectable, OnDestroy} from '@angular/core';
 import {ActivatedRoute, NavigationEnd, Router} from "@angular/router";
 import {BehaviorSubject, filter, Observable, Subject, Subscription} from "rxjs";
+import {isEqual} from "lodash";
 
 export type HeaderConfig = {
     showMenu: boolean,
@@ -10,7 +11,7 @@ export type HeaderConfig = {
 export enum HeaderBackground {
     SHOW = 'show',
     BLEND_IN_ON_SCROLL = 'blend-in-on-scroll',
-    TRANSPARENT = 'transparent',
+    HIDE = 'transparent',
 }
 
 @Injectable({
@@ -18,21 +19,26 @@ export enum HeaderBackground {
 })
 export class HeaderService implements OnDestroy {
 
-    private static readonly DEFAULT_CONFIG: HeaderConfig = {
+    public static readonly DEFAULT_CONFIG: HeaderConfig = {
         showMenu: false,
-        background: HeaderBackground.SHOW
+        background: HeaderBackground.HIDE
     }
 
-    private currentConfig: HeaderConfig = HeaderService.DEFAULT_CONFIG;
     private configSubject: Subject<HeaderConfig> = new BehaviorSubject<HeaderConfig>(HeaderService.DEFAULT_CONFIG);
     private readonly routeSubscription: Subscription | null = null;
+    private currentConfig: HeaderConfig = HeaderService.DEFAULT_CONFIG;
 
     constructor(private router: Router, private route: ActivatedRoute) {
         this.routeSubscription = this.router.events
-            .pipe(filter(event => event instanceof NavigationEnd))
+            .pipe(
+                filter(event => event instanceof NavigationEnd)
+            )
             .subscribe(() => {
-                const routeConfig = this.getCurrentRouteConfig();
-                this.currentConfig = routeConfig ? routeConfig : HeaderService.DEFAULT_CONFIG;
+                const routeConfig = this.getCurrentRouteConfig() || HeaderService.DEFAULT_CONFIG;
+                if (isEqual(routeConfig, this.getConfig())) return;
+
+                this.currentConfig = routeConfig;
+                this.configSubject.next(routeConfig);
             });
     }
 

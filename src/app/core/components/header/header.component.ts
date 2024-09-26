@@ -21,7 +21,7 @@ import {SwapComponent} from "../../../shared/components/swap/swap.component";
 import {isPlatformBrowser} from "@angular/common";
 import {Direction, ParallaxBuilder} from "../../../shared/directives/parallax.directive";
 import {Themes} from "../../models/themes";
-import {HeaderService} from "../../services/header.service";
+import {HeaderBackground, HeaderConfig, HeaderService} from "../../services/header.service";
 
 @Component({
   selector: 'core-header',
@@ -36,6 +36,7 @@ export class HeaderComponent implements AfterViewInit, OnDestroy, OnInit {
   @ViewChildren('customLink', {read: ElementRef}) customLinks!: QueryList<ElementRef>;
   @ViewChild('navbarCenter') navbarCenter!: ElementRef;
 
+  protected headerConfig: HeaderConfig = HeaderService.DEFAULT_CONFIG;
 
   protected opacityParallax = ParallaxBuilder.fromConfig({
     scrollStart: 0,
@@ -49,6 +50,7 @@ export class HeaderComponent implements AfterViewInit, OnDestroy, OnInit {
     strength: 0.004,
   });
   private themeIconSubscription!: Subscription;
+  private headerSubscription!: Subscription;
 
   protected screenTop = 0;
 
@@ -78,6 +80,7 @@ export class HeaderComponent implements AfterViewInit, OnDestroy, OnInit {
 
   ngOnDestroy() {
     this.themeIconSubscription.unsubscribe();
+    this.headerSubscription.unsubscribe();
   }
 
   protected getThemeSwitchIcons(): [string, string] {
@@ -114,12 +117,15 @@ export class HeaderComponent implements AfterViewInit, OnDestroy, OnInit {
   }
 
   ngOnInit(): void {
-    this.onScroll();
-    this.headerService.getConfigObserver().subscribe(config => {
+    this.headerSubscription = this.headerService.getConfigObserver().subscribe((config) => {
+      if (config.background === HeaderBackground.BLEND_IN_ON_SCROLL) {
+        this.onScroll();
+      }
+      this.headerConfig = config;
     });
   }
 
-  protected readonly ParallaxBuilder = ParallaxBuilder;
+  protected readonly HeaderBackground = HeaderBackground;
 }
 
 /**
