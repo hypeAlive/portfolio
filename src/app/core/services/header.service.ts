@@ -1,6 +1,6 @@
 import {Injectable, OnDestroy} from '@angular/core';
 import {ActivatedRoute, NavigationEnd, Router} from "@angular/router";
-import {filter, Subscription} from "rxjs";
+import {BehaviorSubject, filter, Observable, Subject, Subscription} from "rxjs";
 
 export type HeaderConfig = {
     showMenu: boolean,
@@ -24,7 +24,8 @@ export class HeaderService implements OnDestroy {
     }
 
     private currentConfig: HeaderConfig = HeaderService.DEFAULT_CONFIG;
-    private routeSubscription: Subscription | null = null;
+    private configSubject: Subject<HeaderConfig> = new BehaviorSubject<HeaderConfig>(HeaderService.DEFAULT_CONFIG);
+    private readonly routeSubscription: Subscription | null = null;
 
     constructor(private router: Router, private route: ActivatedRoute) {
         this.routeSubscription = this.router.events
@@ -36,8 +37,9 @@ export class HeaderService implements OnDestroy {
     }
 
     ngOnDestroy(): void {
-        if (!this.routeSubscription) return;
+        this.configSubject.unsubscribe();
 
+        if (!this.routeSubscription) return;
         this.routeSubscription.unsubscribe();
     }
 
@@ -50,7 +52,11 @@ export class HeaderService implements OnDestroy {
         return currentRoute.snapshot.data['header'] as HeaderConfig;
     }
 
-    public getHeaderConfig(): HeaderConfig {
+    public getConfigObserver(): Observable<HeaderConfig> {
+        return this.configSubject.asObservable();
+    }
+
+    public getConfig(): HeaderConfig {
         return this.currentConfig;
     }
 

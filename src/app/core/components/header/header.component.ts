@@ -21,6 +21,7 @@ import {SwapComponent} from "../../../shared/components/swap/swap.component";
 import {isPlatformBrowser} from "@angular/common";
 import {Direction, ParallaxBuilder} from "../../../shared/directives/parallax.directive";
 import {Themes} from "../../models/themes";
+import {HeaderService} from "../../services/header.service";
 
 @Component({
   selector: 'core-header',
@@ -51,7 +52,9 @@ export class HeaderComponent implements AfterViewInit, OnDestroy, OnInit {
 
   protected screenTop = 0;
 
-  constructor(private themeService: ThemeService, @Inject(PLATFORM_ID) private platformId: Object) {
+  constructor(private themeService: ThemeService,
+              @Inject(PLATFORM_ID) private platformId: Object,
+              private headerService: HeaderService) {
   }
 
   @HostListener('window:scroll', [])
@@ -112,6 +115,8 @@ export class HeaderComponent implements AfterViewInit, OnDestroy, OnInit {
 
   ngOnInit(): void {
     this.onScroll();
+    this.headerService.getConfigObserver().subscribe(config => {
+    });
   }
 
   protected readonly ParallaxBuilder = ParallaxBuilder;
