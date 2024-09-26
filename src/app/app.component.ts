@@ -1,9 +1,6 @@
 import { Component } from '@angular/core';
 import {RouterOutlet} from "@angular/router";
 import {CoreModule} from "./core/core.module";
-import {ToastrService} from "ngx-toastr";
-import {ToastComponent} from "./core/components/toast/toast.component";
-import {NotifyService} from "./core/services/notify.service";
 
 
 @Component({
