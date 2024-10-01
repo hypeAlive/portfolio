@@ -25,6 +25,7 @@ const httpInterceptorProviders = [
   //@ts-ignore
   ...(environment.mockInterceptor ? [{
     provide: HTTP_INTERCEPTORS,
+    // @ts-ignore
     useClass: environment.mockInterceptor,
     multi: true
   }] : [])
