@@ -4,8 +4,9 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build --localize && node generate-lang-redirect.js",
+    "build": "ng build --localize",
     "watch": "ng build --watch --configuration development",
+    "generate-nginx-config": "node generate-nginx-conf.js",
     "test": "ng test"
   },
   "private": true,

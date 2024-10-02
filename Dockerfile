@@ -12,6 +12,8 @@ COPY *.json *.js  /app/
 
 RUN npm run build
 
+RUN npm run generate-nginx-config
+
 FROM nginx:alpine
 
 # Install openssl
@@ -25,6 +27,6 @@ COPY --from=build /app/dist/portfolio/browser /usr/share/nginx/html
 # Generate self-signed certificate
 RUN openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/nginx/ssl/selfsigned.key -out /etc/nginx/ssl/selfsigned.crt -subj "/CN=localhost"
 
-COPY portfolio.conf /etc/nginx/conf.d/default.conf
+COPY --from=build /app/nginx.conf /etc/nginx/conf.d/default.conf
 
 CMD ["nginx", "-g", "daemon off;"]
