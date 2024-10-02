@@ -5,8 +5,9 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build --localize",
+    "build:prod": "ng build --configuration production --localize",
     "watch": "ng build --watch --configuration development",
-    "generate-nginx-config": "node generate-nginx-conf.js",
+    "generate:nginx-config": "node generate-nginx-conf.js",
     "test": "ng test"
   },
   "private": true,

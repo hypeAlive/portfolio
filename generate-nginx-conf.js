@@ -28,9 +28,14 @@ function getLanguagesFromConfig() {
 function generateHttp() {
   const mapEntries = languages.map(lang => `~*^${lang} ${lang};`).join('\n      ');
   return `http {
+    include       mime.types;
+    default_type  application/octet-stream;
+
     map $http_accept_language $accept_language {
       ${mapEntries}
     }
+
+    include /etc/nginx/conf.d/*.conf;
 }`;
 }
 
@@ -72,12 +77,16 @@ function generateFallback() {
 }
 
 function generateNginxConfig() {
-  getLanguagesFromConfig();
   const httpConfig = generateHttp();
+
+  return `events {}\n\n${httpConfig}`;
+}
+
+function generateDefaultConfig() {
   const serverConfig = generateServer();
   const fallbackConfig = generateFallback();
 
-  return `${httpConfig}\n\n${serverConfig}\n\n${fallbackConfig}`;
+  return `${serverConfig}\n\n${fallbackConfig}\n\n`;
 }
 
 function writeNginxConfigToFile() {
@@ -87,6 +96,15 @@ function writeNginxConfigToFile() {
   console.log(`NGINX configuration written to ${outputPath}`);
 }
 
+function writeDefaultConfigToFile() {
+  const nginxConfig = generateDefaultConfig();
+  const outputPath = path.resolve(__dirname, 'default.conf');
+  fs.writeFileSync(outputPath, nginxConfig, 'utf8');
+  console.log(`NGINX configuration written to ${outputPath}`);
+}
+
+getLanguagesFromConfig();
 writeNginxConfigToFile();
+writeDefaultConfigToFile();
 
 
