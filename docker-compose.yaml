@@ -14,21 +14,15 @@ services:
       - 'MARIADB_PASSWORD=secret'
       - 'MARIADB_ROOT_PASSWORD=verysecret'
       - 'MARIADB_USER=myuser'
-    volumes:
-      - ./db-init:/docker-entrypoint-initdb.d
 
   cms:
     image: directus/directus
     ports:
       - "8055:8055"
-    volumes:
-      - ./database:/directus/database
-      - ./uploads:/directus/uploads
-      - ./extensions:/directus/extensions
     environment:
       SECRET: "replace-with-secure-random-value"
       ADMIN_EMAIL: "admin@example.com"
-      ADMIN_PASSWORD: "d1r3ctu5"
+      ADMIN_PASSWORD: "co"
       DB_CLIENT: "mysql"
       DB_HOST: "db"
       DB_PORT: "3306"
