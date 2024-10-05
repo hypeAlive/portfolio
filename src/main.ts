@@ -9,6 +9,7 @@ if (environment.production) {
   enableProdMode();
 }
 
+//test
 
 bootstrapApplication(AppComponent, {
   ...appConfig
