@@ -30,7 +30,6 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     steps:
-      - name: Wait for approval
       - uses: trstringer/manual-approval@v1
         with:
           secret: ${{ github.GITHUB_TOKEN }}
