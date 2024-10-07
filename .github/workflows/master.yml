@@ -44,14 +44,12 @@ jobs:
         id: save-version
         run: |
           echo "GEN_VERSION=$VERSION" >> $GITHUB_OUTPUT  # Setze den Output für den Job
-          echo "Saved version: $GEN_VERSION"  # Ausgabe zur Bestätigung
+          echo "Saved version: $VERSION"  # Korrekte Ausgabe
 
   build-push:
     name: build and push
     runs-on: self-hosted
-    needs: [install]
-    env:
-      VERSION: ${{ needs.install.outputs.version }}
+    needs: install
     steps:
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
@@ -67,4 +65,4 @@ jobs:
         uses: docker/build-push-action@v6
         with:
           push: true
-          tags: https://registry.thorge-engelmann.de/v2/portfolio:${{ env.VERSION }}
+          tags: https://registry.thorge-engelmann.de/v2/portfolio:${{ needs.install.outputs.version }}  # Verwendung des Outputs
