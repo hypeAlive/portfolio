@@ -77,5 +77,5 @@ jobs:
         with:
           push: true
           tags: |
-            https://registry.thorge-engelmann.de/portfolio:${{ needs.install.outputs.version }}
-            https://registry.thorge-engelmann.de/portfolio:latest
+            registry.thorge-engelmann.de/portfolio:${{ needs.install.outputs.version }}
+            registry.thorge-engelmann.de/portfolio:latest
