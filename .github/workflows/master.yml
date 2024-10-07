@@ -35,7 +35,7 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
         run: |
-          VERSION_SPACES=$(npx semantic-release --dry-run | grep -oP 'Published release \K.*? ')
+          VERSION_SPACES=$(npx semantic-release | grep -oP 'Published release \K.*? ')
           VERSION="${VERSION_SPACES// /}"  # Entfernen von Leerzeichen
           echo "GEN_VERSION=$VERSION" >> $GITHUB_ENV  # Setze die Umgebungsvariable
           echo "Version: $VERSION"  # Ausgabe zur Bestätigung
