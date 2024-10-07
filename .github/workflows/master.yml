@@ -50,6 +50,8 @@ jobs:
     name: build and push
     runs-on: self-hosted
     needs: [install]
+    env:
+      VERSION: ${{ needs.install.outputs.version }}
     steps:
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
@@ -63,8 +65,6 @@ jobs:
 
       - name: Build and Push Docker image
         uses: docker/build-push-action@v6
-        env:
-          VERSION: ${{ needs.install.outputs.version }}
         with:
           push: true
           tags: https://registry.thorge-engelmann.de/v2/portfolio:${{ env.VERSION }}
