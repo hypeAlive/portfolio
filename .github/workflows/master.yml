@@ -49,6 +49,9 @@ jobs:
           username: ${{ vars.REGISTRY_USERNAME }}
           password: ${{ secrets.REGISTRY_TOKEN }}
 
+      - name: Get version from previous job
+        run: echo "VERSION=${{ steps.semantic-release.outputs.version }}" >> $GITHUB_ENV
+
       - name: Build and Push Docker image
         uses: docker/build-push-action@v6
         with:
