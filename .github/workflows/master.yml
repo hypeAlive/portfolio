@@ -9,45 +9,54 @@ on:
       - "master"
 
 jobs:
-  build:
-    name: Build, version, and deploy
+  install:
+    name: Checkout code and Install dependencies
     runs-on: self-hosted
     steps:
-      # Check out the repository
       - name: Checkout code
         uses: actions/checkout@v3
 
-      # Set up Node.js (for semantic-release)
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
           node-version: '18'
 
-      # Install dependencies
       - name: Install dependencies
         run: npm ci
 
-      # Get version from semantic-release (without publishing)
+  versioning:
+    name: Get version
+    runs-on: self-hosted
+    needs: install
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
       - name: Get version
-        id: version # ID to reference output
+        id: version
         run: |
           VERSION=$(npx semantic-release --dry-run | grep 'nextRelease.version' | sed -E 's/.*"version": "(.*)",/\1/')
           echo "VERSION=$VERSION" >> $GITHUB_ENV
 
-      # Set up Docker Buildx
+  build-push:
+    name: Build and Push Docker image
+    runs-on: self-hosted
+    needs: versioning
+    steps:
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
 
-      # Login to Docker Hub
-      - name: Login to Docker Hub
+      - name: Login to Docker Registry
         uses: docker/login-action@v3
         with:
-          username: ${{ vars.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_TOKEN }}
+          registry: https://nexus.thorge-engelmann.de/repository/docker/
+          username: ${{ vars.REGISTRY_USERNAME }}
+          password: ${{ secrets.REGISTRY_TOKEN }}
 
-      # Build and Push Docker image with the new version
       - name: Build and Push Docker image
         uses: docker/build-push-action@v6
         with:
           push: true
-          tags: ${{ vars.DOCKERHUB_USERNAME }}/portfolio:latest,${{ vars.DOCKERHUB_USERNAME }}/portfolio:${{ env.VERSION }}
+          tags: |
+            https://nexus.thorge-engelmann.de/repository/docker/portfolio:latest,
+            https://nexus.thorge-engelmann.de/repository/docker/portfolio:${{ env.VERSION }}
