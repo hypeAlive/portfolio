@@ -16,6 +16,8 @@ permissions:
 jobs:
   install:
     name: install
+    outputs:
+      version: ${{ steps.get-version.outputs.VERSION }}
     runs-on: self-hosted
     steps:
       - name: Checkout code
@@ -30,11 +32,13 @@ jobs:
         run: npm ci
 
       - name: Semantic Release
+        id: get-version
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
         run: |
           VERSION_SPACES=$(npx semantic-release --dryRun | grep -oP 'Published release \K.*? ')
-          VERSION="${VERSION_SPACES// /}"
+          version="${VERSION_SPACES// /}"
+          echo "VERSION=$version" >> $GITHUB_OUTPUT
           echo $VERSION
 
   build-push:
@@ -55,7 +59,7 @@ jobs:
       - name: Build and Push Docker image
         uses: docker/build-push-action@v6
         env:
-          VERSION: ${{ needs.install.outputs.VERSION }}
+          VERSION: ${{ needs.install.outputs.version }}
         with:
           push: true
           tags: https://registry.thorge-engelmann.de/v2/portfolio:${{ env.VERSION }}
