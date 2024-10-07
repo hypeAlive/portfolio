@@ -1,4 +1,4 @@
-import {Injectable} from '@angular/core';
+import {Inject, Injectable, LOCALE_ID} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {createDirectus, rest, RestClient} from "@directus/sdk";
 import {lastValueFrom} from "rxjs";
@@ -11,8 +11,10 @@ import {CoreModule} from "../core.module";
 export class DirectusService {
 
   private readonly client;
+  private readonly locale: string;
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, @Inject(LOCALE_ID) locale: string) {
+    this.locale = locale;
     this.client = createDirectus(environment.cmsUrl, {
       globals: {
         fetch: (url, options) => lastValueFrom(this.http.request(options.method, url, options))
@@ -23,6 +25,10 @@ export class DirectusService {
 
   public getRestClient(): RestClient<any> {
     return this.client;
+  }
+
+  public getLocale(): string {
+    return this.locale;
   }
 
 

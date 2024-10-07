@@ -1,4 +1,4 @@
-import {ApplicationConfig, importProvidersFrom} from '@angular/core';
+import {APP_INITIALIZER, ApplicationConfig, importProvidersFrom, LOCALE_ID} from '@angular/core';
 import {provideRouter} from '@angular/router';
 
 import {routes} from './app.routes';
@@ -9,6 +9,12 @@ import {provideAnimationsAsync} from '@angular/platform-browser/animations/async
 import {LoggerModule} from "ngx-logger";
 import {environment} from "../environments/environment";
 import {provideCoreServices} from "./core/core.module";
+
+function localeFactory(): string {
+  const url = new URL(window.location.href);
+  const pathSegments = url.pathname.split('/');
+  return pathSegments[1] || 'de';
+}
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -22,6 +28,7 @@ export const appConfig: ApplicationConfig = {
       BrowserAnimationsModule
     ),
     provideCoreServices(),
-    provideAnimationsAsync()
+    provideAnimationsAsync(),
+    { provide: LOCALE_ID, useValue: localeFactory() },
   ]
 };

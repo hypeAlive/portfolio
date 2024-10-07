@@ -5,7 +5,7 @@ import {ProjectService} from "../../../project/services/project.service";
 import {ContactComponent} from "../../components/contact/contact.component";
 import {readItems} from "@directus/sdk";
 import {NgOptimizedImage} from "@angular/common";
-import { DirectusService } from '../../../../core/services/directus.service';
+import {DirectusService} from '../../../../core/services/directus.service';
 
 @Component({
   selector: 'app-home-page',
@@ -28,9 +28,20 @@ export default class HomeComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.directus.getRestClient().request(readItems("projects")).then(async (response) => {
+    this.directus.getRestClient().request(readItems("projects", {
+      deep: {
+        translations: {
+          _filter: {
+            languages_code: {_eq: 'de'},
+          },
+        },
+      },
+      fields: ['translations', {translations: ['title']}]
+    })).then(async (response) => {
       console.log(response);
     });
+
+    console.log(this.directus.getLocale())
   }
 
   protected readonly PROGRAMMING_LANGUAGES = PROGRAMMING_LANGUAGES;
