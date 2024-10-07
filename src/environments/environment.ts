@@ -4,7 +4,8 @@ import {MockInterceptor} from "../app/core/interceptors/mock.interceptor";
 
 export const environment = {
   production: false,
-  apiUrl: 'http://localhost:3000/api',
+  apiUrl: '',
+  cmsUrl: 'https://cms.nicolasfritz.dev',
   logLevel: NgxLoggerLevel.DEBUG,
   mockInterceptor: MockInterceptor,
   mockRoutes: {

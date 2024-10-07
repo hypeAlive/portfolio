@@ -3,6 +3,9 @@ import {CardComponent, PROGRAMMING_LANGUAGES, ProjectCard} from "../../component
 import {CardCarouselComponent} from "../../components/card-carousel/card-carousel.component";
 import {ProjectService} from "../../../project/services/project.service";
 import {ContactComponent} from "../../components/contact/contact.component";
+import {readItems} from "@directus/sdk";
+import {NgOptimizedImage} from "@angular/common";
+import {DirectusService} from '../../../../core/services/directus.service';
 
 @Component({
   selector: 'app-home-page',
@@ -10,7 +13,8 @@ import {ContactComponent} from "../../components/contact/contact.component";
   imports: [
     CardComponent,
     CardCarouselComponent,
-    ContactComponent
+    ContactComponent,
+    NgOptimizedImage
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
@@ -19,13 +23,25 @@ export default class HomeComponent implements OnInit {
 
   protected projectCards: ProjectCard[] | undefined = undefined;
 
-  constructor(private project: ProjectService) {
+  constructor(private directus: DirectusService) {
 
   }
 
   ngOnInit(): void {
-    this.project.getProjectCards()
-      .then(cards => this.projectCards = cards);
+    this.directus.getRestClient().request(readItems("projects", {
+      deep: {
+        translations: {
+          _filter: {
+            languages_code: {_eq: this.directus.getLocale()},
+          },
+        },
+      },
+      fields: ['translations', { translations: ['title'] }]
+    })).then(async (response) => {
+      console.log(response);
+    });
+
+    console.log(this.directus.getLocale())
   }
 
   protected readonly PROGRAMMING_LANGUAGES = PROGRAMMING_LANGUAGES;
