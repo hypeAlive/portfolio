@@ -32,11 +32,11 @@ export default class HomeComponent implements OnInit {
       deep: {
         translations: {
           _filter: {
-            languages_code: {_eq: 'de'},
+            languages_code: {_eq: this.directus.getLocale()},
           },
         },
       },
-      fields: ['translations', {translations: ['title']}]
+      fields: ['translations', { translations: ['title'] }]
     })).then(async (response) => {
       console.log(response);
     });
