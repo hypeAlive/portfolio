@@ -31,7 +31,7 @@ jobs:
         id: version
         run: |
           export GITHUB_TOKEN=${{ secrets.GITHUB_TOKEN }}
-          VERSION=$(npx semantic-release --dry-run --no-ci | grep 'nextRelease.version' | sed -E 's/.*"version": "(.*)",/\1/')
+          VERSION=$(npx semantic-release | grep 'nextRelease.version' | sed -E 's/.*"version": "(.*)",/\1/')
           echo "VERSION=$VERSION" >> $GITHUB_ENV
           echo "Version: $VERSION"
 
