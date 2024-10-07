@@ -40,11 +40,17 @@ jobs:
           echo "GEN_VERSION=$VERSION" >> $GITHUB_ENV  # Setze die Umgebungsvariable
           echo "Version: $VERSION"  # Ausgabe zur Bestätigung
 
-      - name: save version
+      - name: Save version
         id: save-version
         run: |
           echo "GEN_VERSION=$VERSION" >> $GITHUB_OUTPUT  # Setze den Output für den Job
           echo "Saved version: $VERSION"  # Korrekte Ausgabe
+
+      - name: Debug Output
+        run: |
+          echo "Debug: Checking GEN_VERSION output..."
+          echo "GEN_VERSION: ${{ steps.save-version.outputs.GEN_VERSION }}"
+          echo "Environment variable VERSION: $VERSION"
 
   build-push:
     name: build and push
@@ -60,6 +66,11 @@ jobs:
           registry: https://registry.thorge-engelmann.de/v2
           username: ${{ vars.REGISTRY_USERNAME }}
           password: ${{ secrets.REGISTRY_TOKEN }}
+
+      - name: Debug Output for Build and Push
+        run: |
+          echo "Debug: Current version for Docker tag..."
+          echo "Using version: ${{ needs.install.outputs.version }}"
 
       - name: Build and Push Docker image
         uses: docker/build-push-action@v6
