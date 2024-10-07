@@ -17,7 +17,7 @@ jobs:
   install:
     name: install
     outputs:
-      version: ${{ steps.get-version.outputs.VERSION }}
+      version: ${{ steps.save-version.outputs.GEN_VERSION }}
     runs-on: self-hosted
     steps:
       - name: Checkout code
@@ -31,15 +31,20 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Semantic Release
-        id: get-version
+      - name: Get Version
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
         run: |
-          VERSION_SPACES=$(npx semantic-release --dryRun | grep -oP 'Published release \K.*? ')
-          version="${VERSION_SPACES// /}"
-          echo "VERSION=$version" >> $GITHUB_OUTPUT
-          echo $VERSION
+          VERSION_SPACES=$(npx semantic-release --dry-run | grep -oP 'Published release \K.*? ')
+          VERSION="${VERSION_SPACES// /}"  # Entfernen von Leerzeichen
+          echo "GEN_VERSION=$VERSION" >> $GITHUB_ENV  # Setze die Umgebungsvariable
+          echo "Version: $VERSION"  # Ausgabe zur Bestätigung
+
+      - name: save version
+        id: save-version
+        run: |
+          echo "GEN_VERSION=$VERSION" >> $GITHUB_OUTPUT  # Setze den Output für den Job
+          echo "Saved version: $GEN_VERSION"  # Ausgabe zur Bestätigung
 
   build-push:
     name: build and push
