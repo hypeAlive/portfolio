@@ -49,24 +49,15 @@ function generateServer() {
     ssl_certificate /etc/nginx/ssl/selfsigned.crt;
     ssl_certificate_key /etc/nginx/ssl/selfsigned.key;
 
-    # default lang
     if ($accept_language ~ "^$") {
-        set $accept_language "${languages[0]}";
+        set $accept_language "de";
     }
 
-    # redirect to default language if no language is specified
-    if ($uri !~ ^/(${languagesString})/) {
-      rewrite ^/(.*)$ /$accept_language/$1 permanent;
+    if ($uri !~ ^/(${languagesString})) {
+        rewrite ^/(.*)$ /$accept_language/$1 permanent;
     }
 
-    # ensure no consecutive language codes
-    if ($uri ~ ^/(${languagesString})/(${languagesString})(/|$)) {
-      rewrite ^/(${languagesString})/(.*)$ /$1/$3 permanent;
-    }
-
-    rewrite ^/$ /$accept_language permanent;
-
-    location ~ ^/(${languagesString}) {
+    location ~ ^/(${languagesString})(/.*|$) {
         try_files $uri /$1/index.html?$args;
     }
 }`;
