@@ -49,14 +49,17 @@ function generateServer() {
     ssl_certificate /etc/nginx/ssl/selfsigned.crt;
     ssl_certificate_key /etc/nginx/ssl/selfsigned.key;
 
+    # Setze Standardsprache auf "de", falls keine Sprache angegeben ist
     if ($accept_language ~ "^$") {
-        set $accept_language "de";
+        set $accept_language "${languages[0]}";
     }
 
+    # Weiterleitung zu Standardsprache, wenn keine Sprache in der URL
     if ($uri !~ ^/(${languagesString})) {
-        rewrite ^/(.*)$ /$accept_language/$1 permanent;
+        rewrite ^(.*)$ /$accept_language$1 permanent;
     }
 
+    # Erlaubte Routen mit Sprachpräfix
     location ~ ^/(${languagesString})(/.*|$) {
         try_files $uri /$1/index.html?$args;
     }
