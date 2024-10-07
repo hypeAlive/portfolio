@@ -2,10 +2,11 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {createDirectus, rest, RestClient} from "@directus/sdk";
 import {lastValueFrom} from "rxjs";
-import {environment} from "../../../../environments/environment";
+import {environment} from "../../../environments/environment";
+import {CoreModule} from "../core.module";
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: CoreModule
 })
 export class DirectusService {
 
