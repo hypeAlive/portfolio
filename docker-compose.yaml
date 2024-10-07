@@ -30,6 +30,11 @@ services:
       DB_USER: "myuser"
       DB_PASSWORD: "secret"
       WEBSOCKETS_ENABLED: "true"
+      CORS_ENABLED: "true"
+      CORS_ORIGIN: "https://localhost,https://nicolasfritz.dev"
+      CORS_METHODS: 'GET,POST,PATCH,DELETE'
+      CORS_ALLOWED_HEADERS: 'Content-Type,Authorization'
+      CORS_EXPOSED_HEADERS: 'Content-Range'
     depends_on:
       - db
 
