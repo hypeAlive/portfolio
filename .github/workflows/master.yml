@@ -15,7 +15,7 @@ permissions:
 jobs:
   build:
     name: build
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     steps:
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
@@ -28,7 +28,7 @@ jobs:
   deploy:
     name: deploy
     needs: build
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     steps:
       - uses: trstringer/manual-approval@v1
         with:
