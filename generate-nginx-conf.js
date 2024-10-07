@@ -60,8 +60,8 @@ function generateServer() {
     }
 
     # ensure no consecutive language codes
-    if ($uri ~ ^/(${languagesString})/(${languagesString})/) {
-      rewrite ^/(${languagesString})/(.*)$ /$1/$2 permanent;
+    if ($uri ~ ^/(${languagesString})/(${languagesString})(/|$)) {
+      rewrite ^/(${languagesString})/(.*)$ /$1/$3 permanent;
     }
 
     rewrite ^/$ /$accept_language permanent;
