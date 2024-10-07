@@ -6,6 +6,8 @@
     "start": "ng serve",
     "build": "ng build --localize",
     "build:prod": "ng build --configuration production --localize",
+    "build:dev": "ng build --configuration development --localize",
+    "build:test1": "ng build --configuration test1 --localize",
     "watch": "ng build --watch --configuration development",
     "generate:nginx-config": "node generate-nginx-conf.js",
     "test": "ng test"

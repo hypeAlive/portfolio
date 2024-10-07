@@ -1,6 +1,9 @@
 services:
   web:
-    build: .
+    build:
+      context: .
+      args:
+        BUILD_IN: test1
     ports:
       - "80:80"
       - "443:443"

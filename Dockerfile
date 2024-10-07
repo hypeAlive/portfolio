@@ -10,7 +10,13 @@ COPY public  /app/public
 COPY src  /app/src
 COPY *.json *.js  /app/
 
-RUN npm run build:prod
+ARG BUILD_IN
+RUN case "$BUILD_IN" in \
+      test1) echo "Running build:test1" && npm run build:test1 ;; \
+      prod) echo "Running build:prod" && npm run build:prod ;; \
+      dev) echo "Running build:dev" && npm run build:dev ;; \
+      *) echo "Running default build:prod" && npm run build:prod ;; \
+    esac
 
 RUN npm run generate:nginx-config
 

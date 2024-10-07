@@ -5,6 +5,7 @@ import {ProjectService} from "../../../project/services/project.service";
 import {ContactComponent} from "../../components/contact/contact.component";
 import {DirectusService} from "../../../project/services/directus.service";
 import {readItems} from "@directus/sdk";
+import {NgOptimizedImage} from "@angular/common";
 
 @Component({
   selector: 'app-home-page',
@@ -12,7 +13,8 @@ import {readItems} from "@directus/sdk";
   imports: [
     CardComponent,
     CardCarouselComponent,
-    ContactComponent
+    ContactComponent,
+    NgOptimizedImage
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
