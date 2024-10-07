@@ -19,7 +19,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '18'
+          node-version: '20'
 
       - name: Install dependencies
         run: npm ci
@@ -58,6 +58,4 @@ jobs:
         uses: docker/build-push-action@v6
         with:
           push: true
-          tags: |
-            https://registry.thorge-engelmann.de/v2/portfolio:latest,
-            https://registry.thorge-engelmann.de/v2/portfolio:${{ env.VERSION }}
+          tags: https://registry.thorge-engelmann.de/v2/portfolio:${{ env.VERSION }}
