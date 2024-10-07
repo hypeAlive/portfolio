@@ -32,12 +32,15 @@ jobs:
       - name: Semantic Release
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
-        run: npx semantic-release
+        run: |
+          VERSION_SPACES=$(npx semantic-release --dryRun | grep -oP 'Published release \K.*? ')
+          VERSION="${VERSION_SPACES// /}"
+          echo $VERSION
 
   build-push:
     name: build and push
     runs-on: self-hosted
-    needs: install
+    needs: [install]
     steps:
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
@@ -49,11 +52,10 @@ jobs:
           username: ${{ vars.REGISTRY_USERNAME }}
           password: ${{ secrets.REGISTRY_TOKEN }}
 
-      - name: Get version from previous job
-        run: echo "VERSION=${{ steps.semantic-release.outputs.version }}" >> $GITHUB_ENV
-
       - name: Build and Push Docker image
         uses: docker/build-push-action@v6
+        env:
+          VERSION: ${{ needs.install.outputs.VERSION }}
         with:
           push: true
           tags: https://registry.thorge-engelmann.de/v2/portfolio:${{ env.VERSION }}
