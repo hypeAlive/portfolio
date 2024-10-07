@@ -54,6 +54,16 @@ function generateServer() {
         set $accept_language "${languages[0]}";
     }
 
+    # redirect to default language if no language is specified
+    if ($uri !~ ^/(${languagesString})/) {
+      rewrite ^/(?!(${languagesString})/)(.*)$ /$accept_language/$1 permanent;
+    }
+
+    # ensure no consecutive language codes
+    if ($uri ~ ^/(${languagesString})/(${languagesString})/) {
+      rewrite ^/(${languagesString})/(.*)$ /$1/$2 permanent;
+    }
+
     rewrite ^/$ /$accept_language permanent;
 
     location ~ ^/(${languagesString}) {
