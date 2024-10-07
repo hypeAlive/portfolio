@@ -50,7 +50,7 @@ jobs:
         run: |
           echo "Debug: Checking GEN_VERSION output..."
           echo "GEN_VERSION: ${{ steps.save-version.outputs.GEN_VERSION }}"
-          echo "Environment variable VERSION: $VERSION"
+          echo "Environment variable VERSION: $GEN_VERSION"
 
   build-push:
     name: build and push
@@ -76,4 +76,6 @@ jobs:
         uses: docker/build-push-action@v6
         with:
           push: true
-          tags: https://registry.thorge-engelmann.de/v2/portfolio:${{ needs.install.outputs.version }}  # Verwendung des Outputs
+          tags: |
+            https://registry.thorge-engelmann.de/portfolio:${{ needs.install.outputs.version }}
+            https://registry.thorge-engelmann.de/portfolio:latest
