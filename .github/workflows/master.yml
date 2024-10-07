@@ -43,8 +43,8 @@ jobs:
       - name: Save version
         id: save-version
         run: |
-          echo "GEN_VERSION=$VERSION" >> $GITHUB_OUTPUT  # Setze den Output für den Job
-          echo "Saved version: $VERSION"  # Korrekte Ausgabe
+          echo "GEN_VERSION=$GEN_VERSION" >> $GITHUB_OUTPUT  # Setze den Output für den Job
+          echo "Saved version: $GEN_VERSION"  # Korrekte Ausgabe
 
       - name: Debug Output
         run: |
