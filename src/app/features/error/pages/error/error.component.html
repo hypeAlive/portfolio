@@ -4,20 +4,20 @@
   }
 </style>
 
-<div class="gradient text-white min-h-screen flex items-center">
+<div class="gradient dark:text-white text-base-content min-h-screen flex items-center">
   <div class="container m-auto flex flex-wrap items-center justify-center">
     <div class="w-full md:w-7/12 text-center md:text-center p-4 box-border mb-2">
       <ng-icon class="text-5xl" name="hugeSettingError03"/>
       <div class="text-8xl font-medium">
         {{ hasCountDown ? countdown : getCode() }}
       </div>
-      <div class="text-xl md:text-3xl font-medium mb-4">
+      <h2 class="text-xl md:text-3xl font-medium mb-4">
         Oops. This page has gone missing.
-      </div>
+      </h2>
       <div class="text-lg mb-8">
         You may have mistyped the address or the page may have moved.
       </div>
-      <a href="#" class="border border-white rounded p-4 inline-block">Go Home</a>
+      <button class="btn btn-wide btn-outline btn-primary text-white">Primary</button>
     </div>
   </div>
 </div>

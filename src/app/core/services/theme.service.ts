@@ -26,6 +26,12 @@ export class ThemeService implements OnDestroy {
     if (!themeLink) return;
 
     themeLink.setAttribute('data-theme', theme);
+    const htmlElement = this.document.documentElement;
+    if (theme === Themes.DARK) {
+      htmlElement.classList.add('dark');
+    } else {
+      htmlElement.classList.remove('dark');
+    }
     this.theme = theme;
     this.observer.next(theme);
   }
