@@ -5,6 +5,7 @@ import {RouteConfig} from "../models/RouteConfig";
 export type FooterConfig = {
   small: boolean;
   background: FooterBackground;
+  fixed: boolean;
 }
 
 export enum FooterBackground {
@@ -19,7 +20,8 @@ export class FooterService extends RouteConfig<FooterConfig> {
 
   public static readonly DEFAULT_CONFIG: FooterConfig = {
     small: false,
-    background: FooterBackground.SHOW
+    background: FooterBackground.SHOW,
+    fixed: false
   }
 
   constructor() {

@@ -29,5 +29,9 @@ export class FooterComponent implements OnInit {
     return this.footerService.getConfig().background === FooterBackground.HALF_OPACITY;
   }
 
+  protected isFixed(): boolean {
+    return this.footerService.getConfig().fixed;
+  }
+
   protected readonly HeaderBackground = HeaderBackground;
 }
