@@ -25,7 +25,7 @@
       </div>
     </nav>
     <aside>
-      <p i18n>Copyright © {{ currentYear }} - Alle Rechte vorbehalten.</p>
+      <p i18n [ngClass]="{'clear-margin ': isSmall()}">Copyright © {{ currentYear }} - Alle Rechte vorbehalten.</p>
     </aside>
   </div>
 </footer>
