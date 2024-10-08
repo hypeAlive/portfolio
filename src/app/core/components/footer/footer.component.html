@@ -1,4 +1,9 @@
-<footer class="footer footer-center bg-base-200 text-base-content rounded p-10">
+<footer
+  class="footer footer-center bg-base-200 text-base-content rounded"
+  [class.p-10]="!isSmall()"
+  [class.p-8]="isSmall()"
+  [class.small-gap]="isSmall()"
+>
   <nav *ngIf="!isSmall()" class="grid grid-flow-col gap-4">
     <a
       class="link link-hover"
@@ -26,7 +31,11 @@
     </a>
   </nav>
   <nav>
-    <div class="grid grid-flow-col gap-4 text-3xl">
+    <div
+      class="grid grid-flow-col gap-4"
+      [class.text-3xl]="!isSmall()"
+      [class.text-2xl]="isSmall()"
+    >
       <ng-icon class="my-clickable" name="bootstrapDiscord"/>
       <ng-icon class="my-clickable" name="bootstrapGithub"/>
       <ng-icon class="my-clickable" name="bootstrapTwitterX"/>
