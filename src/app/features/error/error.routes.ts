@@ -6,7 +6,8 @@ const routes: Routes = [
   ...Object.values(ErrorStatusCode).map(statusCode => ({
     path: statusCode.toString(),
     loadComponent: () => import('./pages/error/error.component'),
-    data: {statusCode, header: {showMenu: false, background: HeaderBackground.SHOW}, title: statusCode.toString()}
+    title: statusCode.toString(),
+    data: {statusCode, header: {showMenu: false, background: HeaderBackground.SHOW}}
   })),
   {
     path: "**",
