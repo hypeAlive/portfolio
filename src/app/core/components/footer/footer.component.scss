@@ -1,0 +1,19 @@
+.small-gap {
+  row-gap: 1.5rem;
+}
+
+.footer-bg {
+  position: absolute;
+  @apply backdrop-blur-sm bg-base-300 bg-opacity-70 drop-shadow-2xl;
+}
+
+.footer-fixed {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.clear-margin {
+  margin: 0 !important;
+}

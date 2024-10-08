@@ -1,41 +1,31 @@
-<footer class="footer footer-center bg-base-200 text-base-content rounded p-10">
-  <nav class="grid grid-flow-col gap-4">
-    <a
-      class="link link-hover"
-      i18n
-    >
-      Startseite
-    </a>
-    <a
-      class="link link-hover"
-      i18n
-    >
-      Projekte
-    </a>
-    <a
-      class="link link-hover"
-      i18n
-    >
-      Kontakt
-    </a>
-    <a
-      class="link link-hover"
-      i18n
-    >
-      Impressum
-    </a>
-  </nav>
-  <nav>
-    <div class="grid grid-flow-col gap-4 text-3xl">
-      <ng-icon class="my-clickable" name="bootstrapDiscord"/>
-      <ng-icon class="my-clickable" name="bootstrapGithub"/>
-      <ng-icon class="my-clickable" name="bootstrapTwitterX"/>
-      <ng-icon class="my-clickable" name="bootstrapLinkedin"/>
-    </div>
-  </nav>
-  <aside>
-    <p i18n>
-      Copyright © {{ currentYear }} - Alle Rechte vorbehalten.
-    </p>
-  </aside>
+<footer
+  class="footer footer-center bg-base-200 text-base-content rounded"
+  [ngClass]="{
+    'p-10': !isSmall(),
+    'p-8 small-gap': isSmall(),
+    'bg-base-200': !isTransparent(),
+    'bg-transparent': isTransparent(),
+    'footer-fixed': isFixed()
+  }"
+>
+  <div *ngIf="isHalfOpacity()" class="footer-bg" style="width: 100vw; height: 100%; top: 0; left: 0; z-index: -1;"></div>
+  <div>
+    <nav *ngIf="!isSmall()" class="grid grid-flow-col gap-4">
+      <a class="link link-hover" i18n>Startseite</a>
+      <a class="link link-hover" i18n>Projekte</a>
+      <a class="link link-hover" i18n>Kontakt</a>
+      <a class="link link-hover" i18n>Impressum</a>
+    </nav>
+    <nav>
+      <div class="grid grid-flow-col gap-4" [ngClass]="{'text-3xl': !isSmall(), 'text-2xl': isSmall()}">
+        <ng-icon class="my-clickable" name="bootstrapDiscord"></ng-icon>
+        <ng-icon class="my-clickable" name="bootstrapGithub"></ng-icon>
+        <ng-icon class="my-clickable" name="bootstrapTwitterX"></ng-icon>
+        <ng-icon class="my-clickable" name="bootstrapLinkedin"></ng-icon>
+      </div>
+    </nav>
+    <aside>
+      <p i18n [ngClass]="{'clear-margin ': isSmall()}">Copyright © {{ currentYear }} - Alle Rechte vorbehalten.</p>
+    </aside>
+  </div>
 </footer>

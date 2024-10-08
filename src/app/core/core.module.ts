@@ -18,6 +18,7 @@ import {NotifyService} from "./services/notify.service";
 import {TitleStrategy} from "@angular/router";
 import {CoreTitleStrategy} from "./services/core-tilte.strategy";
 import {DirectusService} from "./services/directus.service";
+import {FooterService} from "./services/footer.service";
 
 const httpInterceptorProviders = [
   {provide: HTTP_INTERCEPTORS, useClass: EnsureHttpInterceptor, multi: true},
@@ -35,6 +36,7 @@ const httpInterceptorProviders = [
 export const provideCoreServices = () => [
   ...httpInterceptorProviders,
   HeaderService,
+  FooterService,
   DirectusService,
   ThemeService,
   { provide: TitleStrategy, useClass: CoreTitleStrategy },
