@@ -39,7 +39,7 @@ $transition-duration: 0.3s;
 }
 
 .logo {
-  background-color: oklch(var(--nc));
+  background-color: oklch(var(--bc));
   &:hover, &:active {
     background-color: oklch(var(--bc) / 0.75);
   }
