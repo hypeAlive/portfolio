@@ -6,6 +6,7 @@ export interface ErrorApiResponse {
   link: string;
   show_link_button: boolean;
   translations: ErrorTranslations[]
+  scheduled_until?: string;
 }
 
 export interface ErrorTranslations extends DirectusTranslation {

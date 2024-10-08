@@ -1,9 +1,10 @@
 import {Inject, Injectable, LOCALE_ID} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import {createDirectus, rest, RestClient} from "@directus/sdk";
+import {createDirectus, readItems, rest, RestClient} from "@directus/sdk";
 import {lastValueFrom} from "rxjs";
 import {environment} from "../../../environments/environment";
 import {CoreModule} from "../core.module";
+import { MaintenanceData } from '../../shared/services/maintenance.guard';
 
 @Injectable({
   providedIn: CoreModule
@@ -61,6 +62,26 @@ export class DirectusService {
 
   public getDefaultLocale(): string {
     return 'de';
+  }
+
+  public getMaintenanceData() {
+    const currentTimestamp = new Date().toISOString();
+    return this.getRestClient()
+      .request<MaintenanceData[]>(readItems('maintenance', {
+        filter: {
+          _or: [
+            {
+              _and: [
+                {scheduled_for: {_lte: currentTimestamp}},
+                {scheduled_until: {_gte: currentTimestamp}}
+              ]
+            },
+            {scheduled: {_eq: false}}
+          ]
+        },
+        sort: ['-scheduled', '-scheduled_until'],
+        limit: 1
+      }));
   }
 
 

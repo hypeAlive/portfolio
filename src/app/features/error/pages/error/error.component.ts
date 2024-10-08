@@ -32,10 +32,8 @@ export default class ErrorComponent {
   constructor(private route: ActivatedRoute, private router: Router) {
     this.route.data.subscribe(data => {
       this.error = data['errorData'];
-      this.checkIfCountdown();
-      if (this.hasCountDown) {
-        this.startCountdown();
-      }
+
+      this.startCountdown();
     });
   }
 
@@ -69,24 +67,28 @@ export default class ErrorComponent {
     this.router.navigate([this.error.link], { replaceUrl: true }).then(r => {});
   }
 
-  private checkIfCountdown(): void {
-    this.hasCountDown = this.statusCode === ErrorStatusCode.ServiceUnavailable
+  protected get scheduledUntil(): string | undefined {
+    return this.error ? this.error.scheduled_until : undefined;
   }
 
   private startCountdown(): void {
-    this.updateCountdown();
+    if(this.statusCode !== ErrorStatusCode.ServiceUnavailable || !this.scheduledUntil) return;
+    const timestamp = new Date(this.scheduledUntil).getTime() + 10;
+    this.hasCountDown = true;
+    this.updateCountdown(timestamp);
     this.intervalId = setInterval(() => {
-      this.updateCountdown();
+      this.updateCountdown(timestamp);
     }, 1000);
   }
 
-  private updateCountdown(): void {
+  private updateCountdown(timestamp: number): void {
     const now = Date.now();
-    const distance = this.targetTimestamp - now;
+    const distance = timestamp - now;
 
     if (distance < 0) {
       this.countdown = '00:00';
       clearInterval(this.intervalId);
+      this.router.navigate(['/']).then(r => {});
       return;
     }
 

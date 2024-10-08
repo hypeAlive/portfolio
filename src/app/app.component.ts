@@ -1,6 +1,7 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {RouterOutlet} from "@angular/router";
 import {CoreModule} from "./core/core.module";
+import {NotifyService} from "./core/services/notify.service";
 
 
 @Component({
@@ -10,9 +11,13 @@ import {CoreModule} from "./core/core.module";
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
-export class AppComponent {
+export class AppComponent implements OnInit{
 
-  constructor() {
+  constructor(private notify: NotifyService) {
+  }
+
+  ngOnInit() {
+    this.notify.info('App started', {timeOut: 3000});
   }
 
 }
