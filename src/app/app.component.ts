@@ -17,7 +17,6 @@ export class AppComponent implements OnInit{
   }
 
   ngOnInit() {
-    this.notify.info('App started', {timeOut: 3000});
   }
 
 }
