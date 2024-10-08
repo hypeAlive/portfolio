@@ -37,3 +37,12 @@ $transition-duration: 0.3s;
 .off {
   opacity: 1 !important;
 }
+
+.logo {
+  background-color: oklch(var(--nc));
+  &:hover, &:active {
+    background-color: oklch(var(--bc) / 0.75);
+  }
+  -webkit-mask: url(https://cms.nicolasfritz.dev/assets/cf9d4138-2cea-474d-ac8b-8614b7c9fd89) no-repeat center;
+  mask: url(https://cms.nicolasfritz.dev/assets/cf9d4138-2cea-474d-ac8b-8614b7c9fd89) no-repeat center;
+}
