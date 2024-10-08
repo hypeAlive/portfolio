@@ -21,17 +21,12 @@ export class ThemeService implements OnDestroy {
   }
 
   public switchTheme(theme: Themes) {
-
-    let themeLink = this.document.getElementById('app-theme');
+    const themeLink = this.document.getElementById('app-theme');
     if (!themeLink) return;
 
     themeLink.setAttribute('data-theme', theme);
-    const htmlElement = this.document.documentElement;
-    if (theme === Themes.DARK) {
-      htmlElement.classList.add('dark');
-    } else {
-      htmlElement.classList.remove('dark');
-    }
+    themeLink.classList.toggle('dark', theme === Themes.DARK);
+
     this.theme = theme;
     this.observer.next(theme);
   }
