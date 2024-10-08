@@ -1,10 +1,10 @@
-import {inject, OnDestroy} from "@angular/core";
+import {inject, Injectable, OnDestroy} from "@angular/core";
 import {BehaviorSubject, filter, Observable, Subject, Subscription} from "rxjs";
-import {HeaderConfig} from "../services/header.service";
 import {ActivatedRoute, NavigationEnd, Router} from "@angular/router";
 import {isEqual} from "lodash";
 
-export abstract class Config<C> implements OnDestroy{
+@Injectable()
+export abstract class RouteConfig<C> implements OnDestroy {
 
   private readonly snapshotKey: string = 'header';
   private readonly routeSubscription: Subscription | null = null;
@@ -15,7 +15,7 @@ export abstract class Config<C> implements OnDestroy{
   private router = inject(Router);
 
 
-  constructor(snapshotKey: string, defaultConfig: C) {
+  protected constructor(snapshotKey: string, defaultConfig: C) {
     this.snapshotKey = snapshotKey;
     this.configSubject = new BehaviorSubject<C>(defaultConfig);
     this.currentConfig = defaultConfig;
