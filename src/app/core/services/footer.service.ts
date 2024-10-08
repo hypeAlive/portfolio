@@ -11,6 +11,7 @@ export type FooterConfig = {
 export enum FooterBackground {
   SHOW = 'show',
   HALF_OPACITY = 'half-opacity',
+  HIDE = 'transparent',
 }
 
 @Injectable({

@@ -29,6 +29,10 @@ export class FooterComponent implements OnInit {
     return this.footerService.getConfig().background === FooterBackground.HALF_OPACITY;
   }
 
+  protected isTransparent(): boolean {
+    return this.isHalfOpacity() || this.footerService.getConfig().background === FooterBackground.HIDE;
+  }
+
   protected isFixed(): boolean {
     return this.footerService.getConfig().fixed;
   }

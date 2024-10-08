@@ -3,8 +3,8 @@
   [class.p-10]="!isSmall()"
   [class.p-8]="isSmall()"
   [class.small-gap]="isSmall()"
-  [class.bg-base-200]="!isHalfOpacity()"
-  [class.bg-transparent]="isHalfOpacity()"
+  [class.bg-base-200]="!isTransparent()"
+  [class.bg-transparent]="isTransparent()"
   [class.footer-fixed]="isFixed()"
 >
   <div *ngIf="isHalfOpacity()"
