@@ -1,9 +1,10 @@
 import {Component} from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {NgIcon, provideIcons} from "@ng-icons/core";
 import {hugePlugSocket, hugeSettingError03} from "@ng-icons/huge-icons";
 import {NgClass, NgIf} from "@angular/common";
 import {ErrorStatusCode} from "../../models/error-state";
+import {ErrorApiResponse} from "../../models/error.interface";
 
 @Component({
   selector: 'app-error',
@@ -22,15 +23,15 @@ import {ErrorStatusCode} from "../../models/error-state";
 })
 export default class ErrorComponent {
 
-  private statusCode: number | undefined;
   protected hasCountDown: boolean = false;
   private targetTimestamp: number = Date.now() + 6000000;
   protected countdown: string = '00:00';
   private intervalId: any;
+  private error: ErrorApiResponse | undefined;
 
-  constructor(private route: ActivatedRoute) {
+  constructor(private route: ActivatedRoute, private router: Router) {
     this.route.data.subscribe(data => {
-      this.statusCode = data['statusCode'];
+      this.error = data['errorData'];
       this.checkIfCountdown();
       if (this.hasCountDown) {
         this.startCountdown();
@@ -38,8 +39,34 @@ export default class ErrorComponent {
     });
   }
 
+  protected get statusCode(): number | undefined {
+    return this.error ? this.error.code : undefined;
+  }
+
+  protected get message(): string {
+    return this.error ? this.error.translations[0].message : '';
+  }
+
+  protected get description(): string {
+    return this.error ? this.error.translations[0].description : '';
+  }
+
+  protected get linkButton(): string | undefined {
+    if(!this.error || !this.error.show_link_button) return undefined;
+    return this.error.translations[0].link_button;
+  }
+
+  protected get icon(): string | undefined {
+    return this.error ? this.error.error_icon : undefined;
+  }
+
   protected getCode(): string {
     return this.statusCode ? this.statusCode.toString() : '';
+  }
+
+  protected redirect(): void {
+    if (!this.error || !this.linkButton || !this.error.link) return;
+    this.router.navigate([this.error.link], { replaceUrl: true }).then(r => {});
   }
 
   private checkIfCountdown(): void {

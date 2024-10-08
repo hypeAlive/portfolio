@@ -59,3 +59,7 @@ body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
+
+.bright-text {
+  @apply dark:text-bright-text-light text-bright-text-dark;
+}

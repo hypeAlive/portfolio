@@ -8,8 +8,8 @@ module.exports = {
     extend: {
       colors: {
         "bright-text": {
-          light: "#ffffff",
-          dark: "#000000",
+          light: "rgba(255,255,255,0.75)",
+          dark: "rgba(0,0,0,0.75)",
         }
       }
     },

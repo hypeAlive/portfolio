@@ -27,8 +27,40 @@ export class DirectusService {
     return this.client;
   }
 
+  public withTranslations() {
+    return {
+      deep: {
+        translations: {
+          _filter: {
+            languages_code: {_eq: this.getLocale()},
+          },
+        },
+      }
+    };
+  }
+
+  public withFallbackTranslations() {
+    return {
+      deep: {
+        translations: {
+          _filter: {
+            languages_code: {_eq: this.getDefaultLocale()},
+          },
+        },
+      }
+    };
+  }
+
+  public isDefaultLocale(): boolean {
+    return this.getLocale() === this.getDefaultLocale();
+  }
+
   public getLocale(): string {
     return this.locale;
+  }
+
+  public getDefaultLocale(): string {
+    return 'de';
   }
 
 

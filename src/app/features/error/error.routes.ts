@@ -2,12 +2,16 @@ import {Routes} from "@angular/router";
 import {ErrorStatusCode} from "./models/error-state";
 import {HeaderBackground} from "../../core/services/header.service";
 import {FooterBackground} from "../../core/services/footer.service";
+import {ErrorResolver} from "./services/error.resolver";
 
 const routes: Routes = [
   ...Object.values(ErrorStatusCode).map(statusCode => ({
     path: statusCode.toString(),
     loadComponent: () => import('./pages/error/error.component'),
     title: statusCode.toString(),
+    resolve: {
+      errorData: ErrorResolver
+    },
     data: {
       statusCode,
       header: {

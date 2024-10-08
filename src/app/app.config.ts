@@ -11,6 +11,7 @@ import {environment} from "../environments/environment";
 import {provideCoreServices} from "./core/core.module";
 
 function localeFactory(): string {
+  if(!environment.production) return 'de';
   const url = new URL(window.location.href);
   const pathSegments = url.pathname.split('/');
   return pathSegments[1] || 'de';
