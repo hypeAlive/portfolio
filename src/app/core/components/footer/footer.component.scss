@@ -1,3 +1,7 @@
 .small-gap {
   row-gap: 1.5rem;
 }
+
+.footer-bg {
+  @apply backdrop-blur-sm bg-base-300 bg-opacity-70 drop-shadow-2xl;
+}

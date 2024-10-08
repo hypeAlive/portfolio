@@ -3,7 +3,14 @@
   [class.p-10]="!isSmall()"
   [class.p-8]="isSmall()"
   [class.small-gap]="isSmall()"
+  [class.bg-base-200]="!isHalfOpacity()"
+  [class.bg-transparent]="isHalfOpacity()"
 >
+  <div *ngIf="isHalfOpacity()"
+       class="footer-bg"
+       style="width: 100vw; height: 100%; top: 0; left: 0; z-index: -1;"
+  >
+  </div>
   <nav *ngIf="!isSmall()" class="grid grid-flow-col gap-4">
     <a
       class="link link-hover"

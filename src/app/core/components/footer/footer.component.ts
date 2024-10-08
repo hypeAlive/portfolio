@@ -1,7 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {provideIcons} from "@ng-icons/core";
 import {bootstrapDiscord, bootstrapGithub, bootstrapLinkedin, bootstrapTwitterX,} from "@ng-icons/bootstrap-icons";
-import {FooterService} from "../../services/footer.service";
+import {FooterBackground, FooterService} from "../../services/footer.service";
+import {HeaderBackground} from "../../services/header.service";
 
 @Component({
   selector: 'core-footer',
@@ -20,8 +21,13 @@ export class FooterComponent implements OnInit {
     this.currentYear = new Date().getFullYear();
   }
 
-  public isSmall(): boolean {
+  protected isSmall(): boolean {
     return this.footerService.getConfig().small;
   }
 
+  protected isHalfOpacity(): boolean {
+    return this.footerService.getConfig().background === FooterBackground.HALF_OPACITY;
+  }
+
+  protected readonly HeaderBackground = HeaderBackground;
 }
