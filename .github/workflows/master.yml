@@ -36,7 +36,7 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
         run: |
-          VERSION_SPACES=$(npx semantic-release  --dry-run | grep -oP 'Published release \K.*? ')
+          VERSION_SPACES=$(npx semantic-release | grep -oP 'Published release \K.*? ')
           VERSION="${VERSION_SPACES// /}"  # Entfernen von Leerzeichen
           echo "GEN_VERSION=$VERSION" >> $GITHUB_ENV  # Setze die Umgebungsvariable
           echo "Version: $VERSION"  # Ausgabe zur Bestätigung
@@ -80,11 +80,3 @@ jobs:
           tags: |
             registry.thorge-engelmann.de/portfolio:${{ needs.install.outputs.version }}
             registry.thorge-engelmann.de/portfolio:latest
-
-      - name: Remove Docker Tag
-        uses: actions/delete-package-versions@v5
-        with:
-          delete-only-untagged-versions: 'false'
-          min-versions-to-keep: 10
-          package-name: registry.thorge-engelmann.de/portfolio:1.2.2-preview
-          package-type: 'container'
