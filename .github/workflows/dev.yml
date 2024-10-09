@@ -1,4 +1,4 @@
-name: master release
+name: dev preview
 
 on:
   push:
@@ -35,7 +35,7 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
         run: |
-          VERSION_SPACES=$(npx semantic-release | grep -oP 'Published release \K.*? ')
+          VERSION_SPACES=$(npx semantic-release --dry-run | grep -oP 'Published release \K.*? ')
           VERSION="${VERSION_SPACES// /}"  # Entfernen von Leerzeichen
           echo "GEN_VERSION=$VERSION" >> $GITHUB_ENV  # Setze die Umgebungsvariable
           echo "Version: $VERSION"  # Ausgabe zur Bestätigung
@@ -77,15 +77,5 @@ jobs:
         with:
           push: true
           tags: |
-            registry.thorge-engelmann.de/portfolio:${{ needs.install.outputs.version }}
-            registry.thorge-engelmann.de/portfolio:latest
-
-      - name: Delete Preview Image
-        run: |
-          echo "Checking if preview image exists..."
-          if docker image ls | grep -q "registry.thorge-engelmann.de/portfolio:${{ needs.install.outputs.version }}-preview"; then
-            echo "Deleting preview image..."
-            docker image rm registry.thorge-engelmann.de/portfolio:${{ needs.install.outputs.version }}-preview
-          else
-            echo "Preview image does not exist."
-          fi
+            registry.thorge-engelmann.de/portfolio:${{ needs.install.outputs.version }}-preview
+            registry.thorge-engelmann.de/portfolio:preview
