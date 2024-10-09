@@ -63,3 +63,21 @@ body {
 .bright-text {
   @apply dark:text-bright-text-light text-bright-text-dark;
 }
+
+@layer components {
+  .gradient-light {
+    background-image: linear-gradient(135deg,
+      color-mix(in oklch, oklch(var(--s)) 70%, white) 0%,
+      color-mix(in oklch, oklch(var(--a)) 70%, white) 100%);
+  }
+
+  .gradient-dark {
+    background-image: linear-gradient(135deg,
+      color-mix(in oklch, oklch(var(--s)) 70%, black) 0%,
+      color-mix(in oklch, oklch(var(--a)) 70%, black) 100%);
+  }
+
+  .gradient {
+    @apply gradient-light dark:gradient-dark;
+  }
+}

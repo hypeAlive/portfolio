@@ -1,8 +1,9 @@
-import {Inject, Injectable, OnDestroy} from '@angular/core';
+import {Inject, Injectable, OnDestroy, OnInit} from '@angular/core';
 import {DOCUMENT} from "@angular/common";
 import {Subject, Subscription} from "rxjs";
 import {Themes} from "../models/themes";
 import {CoreModule} from "../core.module";
+import theme from "tailwindcss/defaultTheme";
 
 @Injectable({
   providedIn: CoreModule
@@ -38,4 +39,5 @@ export class ThemeService implements OnDestroy {
   public subscribe(observer: (theme: Themes) => void): Subscription {
     return this.observer.subscribe(observer);
   }
+
 }
