@@ -42,12 +42,9 @@ function generateHttp() {
 function generateServer() {
   const languagesString = languages.map(lang => lang).join('|');
   return `server {
-    listen 443 ssl;
+    listen 80;
     server_name 0.0.0.0;
     root /usr/share/nginx/html;
-
-    ssl_certificate /etc/nginx/ssl/selfsigned.crt;
-    ssl_certificate_key /etc/nginx/ssl/selfsigned.key;
 
     # Setze Standardsprache auf "de", falls keine Sprache angegeben ist
     if ($accept_language ~ "^$") {
@@ -90,7 +87,7 @@ function generateDefaultConfig() {
   const serverConfig = generateServer();
   const fallbackConfig = generateFallback();
 
-  return `${serverConfig}\n\n${fallbackConfig}\n\n`;
+  return `${serverConfig}`;
 }
 
 function writeNginxConfigToFile() {
