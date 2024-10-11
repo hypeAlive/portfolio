@@ -6,6 +6,7 @@ import {ContactComponent} from "../../components/contact/contact.component";
 import {readItems} from "@directus/sdk";
 import {NgOptimizedImage} from "@angular/common";
 import {DirectusService} from '../../../../core/services/directus.service';
+import {KeyboardComponent} from "../../components/keyboard/keyboard.component";
 
 @Component({
   selector: 'app-home-page',
@@ -14,7 +15,8 @@ import {DirectusService} from '../../../../core/services/directus.service';
     CardComponent,
     CardCarouselComponent,
     ContactComponent,
-    NgOptimizedImage
+    NgOptimizedImage,
+    KeyboardComponent
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'

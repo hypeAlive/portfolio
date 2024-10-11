@@ -9,6 +9,7 @@ import {provideAnimationsAsync} from '@angular/platform-browser/animations/async
 import {LoggerModule} from "ngx-logger";
 import {environment} from "../environments/environment";
 import {provideCoreServices} from "./core/core.module";
+import {provideLottieOptions} from "ngx-lottie";
 
 function localeFactory(): string {
   if(!environment.production) return 'de';
@@ -30,6 +31,9 @@ export const appConfig: ApplicationConfig = {
     ),
     provideCoreServices(),
     provideAnimationsAsync(),
+    provideLottieOptions({
+      player: () => import('lottie-web'),
+    }),
     { provide: LOCALE_ID, useValue: localeFactory() },
   ]
 };
