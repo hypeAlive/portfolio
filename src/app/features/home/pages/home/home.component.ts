@@ -7,6 +7,7 @@ import {readItems} from "@directus/sdk";
 import {NgOptimizedImage} from "@angular/common";
 import {DirectusService} from '../../../../core/services/directus.service';
 import {KeyboardComponent} from "../../components/keyboard/keyboard.component";
+import {Key, KeyEvent} from "../../models/keyboard-keys";
 
 @Component({
   selector: 'app-home-page',
@@ -44,6 +45,10 @@ export default class HomeComponent implements OnInit {
     });
 
     console.log(this.directus.getLocale())
+  }
+
+  protected keyboardEvent(event: KeyEvent): void {
+    console.log(event);
   }
 
   protected readonly PROGRAMMING_LANGUAGES = PROGRAMMING_LANGUAGES;

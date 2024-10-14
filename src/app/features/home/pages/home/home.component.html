@@ -1,5 +1,7 @@
 <div class="gradient relative h-lvh">
-  <app-keyboard class="absolute left-1/2 transform -translate-x-1/2 bottom-2"></app-keyboard>
+  <img class="test-img" ngSrc="assets/render.png" height="1080" width="1920"/>
+  <app-keyboard class="absolute left-1/2 transform -translate-x-1/2" style="bottom: -3rem"
+                (onKeyBoardEvent)="keyboardEvent($event)"></app-keyboard>
 </div>
 
 <main class="container min-h-dvh m-auto">

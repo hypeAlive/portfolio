@@ -1,11 +1,8 @@
-import {Component, ViewChild, AfterViewInit, HostListener} from '@angular/core';
+import {Component, ViewChild, AfterViewInit, HostListener, Output, EventEmitter, OnDestroy} from '@angular/core';
 import {AnimationOptions, LottieComponent} from "ngx-lottie";
 import {AnimationItem} from "lottie-web";
-
-export enum KEYBOARD_KEYS {
-  SPACE = 'img_4.png',
-  ENTER = 'img_35.png',
-}
+import {Key, KeyEvent, KeyHelper} from "../../models/keyboard-keys";
+import {NGXLogger} from "ngx-logger";
 
 @Component({
   selector: 'app-keyboard',
@@ -16,96 +13,128 @@ export enum KEYBOARD_KEYS {
   templateUrl: './keyboard.component.html',
   styleUrls: ['./keyboard.component.scss']
 })
-export class KeyboardComponent implements AfterViewInit {
+export class KeyboardComponent implements OnDestroy{
   @ViewChild(LottieComponent) lottieComponent!: LottieComponent; // LottieComponent Referenz
+
+  @Output('onKeyBoardEvent') onKeyBoardEvent: EventEmitter<KeyEvent> = new EventEmitter<KeyEvent>();
+
   options: AnimationOptions = {
     path: '/assets/test-keyboard/data.json',
   };
 
-  private keyImageMap: Map<KEYBOARD_KEYS, SVGImageElement> = new Map();
+  constructor(private logger: NGXLogger) {}
+
+  private keyImageMap: Map<number, HTMLElement> = new Map();
+  private activeKeys: Map<number, boolean> = new Map();
+  private keyListener: Map<number, any> = new Map();
 
   @HostListener('window:keydown', ['$event'])
   onKeyDown(event: KeyboardEvent) {
-    console.log('Keydown:', event.code);
-    if (event.key === ' ') {
-      // Wenn die Leertaste gedrückt wird, rufe die activateKey-Methode auf
-      this.activateKey(KEYBOARD_KEYS.SPACE);
-      event.preventDefault(); // Verhindert das Standardverhalten (z.B. Scrollen)
+    const key = KeyHelper.getKey(event);
+    if (!key) return;
+    event.preventDefault();
+
+    if(this.activeKeys.has(key.id)) {
+      this.activeKeys.set(key.id, true);
+      return;
     }
 
-    if (event.code === 'Enter') {
-      // Wenn die Enter-Taste gedrückt wird, rufe die activateKey-Methode auf
-      this.activateKey(KEYBOARD_KEYS.ENTER);
-      event.preventDefault(); // Verhindert das Standardverhalten (z.B. Formular absenden)
-    }
+    this.activateKey(key);
   }
 
   @HostListener('window:keyup', ['$event'])
   onKeyUp(event: KeyboardEvent) {
-    console.log('Keydown:', event.code);
-    if (event.code === 'Space') {
-      // Wenn die Leertaste gedrückt wird, rufe die activateKey-Methode auf
-      this.deactivateKey(KEYBOARD_KEYS.SPACE);
-      event.preventDefault(); // Verhindert das Standardverhalten (z.B. Scrollen)
-    }
+    const key = KeyHelper.getKey(event);
+    if(!key) return;
 
-    if (event.code === 'Enter') {
-      // Wenn die Enter-Taste gedrückt wird, rufe die activateKey-Methode auf
-      this.deactivateKey(KEYBOARD_KEYS.ENTER);
-      event.preventDefault(); // Verhindert das Standardverhalten (z.B. Formular absenden)
-    }
+    this.deactivateKey(key);
+    event.preventDefault();
   }
 
-  ngAfterViewInit() {
-    // Hier kannst du Initialisierungen vornehmen
+  @HostListener('window:blur')
+  onWindowBlur() {
+    this.activeKeys.forEach((_, keyId) => this.deactivateKeyById(keyId));
   }
 
   animationCreated(animationItem: AnimationItem): void {
     const container = this.lottieComponent.container.nativeElement;
 
     setTimeout(() => {
-      // Suche nach dem `<g>`-Element
       const groupElement = container.querySelector('g');
 
       if (!groupElement) {
-        console.error('Container nicht gefunden');
+        this.logger.error('Gruppierung nicht gefunden');
         return;
       }
 
       // Durchlaufe alle Keys im Enum
-      Object.values(KEYBOARD_KEYS).forEach((key) => {
+      KeyHelper.getAllKeys().forEach((key) => {
         // Suche nach dem `<image>`-Element mit dem spezifischen `xlink:href`
         const imageElement = Array.from(groupElement.querySelectorAll('image')).find((img: SVGImageElement) => {
-          return img.getAttribute('href')?.includes(key);
+          return img.getAttribute('href')?.endsWith(key.id + '.png');
         });
 
-        if (imageElement) {
-          console.log(`Bild gefunden für ${key}:`, imageElement); // Gibt das gefundene Bild-Element aus
-          this.keyImageMap.set(key, imageElement); // Speichere das Bild in der Map
-        } else {
-          console.error(`Bild mit ${key} nicht gefunden`);
+        if(!imageElement) {
+          this.logger.error(`Bild mit ${key} nicht gefunden`);
+          return;
         }
+
+        const keyGroup = this.getGroupGElementFromImageElement(imageElement);
+
+        if (!keyGroup) {
+          this.logger.error(`Gruppierung nicht gefunden für ${key}`);
+          return;
+        }
+
+        const clickListener = () => {
+          this.activeKeys.set(key.id, false);
+          this.onKeyBoardEvent.emit({key: key, pressedViaMouse: true});
+        };
+
+        keyGroup.addEventListener('mousedown', clickListener);
+        this.keyListener.set(key.id, clickListener);
+        this.keyImageMap.set(key.id, keyGroup);
+
       });
     }, 500);
-
-    console.log(animationItem);
   }
 
-  activateKey(key: KEYBOARD_KEYS) {
-    const imageElement = this.keyImageMap.get(key);
-
-    if (imageElement) {
-      imageElement.classList.add('active');
-    }
+  private getGroupGElementFromImageElement(imageElement: SVGImageElement): HTMLElement | null {
+    const parent = imageElement.parentElement;
+    if (!parent) return null;
+    const parentParent = parent.parentElement;
+    if (!parentParent) return null;
+    return parentParent as HTMLElement;
   }
 
-  deactivateKey(key: KEYBOARD_KEYS) {
-    const imageElement = this.keyImageMap.get(key);
-
-    if (imageElement) {
-      imageElement.classList.remove('active');
-    }
+  activateKey(key: Key) {
+    const keyGroup = this.keyImageMap.get(key.id);
+    if (!keyGroup) return;
+    keyGroup.classList.add('active');
+    this.activeKeys.set(key.id, false);
+    this.onKeyBoardEvent.emit({key: key, pressedViaMouse: false});
   }
 
-  protected readonly KEYBOARD_KEYS = KEYBOARD_KEYS;
+  deactivateKey(key: Key) {
+    this.deactivateKeyById(key.id);
+  }
+
+  deactivateKeyById(keyId: number) {
+    const activeKey = this.activeKeys.get(keyId);
+    if (activeKey === undefined) return;
+    const keyGroup = this.keyImageMap.get(keyId);
+    if (!keyGroup) return;
+    setTimeout(() => {
+      keyGroup.classList.remove('active');
+    }, activeKey ? 0 : 100);
+    this.activeKeys.delete(keyId);
+  }
+
+  ngOnDestroy(): void {
+    this.keyListener.forEach((listener, keyId) => {
+      const keyGroup = this.keyImageMap.get(keyId);
+      if (!keyGroup) return;
+      keyGroup.removeEventListener('mousedown', listener);
+    });
+  }
 }
