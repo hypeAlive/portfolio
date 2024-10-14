@@ -1,4 +1,4 @@
-import {Component, ViewChild, AfterViewInit, HostListener, Output, EventEmitter, OnDestroy} from '@angular/core';
+import {Component, ViewChild, AfterViewInit, HostListener, Output, EventEmitter, OnDestroy, ViewEncapsulation} from '@angular/core';
 import {AnimationOptions, LottieComponent} from "ngx-lottie";
 import {AnimationItem} from "lottie-web";
 import {Key, KeyEvent, KeyHelper} from "../../models/keyboard-keys";
@@ -11,7 +11,8 @@ import {NGXLogger} from "ngx-logger";
     LottieComponent
   ],
   templateUrl: './keyboard.component.html',
-  styleUrls: ['./keyboard.component.scss']
+  styleUrls: ['./keyboard.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class KeyboardComponent implements OnDestroy{
   @ViewChild(LottieComponent) lottieComponent!: LottieComponent; // LottieComponent Referenz

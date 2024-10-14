@@ -1,1 +1,21 @@
+svg g g g g image {
+  user-select: none;
+  pointer-events: none;
+}
 
+svg g g g g path,
+svg g g g image {
+  transition: transform 0.3s ease;
+  transform: translateY(0px);
+}
+svg g g:hover > g g path,
+svg g g:hover > g image{
+  transform: translateY(-2px);
+  filter: brightness(1.2);
+}
+svg g g.active g image,
+svg g g.active g g path,
+svg g g:active > g g path,
+svg g g:active > g image {
+  transform: translateY(10px);
+}
