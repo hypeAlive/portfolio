@@ -5,7 +5,8 @@ import {
   Output,
   EventEmitter,
   OnDestroy,
-  ViewEncapsulation,
+  ViewEncapsulation, Input, OnChanges,
+  SimpleChanges,
 } from '@angular/core';
 import {AnimationOptions, LottieComponent} from "ngx-lottie";
 import {Key, KeyEvent, KeyHelper} from "../../models/keyboard-keys";
@@ -21,15 +22,25 @@ import {NGXLogger} from "ngx-logger";
   styleUrls: ['./keyboard.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
-export class KeyboardComponent implements OnDestroy{
+export class KeyboardComponent implements OnDestroy, OnChanges {
   @ViewChild(LottieComponent) lottieComponent!: LottieComponent;
   @Output('onKeyBoardEvent') onKeyBoardEvent: EventEmitter<KeyEvent> = new EventEmitter<KeyEvent>();
+  @Input('listenToKeyboard') listenToKeyboard: boolean = true;
 
   options: AnimationOptions = {
     path: '/assets/test-keyboard/data.json',
   };
 
-  constructor(private logger: NGXLogger) {}
+  constructor(private logger: NGXLogger) {
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['listenToKeyboard']) {
+      if(changes['listenToKeyboard'].currentValue === false) {
+        this.deactivateAllKeys();
+      }
+    }
+  }
 
   private keyImageMap: Map<number, HTMLElement> = new Map();
   private activeKeys: Map<number, boolean> = new Map();
@@ -37,11 +48,12 @@ export class KeyboardComponent implements OnDestroy{
 
   @HostListener('window:keydown', ['$event'])
   onKeyDown(event: KeyboardEvent) {
+    if (!this.listenToKeyboard) return;
     const key = KeyHelper.getKey(event);
     if (!key) return;
     event.preventDefault();
 
-    if(this.activeKeys.has(key.id)) {
+    if (this.activeKeys.has(key.id)) {
       this.activeKeys.set(key.id, true);
       return;
     }
@@ -51,8 +63,9 @@ export class KeyboardComponent implements OnDestroy{
 
   @HostListener('window:keyup', ['$event'])
   onKeyUp(event: KeyboardEvent) {
+    if (!this.listenToKeyboard) return;
     const key = KeyHelper.getKey(event);
-    if(!key) return;
+    if (!key) return;
 
     this.deactivateKey(key);
     event.preventDefault();
@@ -60,6 +73,11 @@ export class KeyboardComponent implements OnDestroy{
 
   @HostListener('window:blur')
   onWindowBlur() {
+    if (!this.listenToKeyboard) return;
+    this.deactivateAllKeys();
+  }
+
+  private deactivateAllKeys() {
     this.activeKeys.forEach((_, keyId) => this.deactivateKeyById(keyId));
   }
 
@@ -79,7 +97,7 @@ export class KeyboardComponent implements OnDestroy{
           return img.getAttribute('href')?.endsWith('_' + key.id + '.png');
         });
 
-        if(!imageElement) {
+        if (!imageElement) {
           this.logger.error(`Bild mit ${key} nicht gefunden`);
           return;
         }
