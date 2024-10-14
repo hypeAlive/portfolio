@@ -72,7 +72,7 @@ export class KeyboardComponent implements OnDestroy{
       KeyHelper.getAllKeys().forEach((key) => {
         // Suche nach dem `<image>`-Element mit dem spezifischen `xlink:href`
         const imageElement = Array.from(groupElement.querySelectorAll('image')).find((img: SVGImageElement) => {
-          return img.getAttribute('href')?.endsWith(key.id + '.png');
+          return img.getAttribute('href')?.endsWith('_' + key.id + '.png');
         });
 
         if(!imageElement) {
