@@ -1,6 +1,13 @@
-import {Component, ViewChild, AfterViewInit, HostListener, Output, EventEmitter, OnDestroy, ViewEncapsulation} from '@angular/core';
+import {
+  Component,
+  ViewChild,
+  HostListener,
+  Output,
+  EventEmitter,
+  OnDestroy,
+  ViewEncapsulation,
+} from '@angular/core';
 import {AnimationOptions, LottieComponent} from "ngx-lottie";
-import {AnimationItem} from "lottie-web";
 import {Key, KeyEvent, KeyHelper} from "../../models/keyboard-keys";
 import {NGXLogger} from "ngx-logger";
 
@@ -15,8 +22,7 @@ import {NGXLogger} from "ngx-logger";
   encapsulation: ViewEncapsulation.None
 })
 export class KeyboardComponent implements OnDestroy{
-  @ViewChild(LottieComponent) lottieComponent!: LottieComponent; // LottieComponent Referenz
-
+  @ViewChild(LottieComponent) lottieComponent!: LottieComponent;
   @Output('onKeyBoardEvent') onKeyBoardEvent: EventEmitter<KeyEvent> = new EventEmitter<KeyEvent>();
 
   options: AnimationOptions = {
@@ -57,7 +63,7 @@ export class KeyboardComponent implements OnDestroy{
     this.activeKeys.forEach((_, keyId) => this.deactivateKeyById(keyId));
   }
 
-  animationCreated(animationItem: AnimationItem): void {
+  animationCreated(): void {
     const container = this.lottieComponent.container.nativeElement;
 
     setTimeout(() => {
@@ -68,9 +74,7 @@ export class KeyboardComponent implements OnDestroy{
         return;
       }
 
-      // Durchlaufe alle Keys im Enum
       KeyHelper.getAllKeys().forEach((key) => {
-        // Suche nach dem `<image>`-Element mit dem spezifischen `xlink:href`
         const imageElement = Array.from(groupElement.querySelectorAll('image')).find((img: SVGImageElement) => {
           return img.getAttribute('href')?.endsWith('_' + key.id + '.png');
         });
