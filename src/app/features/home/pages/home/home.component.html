@@ -7,15 +7,22 @@
 <main class="container min-h-dvh m-auto">
 
   <div class="flex w-full justify-center">
-    <h2 class="jetbrains-mono">Hi, I`m Nicolas.</h2>
+    <h1>Hi, I`m Nicolas.</h1>
   </div>
 
-  <div class="flex w-full justify-center">
-    <h3 class="jetbrains-mono">Im glad to worked with...</h3>
+  <div class="custom-shape-divider-bottom-1729001160">
+
+  </div>
+  <div class="flex flex-col w-full gap-6 justify-center items-center">
+    <h2>{{ workedWithTitle }}</h2>
+    <div class="flex flex-row-reverse gap-32 h-36">
+      <img *ngFor="let picture of workedWithPictures" class="h-full"
+           [src]="getDirectusFileUrl(picture.directus_files_id)">
+    </div>
   </div>
 
   <div class="flex w-full justify-center flex-col">
-    <h2 class="text-center jetbrains-mono">My recent work...</h2>
+    <h2 class="text-center jetbrains-mono"></h2>
     <card-carousel style="width: 100%; height: 100%" [cards]="this.projectCards"></card-carousel>
   </div>
 
@@ -24,3 +31,21 @@
     <home-contact class="w-full"/>
   </div>
 </main>
+
+<app-section>
+  <div class="flex flex-col w-full gap-6 justify-center items-center">
+    <h2>{{ workedWithTitle }}</h2>
+    <div class="flex flex-row-reverse gap-32 h-36">
+      <img *ngFor="let picture of workedWithPictures" class="h-full"
+           [src]="getDirectusFileUrl(picture.directus_files_id)">
+    </div>
+  </div>
+</app-section>
+
+<svg xmlns="http://www.w3.org/2000/svg"
+     xmlns:xlink="http://www.w3.org/1999/xlink" id="visual"
+     viewBox="0 0 960 540" version="1.1">
+  <rect x="0" y="0" fill="#002233"/>
+  <path d="M0 290L192 249L384 266L576 288L768 249L960 257L960 541L768 541L576 541L384 541L192 541L0 541Z" fill="#0066FF"
+        stroke-linecap="square" stroke-linejoin="bevel"/>
+</svg>

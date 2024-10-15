@@ -3,11 +3,22 @@ import {CardComponent, PROGRAMMING_LANGUAGES, ProjectCard} from "../../component
 import {CardCarouselComponent} from "../../components/card-carousel/card-carousel.component";
 import {ProjectService} from "../../../project/services/project.service";
 import {ContactComponent} from "../../components/contact/contact.component";
-import {readItems} from "@directus/sdk";
-import {NgOptimizedImage} from "@angular/common";
+import {readItem, readItems} from "@directus/sdk";
+import {NgForOf, NgOptimizedImage} from "@angular/common";
 import {DirectusService} from '../../../../core/services/directus.service';
 import {KeyboardComponent} from "../../components/keyboard/keyboard.component";
 import {Key, KeyEvent} from "../../models/keyboard-keys";
+import {DirectusFile, DirectusTranslation, getDirectusFileUrl} from "../../../../shared/models/directus.interface";
+import {SectionComponent} from "../../../../shared/components/section/section.component";
+
+interface WorkedWithData {
+  pictures: DirectusFile[];
+  translations: WorkedWithTranslations[];
+}
+
+interface WorkedWithTranslations extends DirectusTranslation {
+  title: string;
+}
 
 @Component({
   selector: 'app-home-page',
@@ -17,7 +28,9 @@ import {Key, KeyEvent} from "../../models/keyboard-keys";
     CardCarouselComponent,
     ContactComponent,
     NgOptimizedImage,
-    KeyboardComponent
+    KeyboardComponent,
+    NgForOf,
+    SectionComponent
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
@@ -25,6 +38,8 @@ import {Key, KeyEvent} from "../../models/keyboard-keys";
 export default class HomeComponent implements OnInit {
 
   protected projectCards: ProjectCard[] | undefined = undefined;
+
+  private workedWithData: WorkedWithData | undefined = undefined;
 
   constructor(private directus: DirectusService) {
 
@@ -39,10 +54,21 @@ export default class HomeComponent implements OnInit {
           },
         },
       },
-      fields: ['translations', { translations: ['title'] }]
+      fields: ['translations', {translations: ['title']}]
     })).then(async (response) => {
       console.log(response);
     });
+
+    this.directus.readItemWithTranslation<WorkedWithData>("worked_with", {
+      fields: ['*', {translations: ['*'], pictures: ['*']}],
+    })
+      .then((response) => {
+        this.workedWithData = response;
+        console.log(response);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
 
     console.log(this.directus.getLocale())
   }
@@ -51,5 +77,16 @@ export default class HomeComponent implements OnInit {
     console.log(event);
   }
 
+  protected get workedWithTitle(): string {
+    if (!this.workedWithData) return '';
+    return this.workedWithData.translations[0].title;
+  }
+
+  protected get workedWithPictures(): DirectusFile[] {
+    if (!this.workedWithData) return [];
+    return this.workedWithData.pictures;
+  }
+
   protected readonly PROGRAMMING_LANGUAGES = PROGRAMMING_LANGUAGES;
+  protected readonly getDirectusFileUrl = getDirectusFileUrl;
 }
