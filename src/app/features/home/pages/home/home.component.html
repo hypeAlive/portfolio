@@ -32,16 +32,6 @@
   </div>
 </main>
 
-<app-section>
-  <div class="flex flex-col w-full gap-6 justify-center items-center">
-    <h2>{{ workedWithTitle }}</h2>
-    <div class="flex flex-row-reverse gap-32 h-36">
-      <img *ngFor="let picture of workedWithPictures" class="h-full"
-           [src]="getDirectusFileUrl(picture.directus_files_id)">
-    </div>
-  </div>
-</app-section>
-
 <svg xmlns="http://www.w3.org/2000/svg"
      xmlns:xlink="http://www.w3.org/1999/xlink" id="visual"
      viewBox="0 0 960 540" version="1.1">

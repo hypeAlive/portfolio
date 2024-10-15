@@ -9,8 +9,6 @@ import {DirectusService} from '../../../../core/services/directus.service';
 import {KeyboardComponent} from "../../components/keyboard/keyboard.component";
 import {Key, KeyEvent} from "../../models/keyboard-keys";
 import {DirectusFile, DirectusTranslation, getDirectusFileUrl} from "../../../../shared/models/directus.interface";
-import {SectionComponent} from "../../../../shared/components/section/section.component";
-
 interface WorkedWithData {
   pictures: DirectusFile[];
   translations: WorkedWithTranslations[];
@@ -29,8 +27,7 @@ interface WorkedWithTranslations extends DirectusTranslation {
     ContactComponent,
     NgOptimizedImage,
     KeyboardComponent,
-    NgForOf,
-    SectionComponent
+    NgForOf
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
