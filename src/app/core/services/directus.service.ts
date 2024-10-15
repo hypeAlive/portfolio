@@ -4,7 +4,9 @@ import {createDirectus, readItems, rest, RestClient} from "@directus/sdk";
 import {lastValueFrom} from "rxjs";
 import {environment} from "../../../environments/environment";
 import {CoreModule} from "../core.module";
-import { MaintenanceData } from '../../shared/services/maintenance.guard';
+import {MaintenanceData} from '../../shared/services/maintenance.guard';
+import {ErrorApiResponse} from "../../features/error/models/error.interface";
+import {DirectusTranslation} from "../../shared/models/directus.interface";
 
 @Injectable({
   providedIn: CoreModule
@@ -28,7 +30,45 @@ export class DirectusService {
     return this.client;
   }
 
-  public withTranslations() {
+  public async readItemWithTranslation<T extends {
+    translations: DirectusTranslation[]
+  }>(items: string, insert: Object = {}) {
+    const getData = async (insert: Object) => {
+      return await this.getRestClient()
+        .request<T>(readItems(items, insert));
+    }
+
+    let data = await getData(this.withTranslations({
+      limit: 1,
+      ...insert,
+    }));
+
+    if (Array.isArray(data)) {
+      if (data.length === 0) return Promise.reject('No items found');
+      data = data[0];
+    }
+
+
+    if (!data.translations) return Promise.reject('No translations found');
+
+    if (data.translations.length === 0 && this.isDefaultLocale()) {
+      return Promise.reject('No default-translations found');
+    }
+
+    if (data.translations.length === 0) {
+      data = await getData(this.withFallbackTranslations({
+        limit: 1,
+        ...insert,
+      }));
+      if (data.translations.length === 0) {
+        return Promise.reject('No default translations found');
+      }
+    }
+
+    return data;
+  }
+
+  public withTranslations(insert: Object = {}) {
     return {
       deep: {
         translations: {
@@ -36,11 +76,13 @@ export class DirectusService {
             languages_code: {_eq: this.getLocale()},
           },
         },
-      }
+      },
+      fields: ['*', {translations: ['*']}],
+      ...insert
     };
   }
 
-  public withFallbackTranslations() {
+  public withFallbackTranslations(insert: Object = {}) {
     return {
       deep: {
         translations: {
@@ -48,7 +90,9 @@ export class DirectusService {
             languages_code: {_eq: this.getDefaultLocale()},
           },
         },
-      }
+      },
+      fields: ['*', {translations: ['*']}],
+      ...insert
     };
   }
 
