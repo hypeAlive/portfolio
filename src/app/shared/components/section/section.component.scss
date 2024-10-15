@@ -14,6 +14,19 @@
   height: 76px;
 }
 
-.custom-shape-divider-bottom-1729002952 .shape-fill {
+.shape-fill {
   fill: oklch(var(--b1));
+}
+
+.testsvg {
+  position: relative;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+}
+.testsvg svg {
+  position: relative;
+  left: 0;
+  display: block;
+  width: calc(100% + 1.3px);
 }

@@ -4,6 +4,23 @@
                 (onKeyBoardEvent)="keyboardEvent($event)"></app-keyboard>
 </div>
 
+<app-section>
+  <div class="container m-auto">
+    <div class="flex w-full justify-center">
+      <h1>Hi, I`m Nicolas.</h1>
+    </div>
+  </div>
+  <div class="container m-auto">
+    <div class="flex flex-col w-full gap-6 justify-center items-center">
+      <h1>{{ workedWithTitle }}</h1>
+      <div class="flex flex-row-reverse gap-32 h-36">
+        <img *ngFor="let picture of workedWithPictures" class="h-full"
+             [src]="getDirectusFileUrl(picture.directus_files_id)">
+      </div>
+    </div>
+  </div>
+</app-section>
+
 <main class="container min-h-dvh m-auto">
 
   <div class="flex w-full justify-center">
