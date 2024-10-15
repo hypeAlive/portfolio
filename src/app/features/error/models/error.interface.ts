@@ -1,4 +1,4 @@
-import {DirectusTranslation} from "../../../shared/models/translation.interface";
+import {DirectusTranslation} from "../../../shared/models/directus.interface";
 
 export interface ErrorApiResponse {
   code: number;
