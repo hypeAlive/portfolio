@@ -13,13 +13,15 @@ import {SectionComponent, SectionWave} from "../../../../shared/components/secti
 import {WaveHandComponent} from "../../components/wave-hand/wave-hand.component";
 import {FadeInDirective} from "../../../../shared/directives/fade-in.directive";
 
-interface WorkedWithData {
-  pictures: DirectusFile[];
-  translations: WorkedWithTranslations[];
+interface AboutCmsResponse {
+  worked_at_pictures: DirectusFile[];
+  translations: AboutTranslations[];
 }
 
-interface WorkedWithTranslations extends DirectusTranslation {
-  title: string;
+interface AboutTranslations extends DirectusTranslation {
+  hello_title: string;
+  worked_at_title: string;
+  description: { text: string }[];
 }
 
 @Component({
@@ -44,31 +46,19 @@ export default class HomeComponent implements OnInit {
 
   protected projectCards: ProjectCard[] | undefined = undefined;
 
-  private workedWithData: WorkedWithData | undefined = undefined;
+  private aboutCms: AboutCmsResponse | undefined = undefined;
 
   constructor(private directus: DirectusService) {
 
   }
 
   ngOnInit(): void {
-    this.directus.getRestClient().request(readItems("projects", {
-      deep: {
-        translations: {
-          _filter: {
-            languages_code: {_eq: this.directus.getLocale()},
-          },
-        },
-      },
-      fields: ['translations', {translations: ['title']}]
-    })).then(async (response) => {
-      console.log(response);
-    });
-
-    this.directus.readItemWithTranslation<WorkedWithData>("worked_with", {
-      fields: ['*', {translations: ['*'], pictures: ['*']}],
+    // get about section data from cms
+    this.directus.readItemWithTranslation<AboutCmsResponse>("about", {
+      fields: ['*', {translations: ['*'], worked_at_pictures: ['*']}],
     })
       .then((response) => {
-        this.workedWithData = response;
+        this.aboutCms = response;
         console.log(response);
       })
       .catch((error) => {
@@ -82,14 +72,28 @@ export default class HomeComponent implements OnInit {
     console.log(event);
   }
 
-  protected get workedWithTitle(): string {
-    if (!this.workedWithData) return '';
-    return this.workedWithData.translations[0].title;
+  protected get isAboutLoaded(): boolean {
+    return !!this.aboutCms;
   }
 
-  protected get workedWithPictures(): DirectusFile[] {
-    if (!this.workedWithData) return [];
-    return this.workedWithData.pictures;
+  protected get helloTitle(): string {
+    if (!this.aboutCms) return '';
+    return this.aboutCms.translations[0].hello_title;
+  }
+
+  protected get descriptions(): { text: string }[] {
+    if (!this.aboutCms) return [];
+    return this.aboutCms.translations[0].description;
+  }
+
+  protected get workedAtTitle(): string {
+    if (!this.aboutCms) return '';
+    return this.aboutCms.translations[0].worked_at_title;
+  }
+
+  protected get workedAtPictures(): DirectusFile[] {
+    if (!this.aboutCms) return [];
+    return this.aboutCms.worked_at_pictures;
   }
 
   protected readonly PROGRAMMING_LANGUAGES = PROGRAMMING_LANGUAGES;

@@ -9,23 +9,18 @@
       <div class="flex w-full flex-col items-center">
         <h1 appFadeIn class="drop-shadow-lg">
           <home-wave-hand class="text-7xl"/>
-          Hi, I`m Nicolas.
+          {{ helloTitle }}
         </h1>
-        <p appFadeIn class="max-w-3xl text-2xl text-center">
-          Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et
-          dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet
-          clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet,
-          consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat,
-          sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea
-          takimata sanctus est Lorem ipsum dolor sit amet.
+        <p *ngFor="let description of descriptions" appFadeIn class="max-w-3xl text-2xl text-center">
+          {{ description.text }}
         </p>
       </div>
     </div>
     <div class="container m-auto">
       <div class="flex flex-col w-full gap-6 justify-center items-center">
-        <h2 appFadeIn class="drop-shadow-lg">{{ workedWithTitle }}</h2>
+        <h2 appFadeIn class="drop-shadow-lg">{{ workedAtTitle }}</h2>
         <div class="flex flex-row gap-32 h-36">
-          <img appFadeIn *ngFor="let picture of workedWithPictures; let i = index"
+          <img appFadeIn *ngFor="let picture of workedAtPictures; let i = index"
                class="h-full drop-shadow-lg"
                [delay]="(i * 0.3) + 's'"
                [src]="getDirectusFileUrl(picture.directus_files_id)">
