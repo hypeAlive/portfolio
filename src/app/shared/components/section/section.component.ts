@@ -1,6 +1,9 @@
 import {Component, Input} from '@angular/core';
 import {NgClass, NgIf} from "@angular/common";
-import {PointGradientComponent, PointGradientType} from "../point-gradient/point-gradient.component";
+import {
+  PointColorGradient,
+  PointGradientComponent
+} from "../point-gradient/point-gradient.component";
 
 export enum SectionWave {
   TOP = 'top',
@@ -33,5 +36,5 @@ export class SectionComponent {
     return this.withWave === SectionWave.BOTTOM || this.withWave === SectionWave.BOTH;
   }
 
-  protected readonly PointGradientType = PointGradientType;
+  protected readonly PointColorGradient = PointColorGradient;
 }

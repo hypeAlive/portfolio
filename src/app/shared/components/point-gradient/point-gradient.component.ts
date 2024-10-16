@@ -1,8 +1,10 @@
 import {Component, Input} from '@angular/core';
-import {NgClass} from "@angular/common";
+import {NgClass, NgStyle} from "@angular/common";
 import {FadeInDirective} from "../../directives/fade-in.directive";
 
-export enum PointGradientType {
+export type PointGradientType = PointColorGradient | PointImageGradient;
+
+export enum PointColorGradient {
   PRIMARY = 'primary',
   PRIMARY_CONTENT = 'primary-content',
   SECONDARY = 'secondary',
@@ -11,22 +13,44 @@ export enum PointGradientType {
   ACCENT_CONTENT = 'accent-content',
 }
 
+export enum PointImageGradient {
+  POLYGON = 'poly.png',
+  HEXAGON = 'hexagon.png',
+  LINES = 'lines.png',
+}
+
 @Component({
   selector: 'bg-point-gradient',
   standalone: true,
   imports: [
     NgClass,
-    FadeInDirective
+    FadeInDirective,
+    NgStyle
   ],
   templateUrl: './point-gradient.component.html',
   styleUrl: './point-gradient.component.scss'
 })
 export class PointGradientComponent {
 
-  @Input() type: PointGradientType = PointGradientType.SECONDARY;
+  @Input() type: PointGradientType = PointColorGradient.SECONDARY;
+
+  protected isImageGradient(): boolean {
+    return Object.values(PointImageGradient).includes(this.type as PointImageGradient);
+  }
+
+  protected isColorGradient(): boolean {
+    return Object.values(PointColorGradient).includes(this.type as PointColorGradient);
+  }
 
   protected getGradientClass(): string {
-    return `point-gradient ${this.type}`;
+    if (this.isImageGradient()) {
+      return `point-gradient-image`;
+    }
+    return `${this.type}`;
+  }
+
+  protected getImageUrl(): string {
+    return `../../../../assets/bgs/${this.type}`;
   }
 
 }

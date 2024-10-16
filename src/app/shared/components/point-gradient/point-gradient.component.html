@@ -1,1 +1,5 @@
-<div appFadeIn [ngClass]="getGradientClass()"></div>
+<div appFadeIn
+     class="point-gradient"
+     [ngClass]="getGradientClass()"
+     [ngStyle]="isImageGradient() ? {'background-image': 'url(' + getImageUrl() + ')'} : {}">
+</div>

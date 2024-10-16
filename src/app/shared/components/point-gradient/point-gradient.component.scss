@@ -32,3 +32,10 @@
 .point-gradient.accent-content {
   background: radial-gradient(circle, oklch(var(--ac)) 0%, rgba(0,0,0,0) 70%);
 }
+
+.point-gradient-image {
+  background-size: cover;
+  background-position: center;
+  mask-image: radial-gradient(circle, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0) 70%);
+  -webkit-mask-image: radial-gradient(circle, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0) 70%);
+}

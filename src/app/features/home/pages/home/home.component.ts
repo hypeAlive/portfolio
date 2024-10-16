@@ -13,8 +13,8 @@ import {SectionComponent, SectionWave} from "../../../../shared/components/secti
 import {WaveHandComponent} from "../../components/wave-hand/wave-hand.component";
 import {FadeInDirective} from "../../../../shared/directives/fade-in.directive";
 import {
-  PointGradientComponent,
-  PointGradientType
+  PointColorGradient,
+  PointGradientComponent, PointImageGradient
 } from "../../../../shared/components/point-gradient/point-gradient.component";
 
 interface AboutCmsResponse {
@@ -143,5 +143,6 @@ export default class HomeComponent implements OnInit {
 
   protected readonly getDirectusFileUrl = getDirectusFileUrl;
   protected readonly SectionWave = SectionWave;
-  protected readonly PointGradientType = PointGradientType;
+  protected readonly PointColorGradient = PointColorGradient;
+  protected readonly PointImageGradient = PointImageGradient;
 }
