@@ -13,19 +13,10 @@ import {MouseLightEffectDirective} from "../../../../shared/directives/mouse-lig
 import {NGXLogger} from "ngx-logger";
 import {Router} from "@angular/router";
 
-export enum PROGRAMMING_LANGUAGES {
-  ANGULAR = diAngularOriginal,
-  JAVA = diJavaOriginal,
-  JAVASCRIPT = diJavascriptOriginal,
-  TYPESCRIPT = diTypescriptOriginal,
-  PYTHON = diPythonOriginal,
-  EXPRESS = diExpressOriginal,
-}
-
 export type ProjectCard = {
   id: number;
   title: string;
-  languages: PROGRAMMING_LANGUAGES[];
+  languages: string[];
   description: string;
   imgUrl: string;
 }

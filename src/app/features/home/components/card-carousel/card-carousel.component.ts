@@ -1,6 +1,7 @@
 import {Component, Input, QueryList, ViewChildren} from '@angular/core';
 import {CardComponent, ProjectCard} from "../card/card.component";
 import {NgClass, NgForOf} from "@angular/common";
+import {FadeInDirective} from "../../../../shared/directives/fade-in.directive";
 
 @Component({
   selector: 'card-carousel',
@@ -8,7 +9,8 @@ import {NgClass, NgForOf} from "@angular/common";
   imports: [
     CardComponent,
     NgForOf,
-    NgClass
+    NgClass,
+    FadeInDirective
   ],
   templateUrl: './card-carousel.component.html',
   styleUrl: './card-carousel.component.scss'

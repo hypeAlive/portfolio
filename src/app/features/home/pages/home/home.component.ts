@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {CardComponent, PROGRAMMING_LANGUAGES, ProjectCard} from "../../components/card/card.component";
+import {CardComponent, ProjectCard} from "../../components/card/card.component";
 import {CardCarouselComponent} from "../../components/card-carousel/card-carousel.component";
 import {ProjectService} from "../../../project/services/project.service";
 import {ContactComponent} from "../../components/contact/contact.component";
@@ -17,6 +17,20 @@ interface AboutCmsResponse {
   worked_at_pictures: DirectusFile[];
   translations: AboutTranslations[];
 }
+
+interface ProjectShortCmsResponse {
+  id: number;
+  is_first: boolean;
+  languages: string[];
+  translations: ProjectShortTranslation[];
+  project_pictures: DirectusFile[];
+}
+
+interface ProjectShortTranslation extends DirectusTranslation {
+  description_short: string;
+  title: string;
+}
+
 
 interface AboutTranslations extends DirectusTranslation {
   hello_title: string;
@@ -65,7 +79,32 @@ export default class HomeComponent implements OnInit {
         console.error(error);
       });
 
-    console.log(this.directus.getLocale())
+    // get project cards from cms
+    this.directus.readItemsWithTranslation<ProjectShortCmsResponse>("projects", {
+      fields: ['*', {translations: ['*'], project_pictures: ['*']}]
+    })
+      .then((response) => {
+        const cards = response.map((project) => ({
+          id: project.id,
+          title: project.translations[0].title,
+          languages: project.languages,
+          description: project.translations[0].description_short,
+          imgUrl: project.project_pictures.length >= 1 ? getDirectusFileUrl(project.project_pictures[0].directus_files_id) : ''
+        }));
+
+        const sortedCards: typeof cards = [];
+        const middleIndex = Math.floor(cards.length / 2);
+
+        cards.forEach((card, index) => {
+          const position = index % 2 === 0 ? middleIndex + Math.floor(index / 2) : middleIndex - Math.ceil(index / 2);
+          sortedCards[position] = card;
+        });
+
+        this.projectCards = sortedCards;
+      })
+      .catch((error) => {
+
+      });
   }
 
   protected keyboardEvent(event: KeyEvent): void {
@@ -96,7 +135,6 @@ export default class HomeComponent implements OnInit {
     return this.aboutCms.worked_at_pictures;
   }
 
-  protected readonly PROGRAMMING_LANGUAGES = PROGRAMMING_LANGUAGES;
   protected readonly getDirectusFileUrl = getDirectusFileUrl;
   protected readonly SectionWave = SectionWave;
 }

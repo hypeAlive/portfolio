@@ -26,6 +26,7 @@ input[type="radio"] {
   margin: auto;
 
   &::before {
+    pointer-events: none;
     content: '';
     position: absolute;
     width: 110%;
