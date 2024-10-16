@@ -4,12 +4,14 @@ import {CardCarouselComponent} from "../../components/card-carousel/card-carouse
 import {ProjectService} from "../../../project/services/project.service";
 import {ContactComponent} from "../../components/contact/contact.component";
 import {readItem, readItems} from "@directus/sdk";
-import {NgForOf, NgOptimizedImage} from "@angular/common";
+import {NgForOf, NgOptimizedImage, NgStyle} from "@angular/common";
 import {DirectusService} from '../../../../core/services/directus.service';
 import {KeyboardComponent} from "../../components/keyboard/keyboard.component";
 import {Key, KeyEvent} from "../../models/keyboard-keys";
 import {DirectusFile, DirectusTranslation, getDirectusFileUrl} from "../../../../shared/models/directus.interface";
-import {SectionComponent} from "../../../../shared/components/section/section.component";
+import {SectionComponent, SectionWave} from "../../../../shared/components/section/section.component";
+import {WaveHandComponent} from "../../components/wave-hand/wave-hand.component";
+import {FadeInDirective} from "../../../../shared/directives/fade-in.directive";
 
 interface WorkedWithData {
   pictures: DirectusFile[];
@@ -30,7 +32,10 @@ interface WorkedWithTranslations extends DirectusTranslation {
     NgOptimizedImage,
     KeyboardComponent,
     NgForOf,
-    SectionComponent
+    SectionComponent,
+    WaveHandComponent,
+    FadeInDirective,
+    NgStyle
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
@@ -89,4 +94,5 @@ export default class HomeComponent implements OnInit {
 
   protected readonly PROGRAMMING_LANGUAGES = PROGRAMMING_LANGUAGES;
   protected readonly getDirectusFileUrl = getDirectusFileUrl;
+  protected readonly SectionWave = SectionWave;
 }
