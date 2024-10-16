@@ -1,41 +1,44 @@
-<div class="gradient relative h-lvh">
+<div class="relative h-lvh">
   <img class="test-img" ngSrc="assets/render.png" height="1080" width="1920"/>
-  <app-keyboard class="absolute left-1/2 transform -translate-x-1/2" style="bottom: -3rem"
-                (onKeyBoardEvent)="keyboardEvent($event)"></app-keyboard>
-</div>
-
-<main class="container min-h-dvh m-auto">
-
-  <div class="flex w-full justify-center">
-    <h1>Hi, I`m Nicolas.</h1>
   </div>
-
-  <div class="custom-shape-divider-bottom-1729001160">
-
-  </div>
-  <div class="flex flex-col w-full gap-6 justify-center items-center">
-    <h2>{{ workedWithTitle }}</h2>
-    <div class="flex flex-row-reverse gap-32 h-36">
-      <img *ngFor="let picture of workedWithPictures" class="h-full"
-           [src]="getDirectusFileUrl(picture.directus_files_id)">
+<main>
+  <app-section [withGradient]="true" [withWave]="SectionWave.BOTH">
+    <div class="container m-auto mb-24">
+      <div class="flex w-full flex-col items-center">
+        <h1 appFadeIn class="drop-shadow-lg">
+          <home-wave-hand class="text-7xl"/>
+          {{ helloTitle }}
+        </h1>
+        <p *ngFor="let description of descriptions" appFadeIn class="max-w-3xl text-2xl text-center">
+          {{ description.text }}
+        </p>
+      </div>
     </div>
-  </div>
+    <div class="container m-auto">
+      <div class="flex flex-col w-full gap-6 justify-center items-center">
+        <h2 appFadeIn class="drop-shadow-lg">{{ workedAtTitle }}</h2>
+        <div class="flex flex-row gap-32 h-36">
+          <img appFadeIn *ngFor="let picture of workedAtPictures; let i = index"
+               class="h-full drop-shadow-lg"
+               [delay]="(i * 0.3) + 's'"
+               [src]="getDirectusFileUrl(picture.directus_files_id)">
+        </div>
+      </div>
+    </div>
+  </app-section>
 
-  <div class="flex w-full justify-center flex-col">
-    <h2 class="text-center jetbrains-mono"></h2>
-    <card-carousel style="width: 100%; height: 100%" [cards]="this.projectCards"></card-carousel>
-  </div>
+  <app-section>
+    <div class="flex w-full items-center flex-col">
+      <h1 appFadeIn>Meine Projekte</h1>
+      <card-carousel style="width: 100%; height: 100%" [cards]="this.projectCards"></card-carousel>
+    </div>
+  </app-section>
 
-  <div class="flex w-full items-center flex-col">
-    <h2 class="text-center jetbrains-mono">Contact me!</h2>
-    <home-contact class="w-full"/>
-  </div>
+  <app-section>
+    <div class="flex w-full items-center flex-col">
+      <h1 appFadeIn>Contact me!</h1>
+      <home-contact class="w-full"/>
+    </div>
+  </app-section>
+
 </main>
-
-<svg xmlns="http://www.w3.org/2000/svg"
-     xmlns:xlink="http://www.w3.org/1999/xlink" id="visual"
-     viewBox="0 0 960 540" version="1.1">
-  <rect x="0" y="0" fill="#002233"/>
-  <path d="M0 290L192 249L384 266L576 288L768 249L960 257L960 541L768 541L576 541L384 541L192 541L0 541Z" fill="#0066FF"
-        stroke-linecap="square" stroke-linejoin="bevel"/>
-</svg>

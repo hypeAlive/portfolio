@@ -1,0 +1,8 @@
+POST https://cms.nicolasfritz.dev/items/Inbox
+Content-Type: application/json
+
+{
+  "name": "Test",
+  "mail": "test",
+  "message": "open"
+}

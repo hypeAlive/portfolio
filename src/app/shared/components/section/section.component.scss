@@ -1,0 +1,16 @@
+.shape-fill {
+  fill: oklch(var(--b1));
+}
+
+.wave {
+  position: relative;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+}
+.wave svg {
+  position: relative;
+  left: 0;
+  display: block;
+  width: calc(100% + 1.3px);
+}
