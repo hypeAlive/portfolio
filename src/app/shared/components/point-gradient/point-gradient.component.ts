@@ -1,5 +1,6 @@
 import {Component, Input} from '@angular/core';
 import {NgClass} from "@angular/common";
+import {FadeInDirective} from "../../directives/fade-in.directive";
 
 export enum PointGradientType {
   PRIMARY = 'primary',
@@ -14,7 +15,8 @@ export enum PointGradientType {
   selector: 'bg-point-gradient',
   standalone: true,
   imports: [
-    NgClass
+    NgClass,
+    FadeInDirective
   ],
   templateUrl: './point-gradient.component.html',
   styleUrl: './point-gradient.component.scss'
