@@ -4,7 +4,7 @@ import {CardCarouselComponent} from "../../components/card-carousel/card-carouse
 import {ProjectService} from "../../../project/services/project.service";
 import {ContactComponent} from "../../components/contact/contact.component";
 import {readItem, readItems} from "@directus/sdk";
-import {NgForOf, NgOptimizedImage, NgStyle} from "@angular/common";
+import {NgForOf, NgIf, NgOptimizedImage, NgStyle} from "@angular/common";
 import {DirectusService} from '../../../../core/services/directus.service';
 import {KeyboardComponent} from "../../components/keyboard/keyboard.component";
 import {Key, KeyEvent} from "../../models/keyboard-keys";
@@ -12,6 +12,10 @@ import {DirectusFile, DirectusTranslation, getDirectusFileUrl} from "../../../..
 import {SectionComponent, SectionWave} from "../../../../shared/components/section/section.component";
 import {WaveHandComponent} from "../../components/wave-hand/wave-hand.component";
 import {FadeInDirective} from "../../../../shared/directives/fade-in.directive";
+import {
+  PointGradientComponent,
+  PointGradientType
+} from "../../../../shared/components/point-gradient/point-gradient.component";
 
 interface AboutCmsResponse {
   worked_at_pictures: DirectusFile[];
@@ -51,7 +55,9 @@ interface AboutTranslations extends DirectusTranslation {
     SectionComponent,
     WaveHandComponent,
     FadeInDirective,
-    NgStyle
+    NgStyle,
+    PointGradientComponent,
+    NgIf
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
@@ -137,4 +143,5 @@ export default class HomeComponent implements OnInit {
 
   protected readonly getDirectusFileUrl = getDirectusFileUrl;
   protected readonly SectionWave = SectionWave;
+  protected readonly PointGradientType = PointGradientType;
 }

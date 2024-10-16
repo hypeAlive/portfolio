@@ -1,6 +1,6 @@
 <div class="relative h-lvh">
   <img class="test-img" ngSrc="assets/render.png" height="1080" width="1920"/>
-  </div>
+</div>
 <main>
   <app-section [withGradient]="true" [withWave]="SectionWave.BOTH">
     <div class="container m-auto mb-24">
@@ -27,11 +27,12 @@
     </div>
   </app-section>
 
-  <app-section>
+  <app-section class="relative">
     <div class="flex w-full items-center flex-col gap-6">
       <h1 appFadeIn class="drop-shadow-lg">Meine Projekte</h1>
       <card-carousel style="width: 100%; height: 100%" [cards]="this.projectCards"/>
     </div>
+    <bg-point-gradient [type]="PointGradientType.ACCENT" class="absolute opacity-10 top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/4 h-full scale-x-150"/>
   </app-section>
 
   <app-section>
