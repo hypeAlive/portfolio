@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {NgIcon, provideIcons} from "@ng-icons/core";
 import {
   diAngularOriginal,
@@ -43,8 +43,9 @@ export type ProjectCard = {
     diTypescriptOriginal
   })]
 })
-export class CardComponent {
+export class CardComponent implements OnInit{
   @Input('card') infos: ProjectCard | undefined = undefined;
+  @Input('preActivate') preActivate = false;
 
   constructor(private logger: NGXLogger, private router: Router) {
   }
@@ -76,6 +77,12 @@ export class CardComponent {
       .catch(err => {
         this.logger.error('Error while navigating to project:', err);
       });
+  }
+
+  ngOnInit(): void {
+    if(this.preActivate) {
+      this.activate();
+    }
   }
 
 

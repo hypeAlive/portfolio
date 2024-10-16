@@ -1,4 +1,4 @@
-import {Component, Input, QueryList, ViewChildren} from '@angular/core';
+import {AfterViewInit, Component, Input, OnChanges, QueryList, SimpleChanges, ViewChildren} from '@angular/core';
 import {CardComponent, ProjectCard} from "../card/card.component";
 import {NgClass, NgForOf} from "@angular/common";
 import {FadeInDirective} from "../../../../shared/directives/fade-in.directive";
@@ -51,6 +51,10 @@ export class CardCarouselComponent {
     return this.items || new Array(5).fill(undefined);
   }
 
+  protected isActive(index: number) {
+    return index === this.selectedIndex;
+  }
+
   protected onRadioChange(goToIndex: number): void {
     if (this.blocked) return;
 
@@ -84,5 +88,4 @@ export class CardCarouselComponent {
 
     throw new Error('Invalid index');
   }
-
 }
