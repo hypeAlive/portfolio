@@ -6,7 +6,12 @@
   <div class="carousel-cards">
     <ng-container *ngFor="let item of getItems(); let i = index">
       <label class="carousel-card" [for]="'item-' + (i)" [ngClass]="getCardClasses(i)">
-        <project-card appFadeIn [delay]="(i * 0.2)+ 's'" [preActivate]="isActive(i)" [card]="item" #cards></project-card>
+        <project-card appFadeIn
+                      [delay]="(i * 0.1)+ 's'"
+                      [reFade]="false"
+                      [preActivate]="isActive(i)"
+                      [card]="item" #cards
+        />
       </label>
     </ng-container>
   </div>
