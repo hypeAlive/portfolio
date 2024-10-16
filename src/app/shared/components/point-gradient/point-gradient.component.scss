@@ -1,0 +1,29 @@
+.point-gradient {
+  width: 100%;
+  height: 100%;
+  aspect-ratio: 1 / 1;
+}
+
+.point-gradient.primary {
+  background: radial-gradient(circle, oklch(var(--p)) 0%, rgba(0,0,0,0) 70%);
+}
+
+.point-gradient.primary-content {
+  background: radial-gradient(circle, oklch(var(--pc)) 0%, rgba(0,0,0,0) 70%);
+}
+
+.point-gradient.secondary {
+  background: radial-gradient(circle, oklch(var(--s)) 0%, rgba(0,0,0,0) 70%);
+}
+
+.point-gradient.secondary-content {
+  background: radial-gradient(circle, oklch(var(--sc)) 0%, rgba(0,0,0,0) 70%);
+}
+
+.point-gradient.accent {
+  background: radial-gradient(circle, oklch(var(--a)) 0%, rgba(0,0,0,0) 70%);
+}
+
+.point-gradient.accent-content {
+  background: radial-gradient(circle, oklch(var(--ac)) 0%, rgba(0,0,0,0) 70%);
+}
