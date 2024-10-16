@@ -30,6 +30,35 @@ export class DirectusService {
     return this.client;
   }
 
+  public async readItemsWithTranslation<T extends {
+    id: number | string,
+    translations: DirectusTranslation[]
+  }>(items: string, insert: Object = {}) {
+    const getData = async (insert: Object) => {
+      return await this.getRestClient()
+        .request<T[]>(readItems(items, insert));
+    }
+
+    let data = await getData(this.withTranslations(insert));
+
+    if (!Array.isArray(data) || data.length === 0) {
+      return Promise.reject('No items found');
+    }
+
+    const itemsWithTranslations = await Promise.all(data.map(async (item) => {
+      if (!item.translations || item.translations.length === 0) {
+        try {
+          item = await this.readItemWithTranslation<T>(items + "/" + item.id);
+        } catch (error) {
+          return Promise.reject(error);
+        }
+      }
+      return item;
+    }));
+
+    return itemsWithTranslations;
+  }
+
   public async readItemWithTranslation<T extends {
     translations: DirectusTranslation[]
   }>(items: string, insert: Object = {}) {
@@ -105,7 +134,7 @@ export class DirectusService {
   }
 
   public getDefaultLocale(): string {
-    return 'de';
+    return 'en';
   }
 
   public getMaintenanceData() {
