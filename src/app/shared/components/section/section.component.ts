@@ -2,7 +2,7 @@ import {Component, Input} from '@angular/core';
 import {NgClass, NgIf} from "@angular/common";
 import {
   PointColorGradient,
-  PointGradientComponent
+  PointGradientComponent, PointImageGradient
 } from "../point-gradient/point-gradient.component";
 
 export enum SectionWave {
@@ -27,6 +27,7 @@ export class SectionComponent {
 
   @Input('withWave') withWave: SectionWave = SectionWave.NONE;
   @Input('withGradient') withGradient = false;
+  @Input('withBgImage') withBgImage: PointImageGradient | undefined = undefined;
 
   protected isWaveTop(): boolean {
     return this.withWave === SectionWave.TOP || this.withWave === SectionWave.BOTH;
@@ -37,4 +38,5 @@ export class SectionComponent {
   }
 
   protected readonly PointColorGradient = PointColorGradient;
+  protected readonly PointImageGradient = PointImageGradient;
 }

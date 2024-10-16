@@ -2,7 +2,11 @@
   <img class="test-img" ngSrc="assets/render.png" height="1080" width="1920"/>
 </div>
 <main>
-  <app-section [withGradient]="true" [withWave]="SectionWave.BOTH">
+  <app-section
+    [withGradient]="true"
+    [withWave]="SectionWave.BOTH"
+    [withBgImage]="PointImageGradient.POLYGON"
+  >
     <div class="container m-auto mb-24">
       <div class="flex w-full flex-col items-center">
         <h1 appFadeIn class="drop-shadow-lg">
