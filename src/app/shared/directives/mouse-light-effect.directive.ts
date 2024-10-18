@@ -24,7 +24,7 @@ export class MouseLightEffectDirective implements AfterViewInit {
     this.renderer.setStyle(this.mask, 'opacity', '0');
     this.renderer.setStyle(this.mask, 'pointer-events', 'none');
     this.renderer.setStyle(this.mask, 'transition', 'opacity 0.2s ease-in-out');
-    this.renderer.setStyle(this.mask, 'border', '5px solid rgba(255,255,255,1)');
+    this.renderer.setStyle(this.mask, 'border', '5px solid oklch(var(--s))');
 
     // Set the border-radius of the mask to match the element
     const borderRadius = window.getComputedStyle(this.el.nativeElement).borderRadius;
