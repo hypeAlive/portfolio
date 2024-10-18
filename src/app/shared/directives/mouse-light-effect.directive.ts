@@ -44,7 +44,7 @@ export class MouseLightEffectDirective implements AfterViewInit {
       const style = `radial-gradient(circle at ${x}px ${y}px, oklch(var(--bc)), rgba(0,0,0,0))`;
       this.renderer.setStyle(this.mask, 'background', style);
       this.renderer.setStyle(this.mask, '-webkit-mask-image', style); // Use gradient as mask image
-      this.renderer.setStyle(this.mask, 'opacity', '0.2');
+      this.renderer.setStyle(this.mask, 'opacity', '0.5');
     } else {
       this.renderer.setStyle(this.mask, 'opacity', '0');
     }
