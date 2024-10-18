@@ -81,6 +81,18 @@ body {
     @apply gradient-light dark:gradient-dark;
   }
 
+  .light-effect-light {
+    border: 5px solid black;
+  }
+
+  .light-effect-dark {
+    border: 5px solid oklch(var(--s));
+  }
+
+  .light-effect {
+    @apply light-effect-light dark:light-effect-dark;
+  }
+
   .card-overlay-light {
 
     opacity: 0.2;
