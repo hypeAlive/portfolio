@@ -34,8 +34,8 @@ export type EmojiBackground = {
 export class EmojiBlobComponent {
 
   @Input('background')background: EmojiBackground = {
-    type: EmojiBackgroundType.CIRCLE,
-    color: EffectColor.MY_ACCENT
+    type: EmojiBackgroundType.BLOB2,
+    color: EffectColor.GRADIENT
   };
 
   protected isBackground(bg: EmojiBackgroundType): boolean {
@@ -44,6 +44,14 @@ export class EmojiBlobComponent {
 
   protected getBackgroundColor(): string {
     return getVarFromEffectColor(this.background.color);
+  }
+
+  protected isFillGradient(): boolean {
+    return this.background.color === EffectColor.GRADIENT;
+  }
+
+  protected getFillStyle(): { [key: string]: string } {
+    return this.isFillGradient() ? { 'fill': 'url(#gradient)' } : { 'fill': this.getBackgroundColor() };
   }
 
   protected EmojiBackgroundType = EmojiBackgroundType;

@@ -7,6 +7,7 @@ export enum EffectColor {
   ACCENT_CONTENT = 'accent-content',
   MY_ACCENT = 'my-accent',
   MY_SECONDARY = 'my-secondary',
+  GRADIENT = 'gradient',
 }
 
 export function getVarFromEffectColor(color: EffectColor): string {
