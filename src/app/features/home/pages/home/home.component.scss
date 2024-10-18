@@ -16,3 +16,28 @@
   display: inline-block;
   height: 100%;
 }
+
+.custom-shape-divider-top-1729255725 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  overflow: hidden;
+  line-height: 0;
+}
+
+.custom-shape-divider-top-1729255725 svg {
+  position: relative;
+  display: block;
+  width: calc(116% + 1.3px);
+  height: 90px;
+  transform: rotateY(180deg);
+}
+
+.custom-shape-divider-top-1729255725 .shape-fill {
+  fill: oklch(var(--b1));
+}
+
+.contact-bg {
+  background: transparent;
+}

@@ -3,6 +3,7 @@ import errorRoutes from "./features/error/error.routes";
 import {ProjectResolver} from "./features/project/services/project.resolver";
 import {HeaderBackground} from "./core/services/header.service";
 import {MaintenanceGuard} from "./shared/services/maintenance.guard";
+import {FooterBackground} from "./core/services/footer.service";
 
 export const routes: Routes = [
   {
@@ -14,6 +15,9 @@ export const routes: Routes = [
       header: {
         showMenu: true,
         background: HeaderBackground.BLEND_IN_ON_SCROLL
+      },
+      footer: {
+        background: FooterBackground.SHOW,
       }
     }
   },

@@ -1,6 +1,5 @@
 <div class="relative h-lvh">
   <img class="test-img" ngSrc="assets/render.png" height="1080" width="1920"/>
-  <app-emoji-blob class="absolute z-50 text-9xl"/>
 </div>
 <main>
   <app-section
@@ -43,10 +42,24 @@
       class="absolute opacity-10 top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/4 h-full scale-x-150"/>
   </app-section>
 
-  <app-section>
-    <div class="flex w-full items-center flex-col">
+  <app-section class="relative">
+    <div class="container m-auto flex items-center flex-col">
       <h1 appFadeIn>Contact me!</h1>
-      <home-contact class="w-full"/>
+      <p appFadeIn class="max-w-3xl text-2xl text-center">
+        Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut
+      </p>
+      <div class="flex items-center justify-center gap-12 w-full">
+        <app-emoji-blob appFadeIn delay="0.3s" [mirrorIcon]="true" class="text-9xl drop-shadow-2xl"/>
+        <home-contact class="pt-10 w-full max-w-3xl"/>
+      </div>
+
+    </div>
+    <div appFadeIn delay="0.1s" class="absolute w-full bottom-0 h-96 -z-20 bg-base-200">
+      <div class="custom-shape-divider-top-1729255725">
+        <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+          <path d="M1200 0L0 0 892.25 114.72 1200 0z" class="shape-fill"></path>
+        </svg>
+      </div>
     </div>
   </app-section>
 

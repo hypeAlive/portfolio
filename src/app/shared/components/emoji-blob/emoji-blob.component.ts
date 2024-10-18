@@ -1,6 +1,6 @@
 import {Component, Input} from '@angular/core';
 import {NgIcon, provideIcons} from "@ng-icons/core";
-import {hugeMail01} from "@ng-icons/huge-icons";
+import {hugeMail01, hugeMailbox01} from "@ng-icons/huge-icons";
 import {NgClass, NgIf, NgStyle} from "@angular/common";
 import {EffectColor, getVarFromEffectColor} from "../../models/effects.interface";
 
@@ -26,9 +26,13 @@ export type EmojiBackground = {
     NgStyle
   ],
   templateUrl: './emoji-blob.component.html',
-  styleUrl: './emoji-blob.component.scss',
+  styles: `.svg-container {
+    width: 3em;
+    height: auto;
+  }`,
   viewProviders: [provideIcons({
-    hugeMail01
+    hugeMail01,
+    hugeMailbox01
   })]
 })
 export class EmojiBlobComponent {
@@ -37,6 +41,7 @@ export class EmojiBlobComponent {
     type: EmojiBackgroundType.BLOB2,
     color: EffectColor.GRADIENT
   };
+  @Input('mirrorIcon') iconMirror: boolean = false;
 
   protected isBackground(bg: EmojiBackgroundType): boolean {
     return this.background.type === bg

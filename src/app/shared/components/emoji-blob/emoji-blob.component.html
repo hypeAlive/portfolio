@@ -1,6 +1,7 @@
 <div class="relative" style="font-size: 1em">
-  <ng-icon name="hugeMail01"
+  <ng-icon name="hugeMailbox01"
            class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
+           [ngClass]="{'-scale-x-100': iconMirror}"
   />
   <div class="svg-container">
     <svg *ngIf="isBackground(EmojiBackgroundType.BLOB1)" viewBox="150 0 600 600" xmlns="http://www.w3.org/2000/svg">
@@ -21,8 +22,8 @@
       <g transform="translate(452.9843635076588 291.7016198707921)">
         <defs>
           <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" style="stop-color: var(--ms);" />
-            <stop offset="100%" style="stop-color: var(--ma);" />
+            <stop offset="0%" style="stop-color: var(--ma);" />
+            <stop offset="80%" style="stop-color: var(--ms);" />
           </linearGradient>
         </defs>
         <path
