@@ -29,7 +29,7 @@
           </div>
         </ng-container>
       </div>
-      <p class="text-center jetbrains-mono" style="color: oklch(var(--bc))">
+      <p class="text-center jetbrains-mono transition-all" style="color: oklch(var(--bc))" [ngClass]="{'h-6': !active}">
         {{ infos?.description }}
       </p>
       <div class="card-actions justify-center">
