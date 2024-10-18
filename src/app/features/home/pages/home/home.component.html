@@ -42,7 +42,9 @@
       class="absolute opacity-10 top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/4 h-full scale-x-150"/>
   </app-section>
 
-  <app-section class="relative">
+  <app-section
+    class="relative"
+  [withBgImage]="PointImageGradient.POLYGON">
     <div class="container m-auto flex items-center flex-col">
       <h1 appFadeIn>Contact me!</h1>
       <p appFadeIn class="max-w-3xl text-2xl text-center">

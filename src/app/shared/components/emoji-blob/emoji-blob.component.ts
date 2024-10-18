@@ -3,6 +3,7 @@ import {NgIcon, provideIcons} from "@ng-icons/core";
 import {hugeMail01, hugeMailbox01} from "@ng-icons/huge-icons";
 import {NgClass, NgIf, NgStyle} from "@angular/common";
 import {EffectColor, getVarFromEffectColor} from "../../models/effects.interface";
+import {PointGradientComponent} from "../point-gradient/point-gradient.component";
 
 export enum EmojiBackgroundType {
   BLOB1 = 'blob1',
@@ -14,6 +15,7 @@ export enum EmojiBackgroundType {
 export type EmojiBackground = {
   type: EmojiBackgroundType;
   color: EffectColor
+  glow: EffectColor | undefined;
 }
 
 @Component({
@@ -23,7 +25,8 @@ export type EmojiBackground = {
     NgIcon,
     NgIf,
     NgClass,
-    NgStyle
+    NgStyle,
+    PointGradientComponent
   ],
   templateUrl: './emoji-blob.component.html',
   styles: `.svg-container {
@@ -39,7 +42,8 @@ export class EmojiBlobComponent {
 
   @Input('background')background: EmojiBackground = {
     type: EmojiBackgroundType.BLOB2,
-    color: EffectColor.GRADIENT
+    color: EffectColor.GRADIENT,
+    glow: EffectColor.ACCENT
   };
   @Input('mirrorIcon') iconMirror: boolean = false;
 
@@ -60,4 +64,6 @@ export class EmojiBlobComponent {
   }
 
   protected EmojiBackgroundType = EmojiBackgroundType;
+  protected readonly PointColorGradient = EffectColor;
+  protected readonly encodeURI = encodeURI;
 }

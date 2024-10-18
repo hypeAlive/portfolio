@@ -1,10 +1,13 @@
 <form [formGroup]="contactForm" (ngSubmit)="submitForm()" class="flex flex-col gap-6 max-w-2xl">
   <div class="flex">
-    <input appFadeIn type="text" formControlName="name" placeholder="Your Name" class="input input-bordered w-full mr-3"/>
+    <input appFadeIn type="text" formControlName="name" placeholder="Your Name"
+           class="input input-bordered w-full mr-3"/>
     <input appFadeIn type="text" formControlName="mail" placeholder="Your Email" class="input input-bordered w-full"/>
   </div>
   <textarea appFadeIn formControlName="message" class="textarea textarea-lg textarea-bordered w-full resize-none h-40"
             placeholder="Your Message"></textarea>
-  <button appFadeIn type="submit" class="btn btn-primary btn-wide self-center" [ngClass]="{'btn-disabled': !isValid()}"> Send
+  <button appFadeIn type="submit" class="btn btn-secondary btn-outline btn-wide self-center hover:!bg-my-accent hover:!text-base-content"
+          [ngClass]="{'btn-disabled': !isValid()}">
+    Send
   </button>
 </form>
