@@ -5,6 +5,8 @@ import {NotifyService} from "../../../../core/services/notify.service";
 import {DirectusService} from "../../../../core/services/directus.service";
 import {createItem} from "@directus/sdk";
 import {FadeInDirective} from "../../../../shared/directives/fade-in.directive";
+import {EffectColor} from "../../../../shared/models/effects.interface";
+import {PointGradientComponent} from "../../../../shared/components/point-gradient/point-gradient.component";
 
 @Component({
   selector: 'home-contact',
@@ -12,7 +14,8 @@ import {FadeInDirective} from "../../../../shared/directives/fade-in.directive";
   imports: [
     ReactiveFormsModule,
     NgClass,
-    FadeInDirective
+    FadeInDirective,
+    PointGradientComponent
   ],
   templateUrl: './contact.component.html',
   styles: []
@@ -50,4 +53,5 @@ export class ContactComponent implements OnInit {
   }
 
 
+  protected readonly PointColorGradient = EffectColor;
 }

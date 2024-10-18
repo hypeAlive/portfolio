@@ -1,4 +1,7 @@
-<form [formGroup]="contactForm" (ngSubmit)="submitForm()" class="flex flex-col gap-6 max-w-2xl">
+<form [formGroup]="contactForm" (ngSubmit)="submitForm()" class="flex flex-col gap-6 max-w-2xl relative">
+  <bg-point-gradient
+    [type]="PointColorGradient.SECONDARY"
+    class="absolute opacity-5 -top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/4 w-full scale-x-150"/>
   <div class="flex">
     <input appFadeIn type="text" formControlName="name" placeholder="Your Name"
            class="input input-bordered w-full mr-3"/>
