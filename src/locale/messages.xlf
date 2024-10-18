@@ -87,6 +87,20 @@
           <context context-type="linenumber">32,35</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="contactSectionHeading" datatype="html">
+        <source>Lust auf mehr?</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/home/pages/home/home.component.html</context>
+          <context context-type="linenumber">49,50</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="contactSectionDescription" datatype="html">
+        <source> Hab ich dein Interesse geweckt? Dann schreib mir einfach – ich freue mich, von dir zu hören! </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/home/pages/home/home.component.html</context>
+          <context context-type="linenumber">51,53</context>
+        </context-group>
+      </trans-unit>
     </body>
   </file>
 </xliff>
