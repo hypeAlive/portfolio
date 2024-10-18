@@ -13,9 +13,10 @@ import {SectionComponent, SectionWave} from "../../../../shared/components/secti
 import {WaveHandComponent} from "../../components/wave-hand/wave-hand.component";
 import {FadeInDirective} from "../../../../shared/directives/fade-in.directive";
 import {
-  PointColorGradient,
   PointGradientComponent, PointImageGradient
 } from "../../../../shared/components/point-gradient/point-gradient.component";
+import {EmojiBlobComponent} from "../../../../shared/components/emoji-blob/emoji-blob.component";
+import {EffectColor} from "../../../../shared/models/effects.interface";
 
 interface AboutCmsResponse {
   worked_at_pictures: DirectusFile[];
@@ -57,7 +58,8 @@ interface AboutTranslations extends DirectusTranslation {
     FadeInDirective,
     NgStyle,
     PointGradientComponent,
-    NgIf
+    NgIf,
+    EmojiBlobComponent
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
@@ -143,6 +145,6 @@ export default class HomeComponent implements OnInit {
 
   protected readonly getDirectusFileUrl = getDirectusFileUrl;
   protected readonly SectionWave = SectionWave;
-  protected readonly PointColorGradient = PointColorGradient;
+  protected readonly PointColorGradient = EffectColor;
   protected readonly PointImageGradient = PointImageGradient;
 }

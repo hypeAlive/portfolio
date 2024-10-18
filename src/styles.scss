@@ -5,6 +5,21 @@
 
 @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap');
 
+:root {
+  --ms-l: color-mix(in oklch, oklch(var(--s)) 70%, white);
+  --ms-d: color-mix(in oklch, oklch(var(--s)) 70%, black);
+  --ma-l: color-mix(in oklch, oklch(var(--a)) 70%, white);
+  --ma-d: color-mix(in oklch, oklch(var(--a)) 70%, black);
+  --ma: var(--ma-l);
+  --ms: var(--ms-l);
+}
+
+.dark {
+  --ma: var(--ma-d);
+  --ms: var(--ms-d);
+}
+
+
 .icon-large {
   @apply text-5xl;
 }
@@ -64,22 +79,13 @@ body {
   @apply dark:text-bright-text-light text-bright-text-dark;
 }
 
+.gradient {
+  background-image: linear-gradient(135deg,
+    var(--ms) 0%,
+    var(--ma) 100%);
+}
+
 @layer components {
-  .gradient-light {
-    background-image: linear-gradient(135deg,
-      color-mix(in oklch, oklch(var(--s)) 70%, white) 0%,
-      color-mix(in oklch, oklch(var(--a)) 70%, white) 100%);
-  }
-
-  .gradient-dark {
-    background-image: linear-gradient(135deg,
-      color-mix(in oklch, oklch(var(--s)) 70%, black) 0%,
-      color-mix(in oklch, oklch(var(--a)) 70%, black) 100%);
-  }
-
-  .gradient {
-    @apply gradient-light dark:gradient-dark;
-  }
 
   .light-effect-light {
     border: 5px solid black;
@@ -96,21 +102,21 @@ body {
   .card-overlay-light {
 
     opacity: 0.2;
-    background: linear-gradient(to top,color-mix(in oklch, oklch(var(--a)) 90%, white) 10%, rgba(1,1,1,0) 100%);
+    background: linear-gradient(to top, oklch(var(--a)) 10%, rgba(1, 1, 1, 0) 100%);
     transition: all 0.5s ease-in-out;
     mix-blend-mode: normal;
 
     &.active {
       opacity: 0.75;
-      background: linear-gradient(to top, color-mix(in oklch, oklch(var(--a)) 90%, white) 60%, rgba(1,1,1,0) 100%);
+      background: linear-gradient(to top, oklch(var(--a)) 60%, rgba(1, 1, 1, 0) 100%);
     }
   }
 
   .card-overlay-dark {
-    background: linear-gradient(to top,  color-mix(in oklch, oklch(var(--s)) 70%, black) 10%, rgba(0,0,0,0) 100%);
+    background: linear-gradient(to top, var(--ms) 10%, rgba(0, 0, 0, 0) 100%);
 
     &.active {
-      background: linear-gradient(to top, color-mix(in oklch, oklch(var(--s)) 70%, black) 60%, rgba(0,0,0,0) 100%);
+      background: linear-gradient(to top, var(--ms) 60%, rgba(0, 0, 0, 0) 100%);
     }
   }
 

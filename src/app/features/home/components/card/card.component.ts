@@ -13,9 +13,9 @@ import {MouseLightEffectDirective} from "../../../../shared/directives/mouse-lig
 import {NGXLogger} from "ngx-logger";
 import {Router} from "@angular/router";
 import {
-  PointColorGradient,
   PointGradientComponent
 } from "../../../../shared/components/point-gradient/point-gradient.component";
+import {EffectColor} from "../../../../shared/models/effects.interface";
 
 export type ProjectCard = {
   id: number;
@@ -91,5 +91,5 @@ export class CardComponent implements OnInit{
   }
 
 
-  protected readonly PointColorGradient = PointColorGradient;
+  protected readonly PointColorGradient = EffectColor;
 }

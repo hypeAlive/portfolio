@@ -1,17 +1,9 @@
 import {Component, Input} from '@angular/core';
 import {NgClass, NgStyle} from "@angular/common";
 import {FadeInDirective} from "../../directives/fade-in.directive";
+import {EffectColor} from "../../models/effects.interface";
 
-export type PointGradientType = PointColorGradient | PointImageGradient;
-
-export enum PointColorGradient {
-  PRIMARY = 'primary',
-  PRIMARY_CONTENT = 'primary-content',
-  SECONDARY = 'secondary',
-  SECONDARY_CONTENT = 'secondary-content',
-  ACCENT = 'accent',
-  ACCENT_CONTENT = 'accent-content',
-}
+export type PointGradientType = EffectColor | PointImageGradient;
 
 export enum PointImageGradient {
   POLYGON = 'poly.png',
@@ -32,14 +24,14 @@ export enum PointImageGradient {
 })
 export class PointGradientComponent {
 
-  @Input() type: PointGradientType = PointColorGradient.SECONDARY;
+  @Input() type: PointGradientType = EffectColor.SECONDARY;
 
   protected isImageGradient(): boolean {
     return Object.values(PointImageGradient).includes(this.type as PointImageGradient);
   }
 
   protected isColorGradient(): boolean {
-    return Object.values(PointColorGradient).includes(this.type as PointColorGradient);
+    return Object.values(EffectColor).includes(this.type as EffectColor);
   }
 
   protected getGradientClass(): string {
