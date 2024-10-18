@@ -1,10 +1,16 @@
-FROM node:alpine AS build
+FROM node:18.20.2-alpine AS build
 
 WORKDIR /app
 
 COPY package.json /app
+COPY package-lock.json /app
 
-RUN npm install
+RUN npm config set registry https://registry.npmjs.org/
+RUN npm config set fetch-retries 5
+RUN npm config set fetch-retry-mintimeout 20000
+RUN npm config set fetch-retry-maxtimeout 120000
+
+RUN npm i --force --verbose --trace-warnings
 
 COPY public  /app/public
 COPY src  /app/src
