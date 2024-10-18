@@ -3,14 +3,32 @@
     [type]="PointColorGradient.SECONDARY"
     class="absolute opacity-5 -top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/4 w-full scale-x-150"/>
   <div class="flex">
-    <input appFadeIn type="text" formControlName="name" placeholder="Your Name"
-           class="input input-bordered w-full mr-3 !rounded-lg"/>
-    <input appFadeIn type="text" formControlName="mail" placeholder="Your Email" class="input input-bordered w-full !rounded-lg"/>
+    <input appFadeIn
+           type="text"
+           formControlName="name"
+           placeholder="Name"
+           class="input input-bordered w-full mr-3 !rounded-lg"
+           i18n-placeholder="@@contactNamePlaceholder"
+    />
+    <input appFadeIn
+           type="text"
+           formControlName="mail"
+           placeholder="Email"
+           class="input input-bordered w-full !rounded-lg"
+           i18n-placeholder="@@contactMailPlaceholder"
+    />
   </div>
-  <textarea appFadeIn formControlName="message" class="textarea textarea-lg textarea-bordered w-full resize-none h-40 !rounded-lg"
-            placeholder="Your Message"></textarea>
-  <button appFadeIn type="submit" class="btn btn-secondary btn-outline btn-wide self-center hover:!bg-my-accent hover:!text-base-content !rounded-lg"
-          [ngClass]="{'btn-disabled': !isValid()}">
-    Send
+  <textarea appFadeIn
+            formControlName="message"
+            class="textarea textarea-lg textarea-bordered w-full resize-none h-40 !rounded-lg"
+            placeholder="Nachricht"
+            i18n-placeholder="@@contactTextareaPlaceholder">
+  </textarea>
+  <button appFadeIn
+          type="submit"
+          class="btn btn-secondary btn-outline btn-wide self-center hover:!bg-my-accent hover:!text-base-content !rounded-lg"
+          [ngClass]="{'btn-disabled': !isValid()}"
+          i18n="@@contactSubmit">
+    Senden
   </button>
 </form>

@@ -2,40 +2,89 @@
 <xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
   <file source-language="de" datatype="plaintext" original="ng2.template">
     <body>
-      <trans-unit id="5534079326129790974" datatype="html">
-        <source> test
-</source>
+      <trans-unit id="coreStartPage" datatype="html">
+        <source>Startseite</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/app.component.html</context>
-          <context context-type="linenumber">3,5</context>
+          <context context-type="sourcefile">src/app/core/components/footer/footer.component.html</context>
+          <context context-type="linenumber">14,15</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="5618890539910687772" datatype="html">
-        <source> Über mich </source>
+      <trans-unit id="coreProjects" datatype="html">
+        <source>Projekte</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/header/header/header.component.html</context>
-          <context context-type="linenumber">11</context>
+          <context context-type="sourcefile">src/app/core/components/footer/footer.component.html</context>
+          <context context-type="linenumber">15,16</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/core/components/header/header.component.html</context>
+          <context context-type="linenumber">35,37</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="1539307566697321281" datatype="html">
-        <source> Erfahrung </source>
+      <trans-unit id="coreContact" datatype="html">
+        <source>Kontakt</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/header/header/header.component.html</context>
-          <context context-type="linenumber">14</context>
+          <context context-type="sourcefile">src/app/core/components/footer/footer.component.html</context>
+          <context context-type="linenumber">16,17</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/core/components/header/header.component.html</context>
+          <context context-type="linenumber">41,43</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="3741200213318438827" datatype="html">
-        <source> Projekte </source>
+      <trans-unit id="coreImprint" datatype="html">
+        <source>Impressum</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/header/header/header.component.html</context>
+          <context context-type="sourcefile">src/app/core/components/footer/footer.component.html</context>
+          <context context-type="linenumber">17,19</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="coreCopyright" datatype="html">
+        <source>Copyright © <x id="INTERPOLATION" equiv-text="{{ currentYear }}"/> - Alle Rechte vorbehalten.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/core/components/footer/footer.component.html</context>
+          <context context-type="linenumber">28,29</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="coreAbout" datatype="html">
+        <source>Über mich</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/core/components/header/header.component.html</context>
+          <context context-type="linenumber">23,24</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="coreExperience" datatype="html">
+        <source>Erfahrung</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/core/components/header/header.component.html</context>
+          <context context-type="linenumber">29,31</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="contactNamePlaceholder" datatype="html">
+        <source>Name</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/home/components/contact/contact.component.html</context>
+          <context context-type="linenumber">10</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="contactMailPlaceholder" datatype="html">
+        <source>Email</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/home/components/contact/contact.component.html</context>
           <context context-type="linenumber">17</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="7365125715629516713" datatype="html">
-        <source> Kontakt </source>
+      <trans-unit id="contactTextareaPlaceholder" datatype="html">
+        <source>Nachricht</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/header/header/header.component.html</context>
-          <context context-type="linenumber">20</context>
+          <context context-type="sourcefile">src/app/features/home/components/contact/contact.component.html</context>
+          <context context-type="linenumber">24,25</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="contactSubmit" datatype="html">
+        <source> Senden </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/home/components/contact/contact.component.html</context>
+          <context context-type="linenumber">32,35</context>
         </context-group>
       </trans-unit>
     </body>

@@ -13,43 +13,32 @@
       <a href="/" class="icon-medium my-clickable logo h-12 w-12">
         <span class="hidden">Nicolas Fritz Portfolio</span>
       </a>
-      <a class="text-xl avatar pl-2 pr-4 test-logo" href="/">
-        <span class="hidden">Cytooxien.de</span>
-      </a>
     </div>
     <div *ngIf="headerConfig.showMenu" class="navbar-center flex-col relative" #navbarCenter>
       <div class="flex">
         <a href="#"
-           i18n
+           i18n="@@coreAbout"
            class="btn btn-ghost custom-link transition-all"
            [ngClass]="{'font-size': this.screenTop < 20}"
-           #customLink>
-          Über mich
-        </a>
+           #customLink>Über mich</a>
         <a href="#"
-           i18n
+           i18n="@@coreExperience"
            [ngClass]="{'font-size': this.screenTop < 20}"
            class="btn btn-ghost
            custom-link"
-           #customLink>
-          Erfahrung
-        </a>
+           #customLink>Erfahrung</a>
         <a href="#"
-           i18n
+           i18n="@@coreProjects"
            [ngClass]="{'font-size': this.screenTop < 20}"
            class="btn btn-ghost
            custom-link"
-           #customLink>
-          Projekte
-        </a>
+           #customLink>Projekte</a>
         <a href="#"
-           i18n
+           i18n="@@coreContact"
            [ngClass]="{'font-size': this.screenTop < 20}"
            class="btn btn-ghost
            custom-link"
-           #customLink>
-          Kontakt
-        </a>
+           #customLink>Kontakt</a>
       </div>
       <div class="underline" #underline></div>
     </div>
