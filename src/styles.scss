@@ -43,8 +43,8 @@ h2 {
 }
 
 .text-glow {
-  -webkit-filter: drop-shadow(0 0 0.5rem oklch(var(--nc)));
-  filter: drop-shadow(0 0 0.5rem oklch(var(--nc)));
+  -webkit-filter: drop-shadow(0 0 0.5rem oklch(var(--bc)));
+  filter: drop-shadow(0 0 0.5rem oklch(var(--bc)));
 }
 
 .jetbrains-mono {
@@ -79,6 +79,32 @@ body {
 
   .gradient {
     @apply gradient-light dark:gradient-dark;
+  }
+
+  .card-overlay-light {
+
+    opacity: 0.2;
+    background: linear-gradient(to top, oklch(var(--b2)) 10%, rgba(1,1,1,0) 100%);
+    transition: all 0.5s ease-in-out;
+    mix-blend-mode: soft-light;
+
+    &.active {
+      opacity: 0.9;
+      background: linear-gradient(to top, oklch(var(--b2)) 60%, rgba(1,1,1,0) 100%);
+    }
+  }
+
+  .card-overlay-dark {
+    background: linear-gradient(to top, oklch(var(--b2)) 10%, rgba(0,0,0,0) 100%);
+    mix-blend-mode: darken;
+
+    &.active {
+      background: linear-gradient(to top, oklch(var(--b2)) 60%, rgba(0,0,0,0) 100%);
+    }
+  }
+
+  .card-overlay {
+    @apply card-overlay-light dark:card-overlay-dark;
   }
 }
 

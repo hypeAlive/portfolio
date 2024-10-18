@@ -12,6 +12,10 @@ import {NgClass, NgForOf, NgIf, NgOptimizedImage} from "@angular/common";
 import {MouseLightEffectDirective} from "../../../../shared/directives/mouse-light-effect.directive";
 import {NGXLogger} from "ngx-logger";
 import {Router} from "@angular/router";
+import {
+  PointColorGradient,
+  PointGradientComponent
+} from "../../../../shared/components/point-gradient/point-gradient.component";
 
 export type ProjectCard = {
   id: number;
@@ -30,7 +34,8 @@ export type ProjectCard = {
     NgClass,
     MouseLightEffectDirective,
     NgOptimizedImage,
-    NgIf
+    NgIf,
+    PointGradientComponent
   ],
   templateUrl: './card.component.html',
   styleUrl: './card.component.scss',
@@ -86,4 +91,5 @@ export class CardComponent implements OnInit{
   }
 
 
+  protected readonly PointColorGradient = PointColorGradient;
 }

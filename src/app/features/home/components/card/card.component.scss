@@ -13,7 +13,7 @@ figure:before {
   left: 0;
   width: 100%;
   height: 100%;
-  background: #dc2828;
+  background: url("../../../../../assets/bgs/lines.png") no-repeat;
   clip-path: circle(150px at 80% 5%);
   transition: 0.5s ease-in-out;
 }
@@ -101,8 +101,8 @@ figure.active:before {
   top: 30%;
   rotate: -35deg;
   filter: blur(5px);
-  opacity: 0.5;
-  mix-blend-mode: overlay;
+  opacity: 0.125;
+  mix-blend-mode: color-burn;
 }
 
 .card-body {
