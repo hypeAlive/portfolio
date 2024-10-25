@@ -141,3 +141,10 @@ body {
     @apply opacity-100 transform translate-y-0;
   }
 }
+
+.test svg g path {
+  stroke: var(--ms);
+  -webkit-filter:
+      drop-shadow(3px 3px 2px rgba(0, 0, 0, 0.7)) drop-shadow(0 0 3px oklch(var(--a)));
+  filter: drop-shadow(3px 3px 2px rgba(0, 0, 0, 0.7)) drop-shadow(0 0 3px oklch(var(--a)));
+}

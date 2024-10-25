@@ -41,3 +41,83 @@
 .contact-bg {
   background: transparent;
 }
+
+@keyframes gradient {
+  0% {
+    background-position: -200%;
+  }
+  100% {
+    background-position: 200%;
+  }
+}
+
+.animate-gradient {
+  background-size: 200%;
+  animation: gradient 5s infinite;
+}
+
+@keyframes boxShadowAnimation {
+  0% {
+    box-shadow:
+      0 0 10px 3px var(--ms),
+      0 0 10px 3px var(--ma),
+      oklch(var(--s)) -2px -2px 0 2px,
+      oklch(var(--a)) 0 0 0 4px,
+      rgba(0,0,0,0.5) 0 0 2px 7px;
+  }
+  100% {
+    box-shadow:
+      0 0 10px 3px var(--ma),
+      0 0 10px 3px var(--ms),
+      oklch(var(--a)) -2px -2px 0 2px,
+      oklch(var(--s)) 0 0 0 4px,
+      rgba(0,0,0,0.5) 0 0 2px 7px;
+  }
+}
+
+@keyframes iconIdle {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(10px);
+  }
+}
+
+.anim-icon {
+  animation: iconIdle 10s ease-in-out infinite;
+}
+
+.btn-gradient {
+  @apply rounded-2xl;
+  position: relative;
+  box-shadow:
+    0 0 10px 3px oklch(var(--s)),
+    0 0 10px 3px oklch(var(--a)),
+    oklch(var(--s)) -2px -2px 0 2px,
+    oklch(var(--a)) 0 0 0 4px,
+    rgba(0,0,0,0.5) 0 0 2px 7px;
+}
+
+.btn-gradient::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  box-shadow:
+    0 0 10px 3px oklch(var(--a)),
+    0 0 10px 3px oklch(var(--s)),
+    oklch(var(--a)) -2px -2px 0 2px,
+    oklch(var(--s)) 0 0 0 4px,
+    rgba(0,0,0,0.5) 0 0 2px 7px;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+  @apply rounded-2xl;
+}
+
+.btn-gradient:hover::after {
+  opacity: 1;
+}
+

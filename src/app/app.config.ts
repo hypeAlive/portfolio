@@ -21,19 +21,19 @@ function localeFactory(): string {
 export const appConfig: ApplicationConfig = {
   providers: [
     provideRouter(routes),
+    provideLottieOptions({
+      player: () => import('lottie-web')
+    }),
     provideHttpClient(withInterceptorsFromDi()),
     importProvidersFrom(
       BrowserModule,
       LoggerModule.forRoot({
         level: environment.logLevel
       }),
-      BrowserAnimationsModule
+      BrowserAnimationsModule,
     ),
     provideCoreServices(),
     provideAnimationsAsync(),
-    provideLottieOptions({
-      player: () => import('lottie-web'),
-    }),
     { provide: LOCALE_ID, useValue: localeFactory() },
   ]
 };

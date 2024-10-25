@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {AfterViewInit, Component, NgZone, OnInit, ViewChild} from '@angular/core';
 import {CardComponent, ProjectCard} from "../../components/card/card.component";
 import {CardCarouselComponent} from "../../components/card-carousel/card-carousel.component";
 import {ProjectService} from "../../../project/services/project.service";
@@ -7,7 +7,6 @@ import {readItem, readItems} from "@directus/sdk";
 import {NgForOf, NgIf, NgOptimizedImage, NgStyle} from "@angular/common";
 import {DirectusService} from '../../../../core/services/directus.service';
 import {KeyboardComponent} from "../../components/keyboard/keyboard.component";
-import {Key, KeyEvent} from "../../models/keyboard-keys";
 import {DirectusFile, DirectusTranslation, getDirectusFileUrl} from "../../../../shared/models/directus.interface";
 import {SectionComponent, SectionWave} from "../../../../shared/components/section/section.component";
 import {WaveHandComponent} from "../../components/wave-hand/wave-hand.component";
@@ -15,8 +14,11 @@ import {FadeInDirective} from "../../../../shared/directives/fade-in.directive";
 import {
   PointGradientComponent, PointImageGradient
 } from "../../../../shared/components/point-gradient/point-gradient.component";
-import {EmojiBlobComponent} from "../../../../shared/components/emoji-blob/emoji-blob.component";
-import {EffectColor} from "../../../../shared/models/effects.interface";
+import {EmojiBackgroundType, EmojiBlobComponent} from "../../../../shared/components/emoji-blob/emoji-blob.component";
+import {EffectColor, getVarFromEffectColor} from "../../../../shared/models/effects.interface";
+import {DotLottie} from "@lottiefiles/dotlottie-web";
+import {AnimationOptions, LottieComponent} from "ngx-lottie";
+import {AnimationItem} from "lottie-web";
 
 interface AboutCmsResponse {
   worked_at_pictures: DirectusFile[];
@@ -59,19 +61,27 @@ interface AboutTranslations extends DirectusTranslation {
     NgStyle,
     PointGradientComponent,
     NgIf,
-    EmojiBlobComponent
+    EmojiBlobComponent,
+    LottieComponent
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
-export default class HomeComponent implements OnInit {
+export default class HomeComponent implements OnInit, AfterViewInit {
 
   protected projectCards: ProjectCard[] | undefined = undefined;
 
   private aboutCms: AboutCmsResponse | undefined = undefined;
 
-  constructor(private directus: DirectusService) {
+  @ViewChild('arrow') arrow!: HTMLCanvasElement;
+  private animationItem!: AnimationItem;
 
+  constructor(private directus: DirectusService, private ngZone: NgZone) {
+
+  }
+
+  protected animationCreated(animationItem: AnimationItem): void {
+    this.animationItem = animationItem;
   }
 
   ngOnInit(): void {
@@ -115,10 +125,6 @@ export default class HomeComponent implements OnInit {
       });
   }
 
-  protected keyboardEvent(event: KeyEvent): void {
-    console.log(event);
-  }
-
   protected get isAboutLoaded(): boolean {
     return !!this.aboutCms;
   }
@@ -147,4 +153,31 @@ export default class HomeComponent implements OnInit {
   protected readonly SectionWave = SectionWave;
   protected readonly PointColorGradient = EffectColor;
   protected readonly PointImageGradient = PointImageGradient;
+  protected readonly EmojiBackgroundType = EmojiBackgroundType;
+  protected readonly EffectColor = EffectColor;
+  protected readonly getVarFromEffectColor = getVarFromEffectColor;
+
+  options: AnimationOptions = {
+    path: '/assets/arrow5.json',
+    autoplay: true,
+    loop: true,
+  };
+
+  private enter: boolean = false;
+  private leave: boolean = false;
+
+  private listener: (() => void) | undefined;
+
+  playEnter(): void {
+    this.animationItem.setSpeed(2);
+  }
+
+  playLeave(): void {
+    this.animationItem.setSpeed(1);
+
+  }
+
+  ngAfterViewInit(): void {
+
+  }
 }
