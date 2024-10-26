@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, NgZone, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, ChangeDetectorRef, Component, ElementRef, NgZone, OnInit, ViewChild} from '@angular/core';
 import {CardComponent, ProjectCard} from "../../components/card/card.component";
 import {CardCarouselComponent} from "../../components/card-carousel/card-carousel.component";
 import {ProjectService} from "../../../project/services/project.service";
@@ -19,6 +19,8 @@ import {EffectColor, getVarFromEffectColor} from "../../../../shared/models/effe
 import {DotLottie} from "@lottiefiles/dotlottie-web";
 import {AnimationOptions, LottieComponent} from "ngx-lottie";
 import {AnimationItem} from "lottie-web";
+import hljs from 'highlight.js';
+import javascript from 'highlight.js/lib/languages/javascript';
 
 interface AboutCmsResponse {
   worked_at_pictures: DirectusFile[];
@@ -71,17 +73,21 @@ export default class HomeComponent implements OnInit, AfterViewInit {
 
   protected projectCards: ProjectCard[] | undefined = undefined;
 
+  @ViewChild('hi') hi!: ElementRef;
+
   private aboutCms: AboutCmsResponse | undefined = undefined;
 
   @ViewChild('arrow') arrow!: HTMLCanvasElement;
   private animationItem!: AnimationItem;
 
-  constructor(private directus: DirectusService, private ngZone: NgZone) {
+  constructor(private directus: DirectusService, private ngZone: NgZone, private cdr: ChangeDetectorRef) {
 
   }
 
   protected animationCreated(animationItem: AnimationItem): void {
     this.animationItem = animationItem;
+    this.animationItem.setSpeed(0.5);
+    this.animationItem.play();
   }
 
   ngOnInit(): void {
@@ -159,7 +165,6 @@ export default class HomeComponent implements OnInit, AfterViewInit {
 
   options: AnimationOptions = {
     path: '/assets/arrow5.json',
-    autoplay: true,
     loop: true,
   };
 
@@ -169,15 +174,74 @@ export default class HomeComponent implements OnInit, AfterViewInit {
   private listener: (() => void) | undefined;
 
   playEnter(): void {
-    this.animationItem.setSpeed(2);
+    this.animationItem.setSpeed(1);
   }
 
   playLeave(): void {
-    this.animationItem.setSpeed(1);
-
+    this.animationItem.setSpeed(0.5);
   }
 
   ngAfterViewInit(): void {
+    hljs.registerLanguage('javascript', javascript);
+    this.copyCode();
+  }
 
+  private currentCode: string = '';
+
+  private copyCode(): void {
+    const generatedCode = `function build(l = 1) {
+    return \`line\${l > 0
+      ? ' by ' + build(--l)
+      : '.'}\`;
+}
+
+console.log(\`... \${build()}\`);`;
+
+    const highlightedCode = generatedCode;
+    let currentChar = 0;
+
+    const interval = setInterval(() => {
+      if (currentChar < highlightedCode.length) {
+        this.currentCode += highlightedCode[currentChar];
+        this.hightlightedCode = hljs.highlight(this.currentCode, { language: 'javascript' }).value;
+        currentChar++;
+      } else {
+        clearInterval(interval);
+
+        setTimeout(() => {
+          this.hightlightedCode = '';
+          this.currentCode = '';
+          this.copyCode();
+        }, 10000);
+      }
+    }, 100);
+  }
+
+protected hightlightedCode: string = '';
+
+protected code: string[] = [];
+
+protected gencode(): string[] {
+  return [
+    `function build(l = 1) {`,
+    `return \`line\${l > 0`,
+    `? ' by ' + build(--l)`,
+    `: '.'}\`;`,
+    `}`,
+    ` `,
+    `console.log(\`... \${build()}\`);`]
+}
+  protected scrollToHi() {
+    this.hi.nativeElement.scrollIntoView({ behavior: 'smooth' });
   }
 }
+
+
+// @ts-ignore
+function build(l = 1) {
+  return `line${l > 0
+    ? ' by ' + build(--l)
+    : '.'}`;
+}
+
+build();

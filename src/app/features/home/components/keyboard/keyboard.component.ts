@@ -27,6 +27,8 @@ export class KeyboardComponent implements OnDestroy, OnChanges {
 
   options: AnimationOptions = {
     path: '/assets/test-keyboard/data.json',
+    autoplay: false,
+    loop: false
   };
 
   constructor(private logger: NGXLogger) {

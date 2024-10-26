@@ -49,7 +49,10 @@
     <span>...</span>
   </h1>
   <img class="test-img drop-shadow-lg" ngSrc="assets/render.png" height="1080" width="1920"/>
-  <app-keyboard class="absolute left-1/2 -translate-x-1/2 -bottom-8" (mouseenter)="playEnter()" (mouseleave)="playLeave()"/>
+  <app-keyboard class="absolute left-1/2 -translate-x-1/2 -bottom-3"
+                (mouseenter)="playEnter()" (mouseleave)="playLeave()"
+                (click)="this.scrollToHi()"
+  />
 
   <div class="absolute h-auto pointer-events-none" style="width: 80rem; height: 80rem; left: -35rem; top: -50rem">
     <bg-point-gradient [type]="PointImageGradient.POLYGON" class=""/>
@@ -59,20 +62,29 @@
     <bg-point-gradient [type]="EffectColor.SECONDARY" class=""/>
   </div>
 
-  <ng-lottie containerClass="test" class="absolute left-1/2 -translate-x-1/2 z-0 w-28 pointer-events-none" [options]="options" style="top: 37.5rem"
+  <ng-lottie containerClass="test" class="absolute left-1/2 -translate-x-1/2 z-0 w-28 pointer-events-none" [options]="options" style="top: 35.5rem"
           (animationCreated)="animationCreated($event)">
-
   </ng-lottie>
+
+  <div class="absolute jetbrains-mono top-64 left-1/2 -translate-x-1/2 text-base w-96 pointer-events-none select-none">
+    <pre><code [innerHTML]="hightlightedCode">
+    </code></pre>
+  </div>
 
   <div class="absolute left-1/2 -translate-y-1/2 -translate-x-1/2 -z-20 opacity-15 pointer-events-none" style="width: 70rem; height: 70rem; top: 25rem">
     <bg-point-gradient [type]="EffectColor.SECONDARY" class=""/>
   </div>
 
+  <h4 class="absolute left-1/2 -translate-x-1/2 z-10 jetbrains-mono" style="top: 35.5rem">
+    <span>press me</span>
+  </h4>
+  <!--
   <div class="absolute left-1/2 -translate-x-1/2 z-10" (mouseenter)="playEnter()" (mouseleave)="playLeave()" style="top: 36rem">
     <button class="btn btn-gradient !text-2xl">
       Press me
     </button>
   </div>
+  -->
 
   <div class="absolute h-auto opacity-5 pointer-events-none" style="width: 80rem; right: -35rem; top: -50rem">
     <svg viewBox="150 0 600 600" xmlns="http://www.w3.org/2000/svg">
@@ -110,7 +122,7 @@
 
 </div>
 
-<main>
+<main #hi>
   <app-section
     [withGradient]="true"
     [withWave]="SectionWave.BOTH"
@@ -118,7 +130,7 @@
   >
     <div class="container m-auto mb-24">
       <div class="flex w-full flex-col items-center">
-        <h1 appFadeIn class="drop-shadow-lg">
+        <h1 appFadeIn class="drop-shadow-lg" >
           <home-wave-hand class="text-7xl"/>
           {{ helloTitle }}
         </h1>

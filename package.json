@@ -36,6 +36,7 @@
     "@ng-icons/huge-icons": "^29.2.2",
     "@tailwindcss/typography": "^0.5.14",
     "@types/lodash": "^4.17.9",
+    "highlight.js": "^11.10.0",
     "lodash": "^4.17.21",
     "lottie-web": "^5.12.2",
     "ngx-device-detector": "^8.0.0",
