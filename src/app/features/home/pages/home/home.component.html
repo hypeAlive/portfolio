@@ -1,4 +1,6 @@
 <div class="relative h-lvh">
+  <!-- icons -->
+  <!--
   <app-emoji-blob
     class="absolute right-28 top-96 text-7xl z-20 anim-icon"
     [background]="{
@@ -34,22 +36,30 @@
     bgSize="2.5"
     name="diTypescriptOriginal"
   />
+
+-->
   <bg-point-gradient [type]="PointImageGradient.LINES" class="opacity-30"/>
-  <h1 class="absolute left-1/2 -translate-x-1/2 top-32">
+  <!-- heading -->
+  <h1 class="absolute left-1/2 -translate-x-1/2 top-32 text-center w-[80%]">
     <span>Building</span>
     <span class="inline-grid">
     <span
       class="pointer-events-none col-start-1 row-start-1 bg-[linear-gradient(135deg,oklch(var(--s))_0%,oklch(var(--a))_50%,oklch(var(--s))_100%)] bg-clip-text blur-xl [-webkit-text-fill-color:transparent] [transform:translate3d(0,0,0)] before:content-[attr(data-text)] animate-gradient"
       aria-hidden="true" data-text="&nbsp;Future&nbsp;"></span>
-    <span
-      class="[&amp;::selection]:text-base-content relative col-start-1 row-start-1 bg-[linear-gradient(135deg,oklch(var(--s))_0%,oklch(var(--a))_50%,oklch(var(--s))_100%)] bg-clip-text [-webkit-text-fill-color:transparent] [&amp;::selection]:bg-blue-700/20 animate-gradient">
+      <span
+        class="[&amp;::selection]:text-base-content relative col-start-1 row-start-1 bg-[linear-gradient(135deg,oklch(var(--s))_0%,oklch(var(--a))_50%,oklch(var(--s))_100%)] bg-clip-text [-webkit-text-fill-color:transparent] [&amp;::selection]:bg-blue-700/20 animate-gradient">
       &nbsp;Future&nbsp;
+      </span>
     </span>
-  </span>
     <span>...</span>
   </h1>
-  <img class="test-img drop-shadow-lg" ngSrc="assets/render.png" height="1080" width="1920"/>
-  <app-keyboard class="absolute left-1/2 -translate-x-1/2 -bottom-3"
+
+
+  <!-- monitor -->
+  <div class="test-img-container">
+    <img class="test-img drop-shadow-lg" src="assets/render.png"/>
+  </div>
+  <app-keyboard class="absolute left-1/2 -translate-x-1/2 -bottom-3 hidden md:block"
                 (mouseenter)="playEnter()" (mouseleave)="playLeave()"
                 (click)="this.scrollToHi()"
   />
@@ -58,12 +68,15 @@
     <bg-point-gradient [type]="PointImageGradient.POLYGON" class=""/>
   </div>
 
-  <div class="absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 mix-blend-overlay pointer-events-none opacity-80" style="width: 80rem; height: 80rem">
+  <div
+    class="absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 mix-blend-overlay pointer-events-none opacity-80"
+    style="width: 80rem; height: 80rem">
     <bg-point-gradient [type]="EffectColor.SECONDARY" class=""/>
   </div>
 
-  <ng-lottie containerClass="test" class="absolute left-1/2 -translate-x-1/2 z-0 w-28 pointer-events-none" [options]="options" style="top: 35.5rem"
-          (animationCreated)="animationCreated($event)">
+  <ng-lottie containerClass="test" class="absolute left-1/2 -translate-x-1/2 z-0 w-28 pointer-events-none"
+             [options]="options" style="top: 35.5rem"
+             (animationCreated)="animationCreated($event)">
   </ng-lottie>
 
   <div class="absolute jetbrains-mono top-64 left-1/2 -translate-x-1/2 text-base w-96 pointer-events-none select-none">
@@ -71,20 +84,20 @@
     </code></pre>
   </div>
 
-  <div class="absolute left-1/2 -translate-y-1/2 -translate-x-1/2 -z-20 opacity-15 pointer-events-none" style="width: 70rem; height: 70rem; top: 25rem">
+  <div class="absolute left-1/2 -translate-y-1/2 -translate-x-1/2 -z-20 opacity-15 pointer-events-none"
+       style="width: 70rem; height: 70rem; top: 25rem">
     <bg-point-gradient [type]="EffectColor.SECONDARY" class=""/>
   </div>
 
-  <h4 class="absolute left-1/2 -translate-x-1/2 z-10 jetbrains-mono" style="top: 35.5rem">
+  <h4 class="absolute left-1/2 -translate-x-1/2 z-10 jetbrains-mono hidden md:block"
+      style="top: 35.5rem">
     <span>press me</span>
   </h4>
-  <!--
-  <div class="absolute left-1/2 -translate-x-1/2 z-10" (mouseenter)="playEnter()" (mouseleave)="playLeave()" style="top: 36rem">
+  <div class="absolute left-1/2 -translate-x-1/2 z-10 block md:hidden" (mouseenter)="playEnter()" (mouseleave)="playLeave()" style="top: 36rem">
     <button class="btn btn-gradient !text-2xl">
       Press me
     </button>
   </div>
-  -->
 
   <div class="absolute h-auto opacity-5 pointer-events-none" style="width: 80rem; right: -35rem; top: -50rem">
     <svg viewBox="150 0 600 600" xmlns="http://www.w3.org/2000/svg">
@@ -130,7 +143,7 @@
   >
     <div class="container m-auto mb-24">
       <div class="flex w-full flex-col items-center">
-        <h1 appFadeIn class="drop-shadow-lg" >
+        <h1 appFadeIn class="drop-shadow-lg">
           <home-wave-hand class="text-7xl"/>
           {{ helloTitle }}
         </h1>
