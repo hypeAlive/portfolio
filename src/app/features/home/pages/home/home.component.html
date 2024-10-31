@@ -1,6 +1,5 @@
 <div class="relative h-lvh" id="home" #menuSection>
   <!-- icons -->
-  <!--
   <app-emoji-blob
     class="absolute right-28 top-96 text-7xl z-20 anim-icon"
     [background]="{
@@ -37,7 +36,6 @@
     name="diTypescriptOriginal"
   />
 
--->
   <bg-point-gradient [type]="PointImageGradient.LINES" class="opacity-30"/>
   <!-- heading -->
   <h1 class="absolute left-1/2 -translate-x-1/2 top-32 text-center w-[80%]">
@@ -57,7 +55,7 @@
 
   <!-- monitor -->
   <div class="test-img-container">
-    <img class="test-img drop-shadow-lg" src="assets/render.png"/>
+    <img class="test-img drop-shadow-lg" src="assets/render.png" alt=""/>
   </div>
   <app-keyboard class="absolute left-1/2 -translate-x-1/2 -bottom-3 hidden md:block"
                 (mouseenter)="playEnter()" (mouseleave)="playLeave()"

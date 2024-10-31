@@ -1,11 +1,8 @@
-import {Injectable, OnDestroy} from '@angular/core';
-import {ActivatedRoute, NavigationEnd, Router} from "@angular/router";
-import {BehaviorSubject, filter, Observable, Subject, Subscription} from "rxjs";
-import {isEqual} from "lodash";
+import {Injectable} from '@angular/core';
+import {Subject} from "rxjs";
 import {CoreModule} from "../core.module";
 import {RouteConfig} from "../models/RouteConfig";
 import {InternalHeaderMenu} from '../components/header/header.component';
-import {NGXLogger} from "ngx-logger";
 
 export type HeaderConfig = {
   showMenu: boolean,

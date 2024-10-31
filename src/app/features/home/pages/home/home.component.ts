@@ -4,15 +4,14 @@ import {
   Component,
   ElementRef,
   NgZone,
-  OnInit, QueryList,
+  OnInit,
+  QueryList,
   ViewChild,
   ViewChildren
 } from '@angular/core';
 import {CardComponent, ProjectCard} from "../../components/card/card.component";
 import {CardCarouselComponent} from "../../components/card-carousel/card-carousel.component";
-import {ProjectService} from "../../../project/services/project.service";
 import {ContactComponent} from "../../components/contact/contact.component";
-import {readItem, readItems} from "@directus/sdk";
 import {NgForOf, NgIf, NgOptimizedImage, NgStyle} from "@angular/common";
 import {DirectusService} from '../../../../core/services/directus.service';
 import {KeyboardComponent} from "../../components/keyboard/keyboard.component";
@@ -21,11 +20,11 @@ import {SectionComponent, SectionWave} from "../../../../shared/components/secti
 import {WaveHandComponent} from "../../components/wave-hand/wave-hand.component";
 import {FadeInDirective} from "../../../../shared/directives/fade-in.directive";
 import {
-  PointGradientComponent, PointImageGradient
+  PointGradientComponent,
+  PointImageGradient
 } from "../../../../shared/components/point-gradient/point-gradient.component";
 import {EmojiBackgroundType, EmojiBlobComponent} from "../../../../shared/components/emoji-blob/emoji-blob.component";
 import {EffectColor, getVarFromEffectColor} from "../../../../shared/models/effects.interface";
-import {DotLottie} from "@lottiefiles/dotlottie-web";
 import {AnimationOptions, LottieComponent} from "ngx-lottie";
 import {AnimationItem} from "lottie-web";
 import hljs from 'highlight.js';
@@ -108,10 +107,8 @@ export default class HomeComponent implements OnInit, AfterViewInit {
     })
       .then((response) => {
         this.aboutCms = response;
-        console.log(response);
       })
-      .catch((error) => {
-        console.error(error);
+      .catch((_) => {
       });
 
     // get project cards from cms
@@ -137,8 +134,7 @@ export default class HomeComponent implements OnInit, AfterViewInit {
 
         this.projectCards = sortedCards;
       })
-      .catch((error) => {
-
+      .catch((_) => {
       });
   }
 
@@ -170,7 +166,6 @@ export default class HomeComponent implements OnInit, AfterViewInit {
   protected readonly SectionWave = SectionWave;
   protected readonly PointColorGradient = EffectColor;
   protected readonly PointImageGradient = PointImageGradient;
-  protected readonly EmojiBackgroundType = EmojiBackgroundType;
   protected readonly EffectColor = EffectColor;
   protected readonly getVarFromEffectColor = getVarFromEffectColor;
 
@@ -178,11 +173,6 @@ export default class HomeComponent implements OnInit, AfterViewInit {
     path: '/assets/arrow5.json',
     loop: true,
   };
-
-  private enter: boolean = false;
-  private leave: boolean = false;
-
-  private listener: (() => void) | undefined;
 
   playEnter(): void {
     this.animationItem.setSpeed(1);
@@ -208,15 +198,13 @@ export default class HomeComponent implements OnInit, AfterViewInit {
   private currentCode: string = '';
 
   private copyCode(): void {
-    const generatedCode = `function build(l = 1) {
+    const highlightedCode = `function build(l = 1) {
     return \`line\${l > 0
       ? ' by ' + build(--l)
       : '.'}\`;
 }
 
 console.log(\`... \${build()}\`);`;
-
-    const highlightedCode = generatedCode;
     let currentChar = 0;
 
     const interval = setInterval(() => {
@@ -240,27 +228,9 @@ protected hightlightedCode: string = '';
 
 protected code: string[] = [];
 
-protected gencode(): string[] {
-  return [
-    `function build(l = 1) {`,
-    `return \`line\${l > 0`,
-    `? ' by ' + build(--l)`,
-    `: '.'}\`;`,
-    `}`,
-    ` `,
-    `console.log(\`... \${build()}\`);`]
-}
   protected scrollToHi() {
     this.hi.nativeElement.scrollIntoView({ behavior: 'smooth' });
   }
+
+  protected readonly EmojiBackgroundType = EmojiBackgroundType;
 }
-
-
-// @ts-ignore
-function build(l = 1) {
-  return `line${l > 0
-    ? ' by ' + build(--l)
-    : '.'}`;
-}
-
-build();

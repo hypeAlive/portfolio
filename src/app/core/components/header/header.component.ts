@@ -1,5 +1,4 @@
 import {
-  AfterViewChecked,
   AfterViewInit,
   Component,
   ElementRef,
@@ -217,8 +216,3 @@ export class HeaderComponent implements AfterViewInit, OnDestroy, OnInit {
 
   protected readonly HeaderBackground = HeaderBackground;
 }
-
-/**
- * Building Future,
- * Line by Line
- */
