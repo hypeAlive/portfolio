@@ -27,6 +27,7 @@ export type ParallaxConfig = {
   position?: 'absolute' | 'relative',
   maxValue?: number,
   minValue?: number,
+  default?: number,
   unit: string,
   direction: Direction,
   strength: number,
@@ -48,6 +49,7 @@ export class ParallaxBuilder {
 
     if (config.maxValue !== undefined) builder.setMaxValue(config.maxValue)
     if (config.minValue !== undefined) builder.setMinValue(config.minValue)
+    if (config.default !== undefined) builder.setDefaultValue(config.default);
     if (config.unit !== undefined) builder.setUnit(config.unit);
     if (config.position !== undefined) builder.setPosition(config.position)
 
@@ -84,6 +86,11 @@ export class ParallaxBuilder {
 
   public setMaxValue(value: number): ParallaxBuilder {
     this.config.maxValue = value;
+    return this;
+  }
+
+  public setDefaultValue(value: number): ParallaxBuilder {
+    this.config.default = value;
     return this;
   }
 
@@ -143,12 +150,24 @@ export class ParallaxDirective implements OnInit, OnDestroy {
 
   private config: ParallaxConfig | undefined;
 
+  private get style() {
+    return (window.getComputedStyle(this.ele.nativeElement) as any);
+  }
+
   /**
    * Event-Listener für das Scroll-Ereignis.
-   * @param {Event} event - Das Scroll-Ereignis.
+   * @param {Event} event
    */
   @HostListener("window:scroll", ["$event"]) onWindowScroll(event: Event | null) {
-    if (this.device.isMobile() || this.device.isTablet()) return;
+    this.logger.debug(this.device.isMobile())
+    if (this.device.isMobile() || this.device.isTablet()) {
+      if (!this.config || !this.config.default) return;
+
+      let style = this.style;
+      if (style.getPropertyValue(this.config.valueName) === this.config.default + this.config.unit) return;
+
+      this.renderer.setStyle(this.ele.nativeElement, this.config.valueName, this.config.default + this.config.unit);
+    }
 
     if (!this.active || this.config === undefined) {
       return;
@@ -159,7 +178,7 @@ export class ParallaxDirective implements OnInit, OnDestroy {
 
     let valueName: string = this.config.valueName;
 
-    let style = (window.getComputedStyle(this.ele.nativeElement) as any);
+    let style = this.style;
     let value2: number = parseFloat(style.getPropertyValue(this.config.valueName).replace(this.config.unit || false, ""))
 
     let scrollY = window.scrollY - this.config.scrollStart;

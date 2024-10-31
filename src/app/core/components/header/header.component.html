@@ -14,7 +14,7 @@
         <span class="hidden">Nicolas Fritz Portfolio</span>
       </a>
     </div>
-    <div *ngIf="headerConfig.showMenu" class="navbar-center flex-col relative" #navbarCenter>
+    <div *ngIf="headerConfig.showMenu" class="navbar-center flex-col relative hidden md:block" #navbarCenter>
       <div class="flex">
         <a *ngFor="let item of menu; let i = index"
            class="btn btn-ghost custom-link transition-all"

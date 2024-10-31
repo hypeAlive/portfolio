@@ -66,6 +66,7 @@ export class HeaderComponent implements AfterViewInit, OnDestroy, OnInit {
     position: 'absolute',
     minValue: 0,
     startValue: 0,
+    default: 0.5,
     unit: '',
     strength: 0.004,
   });
