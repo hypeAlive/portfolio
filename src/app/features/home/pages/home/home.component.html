@@ -141,19 +141,19 @@
   >
     <div class="container m-auto mb-24" id="about" #menuSection>
       <div class="flex w-full flex-col items-center">
-        <h1 appFadeIn class="drop-shadow-lg">
+        <h1 appFadeIn class="drop-shadow-lg text-center">
           <home-wave-hand class="text-7xl"/>
           {{ helloTitle }}
         </h1>
-        <p *ngFor="let description of descriptions" appFadeIn class="max-w-3xl text-2xl text-center">
+        <p *ngFor="let description of descriptions" appFadeIn class="max-w-3xl text-2xl text-center pl-0.5 pr-0.5 md:p-0">
           {{ description.text }}
         </p>
       </div>
     </div>
     <div class="container m-auto">
       <div class="flex flex-col w-full gap-6 justify-center items-center">
-        <h2 appFadeIn class="drop-shadow-lg">{{ workedAtTitle }}</h2>
-        <div class="flex flex-row gap-32 h-36">
+        <h2 appFadeIn class="drop-shadow-lg text-center">{{ workedAtTitle }}</h2>
+        <div class="flex flex-row gap-6 md:gap-32 h-24 md:h-36">
           <img appFadeIn *ngFor="let picture of workedAtPictures; let i = index"
                class="h-full drop-shadow-lg"
                [delay]="(i * 0.3) + 's'"
