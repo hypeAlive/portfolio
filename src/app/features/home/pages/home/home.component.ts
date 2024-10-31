@@ -1,4 +1,13 @@
-import {AfterViewInit, ChangeDetectorRef, Component, ElementRef, NgZone, OnInit, ViewChild} from '@angular/core';
+import {
+  AfterViewInit,
+  ChangeDetectorRef,
+  Component,
+  ElementRef,
+  NgZone,
+  OnInit, QueryList,
+  ViewChild,
+  ViewChildren
+} from '@angular/core';
 import {CardComponent, ProjectCard} from "../../components/card/card.component";
 import {CardCarouselComponent} from "../../components/card-carousel/card-carousel.component";
 import {ProjectService} from "../../../project/services/project.service";
@@ -21,6 +30,7 @@ import {AnimationOptions, LottieComponent} from "ngx-lottie";
 import {AnimationItem} from "lottie-web";
 import hljs from 'highlight.js';
 import javascript from 'highlight.js/lib/languages/javascript';
+import {HeaderService} from "../../../../core/services/header.service";
 
 interface AboutCmsResponse {
   worked_at_pictures: DirectusFile[];
@@ -74,13 +84,14 @@ export default class HomeComponent implements OnInit, AfterViewInit {
   protected projectCards: ProjectCard[] | undefined = undefined;
 
   @ViewChild('hi') hi!: ElementRef;
+  @ViewChildren('menuSection') menuSections!: QueryList<ElementRef>;
 
   private aboutCms: AboutCmsResponse | undefined = undefined;
 
   @ViewChild('arrow') arrow!: HTMLCanvasElement;
   private animationItem!: AnimationItem;
 
-  constructor(private directus: DirectusService, private ngZone: NgZone, private cdr: ChangeDetectorRef) {
+  constructor(private directus: DirectusService, private ngZone: NgZone, private cdr: ChangeDetectorRef, private headerService: HeaderService) {
 
   }
 
@@ -183,7 +194,15 @@ export default class HomeComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit(): void {
     hljs.registerLanguage('javascript', javascript);
+    this.menuSections.forEach((section) => {
+      this.registerSectionToHeader(section.nativeElement);
+    });
     this.copyCode();
+  }
+
+  protected registerSectionToHeader(element: HTMLElement | null){
+    if(!element) return;
+    this.headerService.registerElement(element);
   }
 
   private currentCode: string = '';

@@ -96,6 +96,13 @@ body {
       var(--ma) 100%);
   }
 
+  .gradient-text {
+    background-image: linear-gradient(135deg, oklch(var(--a)) 0%, oklch(var(--s)) 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+  }
+
   .light-effect-light {
     border: 5px solid black;
   }

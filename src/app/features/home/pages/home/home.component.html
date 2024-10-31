@@ -1,4 +1,4 @@
-<div class="relative h-lvh">
+<div class="relative h-lvh" id="home" #menuSection>
   <!-- icons -->
   <!--
   <app-emoji-blob
@@ -141,7 +141,7 @@
     [withWave]="SectionWave.BOTH"
     [withBgImage]="PointImageGradient.POLYGON"
   >
-    <div class="container m-auto mb-24">
+    <div class="container m-auto mb-24" id="about" #menuSection>
       <div class="flex w-full flex-col items-center">
         <h1 appFadeIn class="drop-shadow-lg">
           <home-wave-hand class="text-7xl"/>
@@ -167,7 +167,7 @@
 
   <app-section class="relative"
                [withBgImage]="PointImageGradient.LINES">
-    <div class="flex w-full items-center flex-col gap-6">
+    <div class="flex w-full items-center flex-col gap-6" id="projects" #menuSection>
       <h1 appFadeIn
           class="drop-shadow-lg"
           i18n="@@projectSectionHeading">
@@ -183,7 +183,7 @@
   <app-section
     class="relative"
     [withBgImage]="PointImageGradient.POLYGON">
-    <div class="container m-auto flex items-center flex-col">
+    <div class="container m-auto flex items-center flex-col" id="contact" #menuSection>
       <h1 appFadeIn i18n="@@contactSectionHeading">Lust auf mehr?</h1>
       <p appFadeIn class="max-w-3xl text-2xl text-center" i18n="@@contactSectionDescription">
         Hab ich dein Interesse geweckt? Dann schreib mir einfach – ich freue mich, von dir zu hören!
