@@ -145,7 +145,7 @@
           <home-wave-hand class="text-7xl"/>
           {{ helloTitle }}
         </h1>
-        <p *ngFor="let description of descriptions" appFadeIn class="max-w-3xl text-2xl text-center pl-0.5 pr-0.5 md:p-0">
+        <p *ngFor="let description of descriptions" appFadeIn class="max-w-3xl text-2xl text-center pl-3 pr-3 md:p-0">
           {{ description.text }}
         </p>
       </div>
@@ -153,7 +153,7 @@
     <div class="container m-auto">
       <div class="flex flex-col w-full gap-6 justify-center items-center">
         <h2 appFadeIn class="drop-shadow-lg text-center">{{ workedAtTitle }}</h2>
-        <div class="flex flex-row gap-6 md:gap-32 h-24 md:h-36">
+        <div class="flex flex-row gap-8 md:gap-32 h-20 md:h-36">
           <img appFadeIn *ngFor="let picture of workedAtPictures; let i = index"
                class="h-full drop-shadow-lg"
                [delay]="(i * 0.3) + 's'"
