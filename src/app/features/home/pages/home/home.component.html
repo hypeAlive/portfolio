@@ -83,6 +83,7 @@
   </div>
 
   <div
+    *ngIf="!isMobile()"
     class="absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 mix-blend-overlay pointer-events-none opacity-80"
     style="width: 80rem; height: 80rem">
     <bg-point-gradient [type]="EffectColor.SECONDARY" class=""/>
@@ -109,7 +110,7 @@
     <bg-point-gradient [type]="EffectColor.SECONDARY" class=""/>
   </div>
 
-  <div class="absolute h-auto opacity-5 pointer-events-none" style="width: 80rem; right: -35rem; top: -50rem">
+  <div *ngIf="!isMobile()" class="absolute h-auto opacity-5 pointer-events-none" style="width: 80rem; right: -35rem; top: -50rem">
     <svg viewBox="150 0 600 600" xmlns="http://www.w3.org/2000/svg">
       <g transform="translate(465.7016834355472 323.0495020264449)">
         <path
@@ -120,7 +121,7 @@
     </svg>
   </div>
 
-  <div class="absolute h-auto -top-72 opacity-10 pointer-events-none" style="width: 80rem; left: -40rem">
+  <div *ngIf="!isMobile()" class="absolute h-auto -top-72 opacity-10 pointer-events-none" style="width: 80rem; left: -40rem">
     <svg viewBox="150 0 600 600" xmlns="http://www.w3.org/2000/svg">
       <g transform="translate(465.7016834355472 323.0495020264449)">
         <path
@@ -131,7 +132,7 @@
     </svg>
   </div>
 
-  <div class="absolute h-auto -top-72 opacity-5 -z-10 pointer-events-none" style="width: 80rem; left: -40rem">
+  <div *ngIf="!isMobile()" class="absolute h-auto -top-72 opacity-5 -z-10 pointer-events-none" style="width: 80rem; left: -40rem">
     <svg viewBox="150 0 600 600" xmlns="http://www.w3.org/2000/svg">
       <g transform="translate(424.80989750324267 333.1137495413227)">
         <path

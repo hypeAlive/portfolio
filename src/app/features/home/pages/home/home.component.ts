@@ -3,8 +3,10 @@ import {
   ChangeDetectorRef,
   Component,
   ElementRef,
+  Inject,
   NgZone,
   OnInit,
+  PLATFORM_ID,
   QueryList,
   ViewChild,
   ViewChildren
@@ -30,6 +32,7 @@ import {AnimationItem} from "lottie-web";
 import hljs from 'highlight.js';
 import javascript from 'highlight.js/lib/languages/javascript';
 import {HeaderService} from "../../../../core/services/header.service";
+import {DeviceDetectorService} from "ngx-device-detector";
 
 interface AboutCmsResponse {
   worked_at_pictures: DirectusFile[];
@@ -90,8 +93,17 @@ export default class HomeComponent implements OnInit, AfterViewInit {
   @ViewChild('arrow') arrow!: HTMLCanvasElement;
   private animationItem!: AnimationItem;
 
-  constructor(private directus: DirectusService, private ngZone: NgZone, private cdr: ChangeDetectorRef, private headerService: HeaderService) {
+  constructor(
+    private directus: DirectusService,
+    private ngZone: NgZone,
+    protected device: DeviceDetectorService,
+    private cdr: ChangeDetectorRef,
+    private headerService: HeaderService) {
 
+  }
+
+  isMobile(): boolean {
+    return this.device.isMobile();
   }
 
   protected animationCreated(animationItem: AnimationItem): void {
