@@ -1,32 +1,49 @@
-<form [formGroup]="contactForm" (ngSubmit)="submitForm()" class="flex flex-col gap-6 max-w-2xl relative">
+<form [formGroup]="contactForm"
+      (ngSubmit)="submitForm()"
+      class="flex flex-col gap-3 sm:gap-6 max-w-2xl relative mx-3 md:mx-auto">
   <bg-point-gradient
     [type]="PointColorGradient.SECONDARY"
     class="absolute opacity-5 -top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/4 w-full scale-x-150"/>
-  <div class="flex">
-    <input appFadeIn
-           type="text"
-           formControlName="name"
-           placeholder="Name"
-           class="input input-bordered w-full mr-3 !rounded-lg"
-           i18n-placeholder="@@contactNamePlaceholder"
-    />
-    <input appFadeIn
-           type="text"
-           formControlName="mail"
-           placeholder="Email"
-           class="input input-bordered w-full !rounded-lg"
-           i18n-placeholder="@@contactMailPlaceholder"
-    />
+  <div class="flex gap-3 sm:flex-row flex-col items-center">
+    <label class="form-control w-full max-w-md">
+      <div class="label">
+        <span class="label-text">Name</span>
+      </div>
+      <input appFadeIn
+             type="text"
+             formControlName="name"
+             placeholder="Max Mustermann"
+             class="input input-bordered w-full !rounded-lg"
+             i18n-placeholder="@@contactNamePlaceholder"
+      />
+    </label>
+    <label class="form-control w-full max-w-md">
+      <div class="label">
+        <span class="label-text">Email</span>
+      </div>
+      <input appFadeIn
+             type="text"
+             formControlName="mail"
+             placeholder="e.g. max@mustermann.com"
+             class="input input-bordered w-full !rounded-lg"
+             i18n-placeholder="@@contactMailPlaceholder"
+      />
+    </label>
   </div>
-  <textarea appFadeIn
-            formControlName="message"
-            class="textarea textarea-lg textarea-bordered w-full resize-none h-40 !rounded-lg"
-            placeholder="Nachricht"
-            i18n-placeholder="@@contactTextareaPlaceholder">
+  <label class="form-control max-w-md sm:max-w-full w-full mx-auto">
+    <div class="label block sm:hidden">
+      <span class="label-text">Nachricht</span>
+    </div>
+    <textarea appFadeIn
+              formControlName="message"
+              class="textarea textarea-lg textarea-bordered w-full resize-none h-40 !rounded-lg"
+              placeholder="I am interested in your work..."
+              i18n-placeholder="@@contactTextareaPlaceholder">
   </textarea>
+  </label>
   <button appFadeIn
           type="submit"
-          class="btn btn-secondary btn-outline btn-wide self-center hover:!bg-my-accent hover:!text-base-content !rounded-lg"
+          class="btn btn-secondary btn-outline btn-wide self-center hover:!bg-my-accent hover:!text-base-content !rounded-lg mt-3 sm:mt-0"
           [ngClass]="{'btn-disabled': !isValid()}"
           i18n="@@contactSubmit">
     Senden

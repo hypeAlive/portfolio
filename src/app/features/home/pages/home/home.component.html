@@ -182,12 +182,12 @@
     class="relative"
     [withBgImage]="PointImageGradient.POLYGON">
     <div class="container m-auto flex items-center flex-col" id="contact" #menuSection>
-      <h1 appFadeIn i18n="@@contactSectionHeading">Lust auf mehr?</h1>
+      <h1 appFadeIn i18n="@@contactSectionHeading" class="text-center">Lust auf mehr?</h1>
       <p appFadeIn class="max-w-3xl text-2xl text-center" i18n="@@contactSectionDescription">
         Hab ich dein Interesse geweckt? Dann schreib mir einfach – ich freue mich, von dir zu hören!
       </p>
       <div class="flex items-center justify-center gap-12 w-full">
-        <app-emoji-blob appFadeIn delay="0.3s" [mirrorIcon]="true" class="text-9xl drop-shadow-2xl"/>
+        <app-emoji-blob appFadeIn delay="0.3s" [mirrorIcon]="true" class="text-9xl drop-shadow-2xl hidden lg:block"/>
         <home-contact class="pt-10 w-full max-w-3xl"/>
       </div>
 
