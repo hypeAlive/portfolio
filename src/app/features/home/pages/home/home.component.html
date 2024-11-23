@@ -1,7 +1,11 @@
 <div class="relative h-lvh" id="home" #menuSection>
   <!-- icons -->
   <app-emoji-blob
-    class="absolute right-28 top-96 text-7xl z-20 anim-icon"
+    class="absolute text-7xl z-20 anim-icon
+    right-5 bottom-24
+    md:right-12 md:top-96 md:bottom-auto
+    xl:bottom-auto xl:right-28 xl:top-96
+"
     [background]="{
       type: EmojiBackgroundType.BLOB3,
       color: EffectColor.MY_SECONDARY,
@@ -12,7 +16,11 @@
     name="diAngularOriginal"
   />
   <app-emoji-blob
-    class="absolute left-48 bottom-80 text-7xl z-20 anim-icon"
+    class="absolute text-7xl z-20 anim-icon
+    left-0 bottom-64
+    sm:left-5
+    md:left-12 md:bottom-72
+    xl:left-48 xl:bottom-80"
     style="animation-delay: -2s"
     [background]="{
       type: EmojiBackgroundType.BLOB1,
@@ -38,7 +46,7 @@
 
   <bg-point-gradient [type]="PointImageGradient.LINES" class="opacity-30"/>
   <!-- heading -->
-  <h1 class="absolute left-1/2 -translate-x-1/2 top-32 text-center w-[80%]">
+  <h1 class="absolute left-1/2 -translate-x-1/2 top-32 text-center w-[80%] z-30">
     <span>Building</span>
     <span class="inline-grid">
     <span
@@ -56,7 +64,15 @@
   <!-- monitor -->
   <div class="test-img-container">
     <img class="test-img drop-shadow-lg" src="assets/render.png" alt=""/>
+    <div class="relative jetbrains-mono pointer-events-none select-none
+    top-52 text-sm w-72
+    left-1/2 md:top-64 -translate-x-1/2 md:text-base md:w-96">
+    <pre><code [innerHTML]="hightlightedCode">
+    </code></pre>
+    </div>
   </div>
+
+
   <app-keyboard class="absolute left-1/2 -translate-x-1/2 -bottom-3 hidden md:block"
                 (mouseenter)="playEnter()" (mouseleave)="playLeave()"
                 (click)="this.scrollToHi()"
@@ -72,29 +88,25 @@
     <bg-point-gradient [type]="EffectColor.SECONDARY" class=""/>
   </div>
 
-  <ng-lottie containerClass="test" class="absolute left-1/2 -translate-x-1/2 z-0 w-28 pointer-events-none"
-             [options]="options" style="top: 35.5rem"
-             (animationCreated)="animationCreated($event)">
-  </ng-lottie>
-
-  <div class="absolute jetbrains-mono top-64 left-1/2 -translate-x-1/2 text-base w-96 pointer-events-none select-none">
-    <pre><code [innerHTML]="hightlightedCode">
-    </code></pre>
+  <!-- press me btn -->
+  <div class="absolute left-1/2 z-30 -translate-x-1/2 md:top-[35.5rem] -bottom-2 md:bottom-auto flex flex-col items-center md:gap-0 gap-24">
+    <h4 class="relative z-10 jetbrains-mono hidden md:block">
+      <span>press me</span>
+    </h4>
+    <div class="relative z-10 block md:hidden" (mouseenter)="playEnter()" (mouseleave)="playLeave()">
+      <button class="btn btn-gradient !text-2xl whitespace-nowrap">
+        press me
+      </button>
+    </div>
+    <ng-lottie containerClass="test" class="relative z-0 w-28 h-28 pointer-events-none bottom-12"
+               [options]="options"
+               (animationCreated)="animationCreated($event)">
+    </ng-lottie>
   </div>
 
   <div class="absolute left-1/2 -translate-y-1/2 -translate-x-1/2 -z-20 opacity-15 pointer-events-none"
        style="width: 70rem; height: 70rem; top: 25rem">
     <bg-point-gradient [type]="EffectColor.SECONDARY" class=""/>
-  </div>
-
-  <h4 class="absolute left-1/2 -translate-x-1/2 z-10 jetbrains-mono hidden md:block"
-      style="top: 35.5rem">
-    <span>press me</span>
-  </h4>
-  <div class="absolute left-1/2 -translate-x-1/2 z-10 block md:hidden" (mouseenter)="playEnter()" (mouseleave)="playLeave()" style="top: 36rem">
-    <button class="btn btn-gradient !text-2xl">
-      Press me
-    </button>
   </div>
 
   <div class="absolute h-auto opacity-5 pointer-events-none" style="width: 80rem; right: -35rem; top: -50rem">
