@@ -26,7 +26,7 @@ export class KeyboardComponent implements OnDestroy, OnChanges {
   @Input('listenToKeyboard') listenToKeyboard: boolean = true;
 
   options: AnimationOptions = {
-    path: '/assets/test-keyboard/data.json',
+    path: 'https://cms.nicolasfritz.dev/assets/24d8ec04-ba2b-4885-8c33-99ea9efe843c',
     autoplay: false,
     loop: false
   };

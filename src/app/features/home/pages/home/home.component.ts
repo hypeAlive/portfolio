@@ -170,7 +170,7 @@ export default class HomeComponent implements OnInit, AfterViewInit {
   protected readonly getVarFromEffectColor = getVarFromEffectColor;
 
   options: AnimationOptions = {
-    path: '/assets/arrow5.json',
+    path: 'https://cms.nicolasfritz.dev/assets/de75c1ae-f8e7-434c-87e7-4ff3904891c9',
     loop: true,
   };
 
