@@ -1,4 +1,4 @@
-<div class="carousel-container">
+<div class="carousel-container relative">
   <ng-container *ngFor="let _ of getItems(); let i = index">
     <input type="radio" name="carousel" [id]="'item-' + (i)" [checked]="isSelected(i)" (change)="onRadioChange(i)">
   </ng-container>
@@ -14,5 +14,12 @@
         />
       </label>
     </ng-container>
+  </div>
+  <div class="flex w-full justify-center gap-2 py-2 absolute bottom-0 md:hidden">
+    <a *ngFor="let item of getItems(); let i = index"
+       class="btn btn-md"
+       [ngClass]="{'btn-active': isActive(i)}"
+       (click)="activateCard(i)"
+    >{{i}}</a>
   </div>
 </div>
