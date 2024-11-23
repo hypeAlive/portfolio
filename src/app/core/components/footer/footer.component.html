@@ -11,9 +11,9 @@
   <div *ngIf="isHalfOpacity()" class="footer-bg" style="width: 100vw; height: 100%; top: 0; left: 0; z-index: -1;"></div>
   <div>
     <nav *ngIf="!isSmall()" class="grid grid-flow-col gap-4">
-      <a class="link link-hover" i18n="@@coreStartPage">Startseite</a>
+      <a class="link link-hover hidden sm:block" i18n="@@coreStartPage">Startseite</a>
       <a class="link link-hover" i18n="@@coreProjects">Projekte</a>
-      <a class="link link-hover" i18n="@@coreContact">Kontakt</a>
+      <a class="link link-hover hidden sm:block" i18n="@@coreContact">Kontakt</a>
       <a class="link link-hover" i18n="@@coreImprint">Impressum</a>
     </nav>
     <nav>
