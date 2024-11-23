@@ -5,7 +5,6 @@ import {lastValueFrom} from "rxjs";
 import {environment} from "../../../environments/environment";
 import {CoreModule} from "../core.module";
 import {MaintenanceData} from '../../shared/services/maintenance.guard';
-import {ErrorApiResponse} from "../../features/error/models/error.interface";
 import {DirectusTranslation} from "../../shared/models/directus.interface";
 
 @Injectable({
@@ -45,7 +44,7 @@ export class DirectusService {
       return Promise.reject('No items found');
     }
 
-    const itemsWithTranslations = await Promise.all(data.map(async (item) => {
+    return await Promise.all(data.map(async (item) => {
       if (!item.translations || item.translations.length === 0) {
         try {
           item = await this.readItemWithTranslation<T>(items + "/" + item.id);
@@ -55,8 +54,6 @@ export class DirectusService {
       }
       return item;
     }));
-
-    return itemsWithTranslations;
   }
 
   public async readItemWithTranslation<T extends {

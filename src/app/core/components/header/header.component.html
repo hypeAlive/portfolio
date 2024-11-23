@@ -14,31 +14,17 @@
         <span class="hidden">Nicolas Fritz Portfolio</span>
       </a>
     </div>
-    <div *ngIf="headerConfig.showMenu" class="navbar-center flex-col relative" #navbarCenter>
+    <div *ngIf="headerConfig.showMenu" class="navbar-center flex-col relative hidden md:block" #navbarCenter>
       <div class="flex">
-        <a href="#"
-           i18n="@@coreAbout"
+        <a *ngFor="let item of menu; let i = index"
            class="btn btn-ghost custom-link transition-all"
-           [ngClass]="{'font-size': this.screenTop < 20}"
-           #customLink>Über mich</a>
-        <a href="#"
-           i18n="@@coreExperience"
-           [ngClass]="{'font-size': this.screenTop < 20}"
-           class="btn btn-ghost
-           custom-link"
-           #customLink>Erfahrung</a>
-        <a href="#"
-           i18n="@@coreProjects"
-           [ngClass]="{'font-size': this.screenTop < 20}"
-           class="btn btn-ghost
-           custom-link"
-           #customLink>Projekte</a>
-        <a href="#"
-           i18n="@@coreContact"
-           [ngClass]="{'font-size': this.screenTop < 20}"
-           class="btn btn-ghost
-           custom-link"
-           #customLink>Kontakt</a>
+           [id]="i"
+           [ngClass]="{'font-size': this.screenTop < 20, '!gradient-text': isActive(i)}"
+           (mouseenter)="showUnderline($event.target, i)"
+           (mouseleave)="hideUnderline($event.target, i)"
+           (click)="scrollToElement(item, $event.target, i)"
+           #menuElement
+        >{{ item.title }}</a>
       </div>
       <div class="underline" #underline></div>
     </div>

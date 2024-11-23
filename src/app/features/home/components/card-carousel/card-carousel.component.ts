@@ -88,4 +88,12 @@ export class CardCarouselComponent {
 
     throw new Error('Invalid index');
   }
+
+  protected activateCard(index: number) {
+    try {
+      this.onRadioChange(index);
+    } catch (e) {
+      this.selectedIndex = index;
+    }
+  }
 }

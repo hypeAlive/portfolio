@@ -1,22 +1,35 @@
-import {Component, OnInit} from '@angular/core';
+import {
+  AfterViewInit,
+  ChangeDetectorRef,
+  Component,
+  ElementRef,
+  NgZone,
+  OnInit,
+  QueryList,
+  ViewChild,
+  ViewChildren
+} from '@angular/core';
 import {CardComponent, ProjectCard} from "../../components/card/card.component";
 import {CardCarouselComponent} from "../../components/card-carousel/card-carousel.component";
-import {ProjectService} from "../../../project/services/project.service";
 import {ContactComponent} from "../../components/contact/contact.component";
-import {readItem, readItems} from "@directus/sdk";
 import {NgForOf, NgIf, NgOptimizedImage, NgStyle} from "@angular/common";
 import {DirectusService} from '../../../../core/services/directus.service';
 import {KeyboardComponent} from "../../components/keyboard/keyboard.component";
-import {Key, KeyEvent} from "../../models/keyboard-keys";
 import {DirectusFile, DirectusTranslation, getDirectusFileUrl} from "../../../../shared/models/directus.interface";
 import {SectionComponent, SectionWave} from "../../../../shared/components/section/section.component";
 import {WaveHandComponent} from "../../components/wave-hand/wave-hand.component";
 import {FadeInDirective} from "../../../../shared/directives/fade-in.directive";
 import {
-  PointGradientComponent, PointImageGradient
+  PointGradientComponent,
+  PointImageGradient
 } from "../../../../shared/components/point-gradient/point-gradient.component";
-import {EmojiBlobComponent} from "../../../../shared/components/emoji-blob/emoji-blob.component";
-import {EffectColor} from "../../../../shared/models/effects.interface";
+import {EmojiBackgroundType, EmojiBlobComponent} from "../../../../shared/components/emoji-blob/emoji-blob.component";
+import {EffectColor, getVarFromEffectColor} from "../../../../shared/models/effects.interface";
+import {AnimationOptions, LottieComponent} from "ngx-lottie";
+import {AnimationItem} from "lottie-web";
+import hljs from 'highlight.js';
+import javascript from 'highlight.js/lib/languages/javascript';
+import {HeaderService} from "../../../../core/services/header.service";
 
 interface AboutCmsResponse {
   worked_at_pictures: DirectusFile[];
@@ -59,19 +72,32 @@ interface AboutTranslations extends DirectusTranslation {
     NgStyle,
     PointGradientComponent,
     NgIf,
-    EmojiBlobComponent
+    EmojiBlobComponent,
+    LottieComponent
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
-export default class HomeComponent implements OnInit {
+export default class HomeComponent implements OnInit, AfterViewInit {
 
   protected projectCards: ProjectCard[] | undefined = undefined;
 
+  @ViewChild('hi') hi!: ElementRef;
+  @ViewChildren('menuSection') menuSections!: QueryList<ElementRef>;
+
   private aboutCms: AboutCmsResponse | undefined = undefined;
 
-  constructor(private directus: DirectusService) {
+  @ViewChild('arrow') arrow!: HTMLCanvasElement;
+  private animationItem!: AnimationItem;
 
+  constructor(private directus: DirectusService, private ngZone: NgZone, private cdr: ChangeDetectorRef, private headerService: HeaderService) {
+
+  }
+
+  protected animationCreated(animationItem: AnimationItem): void {
+    this.animationItem = animationItem;
+    this.animationItem.setSpeed(0.5);
+    this.animationItem.play();
   }
 
   ngOnInit(): void {
@@ -81,10 +107,8 @@ export default class HomeComponent implements OnInit {
     })
       .then((response) => {
         this.aboutCms = response;
-        console.log(response);
       })
-      .catch((error) => {
-        console.error(error);
+      .catch((_) => {
       });
 
     // get project cards from cms
@@ -110,13 +134,8 @@ export default class HomeComponent implements OnInit {
 
         this.projectCards = sortedCards;
       })
-      .catch((error) => {
-
+      .catch((_) => {
       });
-  }
-
-  protected keyboardEvent(event: KeyEvent): void {
-    console.log(event);
   }
 
   protected get isAboutLoaded(): boolean {
@@ -147,4 +166,71 @@ export default class HomeComponent implements OnInit {
   protected readonly SectionWave = SectionWave;
   protected readonly PointColorGradient = EffectColor;
   protected readonly PointImageGradient = PointImageGradient;
+  protected readonly EffectColor = EffectColor;
+  protected readonly getVarFromEffectColor = getVarFromEffectColor;
+
+  options: AnimationOptions = {
+    path: '/assets/arrow5.json',
+    loop: true,
+  };
+
+  playEnter(): void {
+    this.animationItem.setSpeed(1);
+  }
+
+  playLeave(): void {
+    this.animationItem.setSpeed(0.5);
+  }
+
+  ngAfterViewInit(): void {
+    hljs.registerLanguage('javascript', javascript);
+    this.menuSections.forEach((section) => {
+      this.registerSectionToHeader(section.nativeElement);
+    });
+    this.copyCode();
+  }
+
+  protected registerSectionToHeader(element: HTMLElement | null){
+    if(!element) return;
+    this.headerService.registerElement(element);
+  }
+
+  private currentCode: string = '';
+
+  private copyCode(): void {
+    const highlightedCode = `function build(l = 1) {
+    return \`line\${l > 0
+      ? ' by ' + build(--l)
+      : '.'}\`;
+}
+
+console.log(\`... \${build()}\`);`;
+    let currentChar = 0;
+
+    const interval = setInterval(() => {
+      if (currentChar < highlightedCode.length) {
+        this.currentCode += highlightedCode[currentChar];
+        this.hightlightedCode = hljs.highlight(this.currentCode, { language: 'javascript' }).value;
+        currentChar++;
+      } else {
+        clearInterval(interval);
+
+        setTimeout(() => {
+          this.hightlightedCode = '';
+          this.currentCode = '';
+          this.copyCode();
+        }, 10000);
+      }
+    }, 100);
+  }
+
+protected hightlightedCode: string = '';
+
+protected code: string[] = [];
+
+  protected scrollToHi() {
+    this.hi.nativeElement.scrollIntoView({ behavior: 'smooth' });
+  }
+
+  protected readonly EmojiBackgroundType = EmojiBackgroundType;
 }

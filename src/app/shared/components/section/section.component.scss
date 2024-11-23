@@ -4,9 +4,12 @@
 
 .wave {
   position: relative;
-  top: 0;
+  top: -1px;
   left: 0;
   overflow: hidden;
+  &.wave-bottom {
+    top: 1px;
+  }
 }
 .wave svg {
   position: relative;
