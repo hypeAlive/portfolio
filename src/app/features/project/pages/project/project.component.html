@@ -28,7 +28,7 @@
   </div>
 
   <!-- pictures -->
-  <div class="carousel w-full h-carousel overflow-hidden relative">
+  <div class="carousel w-full h-carousel overflow-hidden relative bg-base-200">
     <div class="carousel-item absolute h-[calc(100%-2px)] w-full transition-transform duration-500"
          *ngFor="let img of imgs; let i = index"
          [ngClass]="{
@@ -36,7 +36,7 @@
          '-translate-x-full': i < activePictureIndex,
          'translate-x-0': i === activePictureIndex
          }">
-      <img src="{{img}}" class="w-full object-cover"/>
+      <img src="{{img}}" class="w-full object-cover opacity-55 blur-sm"/>
     </div>
   </div>
 
