@@ -23,6 +23,7 @@ export type ProjectCard = {
   languages: string[];
   description: string;
   imgUrl: string;
+  url: string;
 }
 
 @Component({
@@ -75,13 +76,11 @@ export class CardComponent implements OnInit{
   }
 
   protected navigateToProject(): void {
-    this.router.navigate(['project'], {
-      queryParams: {id: this.infos?.id},
-      state: {data: this.infos}
-    })
-      .catch(err => {
-        this.logger.error('Error while navigating to project:', err);
-      });
+    if(!this.infos) {
+      this.logger.error('No infos to navigate to project');
+      return;
+    }
+    this.router.navigate(['project', this.infos.url]).then();
   }
 
   ngOnInit(): void {

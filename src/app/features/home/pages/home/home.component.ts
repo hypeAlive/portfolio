@@ -33,23 +33,13 @@ import hljs from 'highlight.js';
 import javascript from 'highlight.js/lib/languages/javascript';
 import {HeaderService} from "../../../../core/services/header.service";
 import {DeviceDetectorService} from "ngx-device-detector";
+import {ProjectShortCmsResponse} from "../../../../shared/models/project.interface";
+import {ProjectService} from "../../../../shared/services/project.service";
+import {RainbowTextComponent} from "../../../../shared/components/rainbow-text/rainbow-text.component";
 
 interface AboutCmsResponse {
   worked_at_pictures: DirectusFile[];
   translations: AboutTranslations[];
-}
-
-interface ProjectShortCmsResponse {
-  id: number;
-  is_first: boolean;
-  languages: string[];
-  translations: ProjectShortTranslation[];
-  project_pictures: DirectusFile[];
-}
-
-interface ProjectShortTranslation extends DirectusTranslation {
-  description_short: string;
-  title: string;
 }
 
 
@@ -63,10 +53,8 @@ interface AboutTranslations extends DirectusTranslation {
   selector: 'app-home-page',
   standalone: true,
   imports: [
-    CardComponent,
     CardCarouselComponent,
     ContactComponent,
-    NgOptimizedImage,
     KeyboardComponent,
     NgForOf,
     SectionComponent,
@@ -76,7 +64,8 @@ interface AboutTranslations extends DirectusTranslation {
     PointGradientComponent,
     NgIf,
     EmojiBlobComponent,
-    LottieComponent
+    LottieComponent,
+    RainbowTextComponent
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
@@ -98,6 +87,7 @@ export default class HomeComponent implements OnInit, AfterViewInit {
     private ngZone: NgZone,
     protected device: DeviceDetectorService,
     private cdr: ChangeDetectorRef,
+    private project: ProjectService,
     private headerService: HeaderService) {
 
   }
@@ -124,30 +114,9 @@ export default class HomeComponent implements OnInit, AfterViewInit {
       });
 
     // get project cards from cms
-    this.directus.readItemsWithTranslation<ProjectShortCmsResponse>("projects", {
-      fields: ['*', {translations: ['*'], project_pictures: ['*']}]
-    })
-      .then((response) => {
-        const cards = response.map((project) => ({
-          id: project.id,
-          title: project.translations[0].title,
-          languages: project.languages,
-          description: project.translations[0].description_short,
-          imgUrl: project.project_pictures.length >= 1 ? getDirectusFileUrl(project.project_pictures[0].directus_files_id) : ''
-        }));
-
-        const sortedCards: typeof cards = [];
-        const middleIndex = Math.floor(cards.length / 2);
-
-        cards.forEach((card, index) => {
-          const position = index % 2 === 0 ? middleIndex + Math.floor(index / 2) : middleIndex - Math.ceil(index / 2);
-          sortedCards[position] = card;
-        });
-
-        this.projectCards = sortedCards;
-      })
-      .catch((_) => {
-      });
+    this.project.getProjectCards().then(cards => {
+      this.projectCards = cards;
+    });
   }
 
   protected get isAboutLoaded(): boolean {

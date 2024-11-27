@@ -1,0 +1,46 @@
+.h-carousel {
+  height: calc(100vh - 12rem);
+}
+
+.shape-fill {
+  fill: oklch(var(--b1));
+}
+
+.top-gradient {
+  top: 0;
+  @apply dark:mix-blend-multiply mix-blend-plus-lighter;
+  background: linear-gradient(180deg, oklch(var(--s) / 0.5), oklch(var(--s) / 0.1), transparent);
+}
+
+.left-gradient {
+  position: absolute;
+  left: -50%;
+  top: -10%;
+  height: 120%;
+  width: 200%;
+  @apply dark:mix-blend-multiply mix-blend-plus-lighter;
+  background: linear-gradient(90deg, transparent, oklch(var(--sc) / 0.4), oklch(var(--sc) / 0.1), transparent);
+}
+
+.middle-gradient {
+  position: absolute;
+  left: -50%;
+  top: -10%;
+  height: 120%;
+  width: 200%;
+  @apply dark:mix-blend-multiply mix-blend-plus-lighter;
+  background: linear-gradient(90deg, transparent, oklch(var(--sc) / 0.1), oklch(var(--sc) / 0.4), oklch(var(--sc) / 0.1), transparent);
+}
+
+.wave {
+  z-index: 100;
+  position: absolute;
+  width: 100%;
+  bottom: 0;
+  transform: rotate(180deg);
+
+  svg {
+    width: calc(148% + 1.3px);
+    height: 90px;
+  }
+}

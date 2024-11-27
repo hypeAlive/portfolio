@@ -48,15 +48,7 @@
   <!-- heading -->
   <h1 class="absolute left-1/2 -translate-x-1/2 top-32 text-center w-[80%] z-30">
     <span>Building</span>
-    <span class="inline-grid">
-    <span
-      class="pointer-events-none col-start-1 row-start-1 bg-[linear-gradient(135deg,oklch(var(--s))_0%,oklch(var(--a))_50%,oklch(var(--s))_100%)] bg-clip-text blur-xl [-webkit-text-fill-color:transparent] [transform:translate3d(0,0,0)] before:content-[attr(data-text)] animate-gradient"
-      aria-hidden="true" data-text="&nbsp;Future&nbsp;"></span>
-      <span
-        class="[&amp;::selection]:text-base-content relative col-start-1 row-start-1 bg-[linear-gradient(135deg,oklch(var(--s))_0%,oklch(var(--a))_50%,oklch(var(--s))_100%)] bg-clip-text [-webkit-text-fill-color:transparent] [&amp;::selection]:bg-blue-700/20 animate-gradient">
-      &nbsp;Future&nbsp;
-      </span>
-    </span>
+    <app-rainbow-text text="Future"/>
     <span>...</span>
   </h1>
 
@@ -90,12 +82,13 @@
   </div>
 
   <!-- press me btn -->
-  <div class="absolute left-1/2 z-30 -translate-x-1/2 md:top-[35.5rem] -bottom-2 md:bottom-auto flex flex-col items-center md:gap-0 gap-24">
+  <div
+    class="absolute left-1/2 z-30 -translate-x-1/2 md:top-[35.5rem] -bottom-2 md:bottom-auto flex flex-col items-center md:gap-0 gap-24">
     <h4 class="relative z-10 jetbrains-mono hidden md:block">
       <span>press me</span>
     </h4>
     <div class="relative z-10 block md:hidden" (mouseenter)="playEnter()" (mouseleave)="playLeave()">
-      <button class="btn btn-gradient !text-2xl whitespace-nowrap">
+      <button class="btn btn-gradient !text-2xl whitespace-nowrap" (click)="this.scrollToHi()">
         press me
       </button>
     </div>
@@ -110,7 +103,8 @@
     <bg-point-gradient [type]="EffectColor.SECONDARY" class=""/>
   </div>
 
-  <div *ngIf="!isMobile()" class="absolute h-auto opacity-5 pointer-events-none" style="width: 80rem; right: -35rem; top: -50rem">
+  <div *ngIf="!isMobile()" class="absolute h-auto opacity-5 pointer-events-none"
+       style="width: 80rem; right: -35rem; top: -50rem">
     <svg viewBox="150 0 600 600" xmlns="http://www.w3.org/2000/svg">
       <g transform="translate(465.7016834355472 323.0495020264449)">
         <path
@@ -121,7 +115,8 @@
     </svg>
   </div>
 
-  <div *ngIf="!isMobile()" class="absolute h-auto -top-72 opacity-10 pointer-events-none" style="width: 80rem; left: -40rem">
+  <div *ngIf="!isMobile()" class="absolute h-auto -top-72 opacity-10 pointer-events-none"
+       style="width: 80rem; left: -40rem">
     <svg viewBox="150 0 600 600" xmlns="http://www.w3.org/2000/svg">
       <g transform="translate(465.7016834355472 323.0495020264449)">
         <path
@@ -132,7 +127,8 @@
     </svg>
   </div>
 
-  <div *ngIf="!isMobile()" class="absolute h-auto -top-72 opacity-5 -z-10 pointer-events-none" style="width: 80rem; left: -40rem">
+  <div *ngIf="!isMobile()" class="absolute h-auto -top-72 opacity-5 -z-10 pointer-events-none"
+       style="width: 80rem; left: -40rem">
     <svg viewBox="150 0 600 600" xmlns="http://www.w3.org/2000/svg">
       <g transform="translate(424.80989750324267 333.1137495413227)">
         <path
