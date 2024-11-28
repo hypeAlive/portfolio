@@ -65,7 +65,8 @@ interface AboutTranslations extends DirectusTranslation {
     NgIf,
     EmojiBlobComponent,
     LottieComponent,
-    RainbowTextComponent
+    RainbowTextComponent,
+    NgOptimizedImage
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
