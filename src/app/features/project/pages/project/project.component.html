@@ -15,12 +15,12 @@
           </div>
         </ng-container>
       </div>
-      <p class="text-center md:text-left bright-text">
+      <p class="text-center md:text-left !text-bright-text-light">
         {{getLongDescription()}}
       </p>
       <div class="flex gap-3 mt-6 justify-center md:justify-start">
         <a [href]="projectLink" *ngIf="projectLink" class="btn btn-secondary !rounded-xl">Visit Project</a>
-        <a [href]="codeLink" *ngIf="codeLink" class="btn btn-secondary btn-ghost !rounded-xl bright-text">View Code</a>
+        <a [href]="codeLink" *ngIf="codeLink" class="btn btn-secondary btn-ghost !rounded-xl !text-bright-text-light">View Code</a>
       </div>
     </div>
 

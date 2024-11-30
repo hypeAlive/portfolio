@@ -8,7 +8,7 @@ module.exports = {
     extend: {
       colors: {
         "bright-text": {
-          light: "rgba(255,255,255,0.75)",
+          light: "rgba(255,255,255,0.9)",
           dark: "rgba(0,0,0,0.75)",
         }
       }
