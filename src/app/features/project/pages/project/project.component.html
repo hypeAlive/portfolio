@@ -2,23 +2,23 @@
 
 </div>
 
-<div class="w-full relative" (mouseenter)="stopAutoSlide()" (mouseleave)="startAutoSlide()">
+<div class="w-full relative min-h-96" (mouseenter)="stopAutoSlide()" (mouseleave)="startAutoSlide()">
   <!-- text overlay -->
-  <div class="container left-1/2 -translate-x-1/2 absolute z-20 h-full p-24 flex items-center">
-    <div class="max-w-xl drop-shadow-lg absolute">
+  <div class="container left-1/2 -translate-x-1/2 absolute z-20 h-full p-6 lg:p-24 flex items-center">
+    <div class="max-w-xl drop-shadow-lg relative">
       <div class="left-gradient pointer-events-none"></div>
-      <h1><app-rainbow-text [text]="getTitle()"/></h1>
-      <div class="flex gap-3 items-center relative -top-3">
+      <h1 class="text-center md:text-left"><app-rainbow-text [text]="getTitle()"/></h1>
+      <div class="flex gap-3 items-center relative -top-3 justify-center md:justify-start">
         <ng-container *ngFor="let language of getLanguages()">
           <div class="text-2xl text-glow">
             <ng-icon [name]="language"></ng-icon>
           </div>
         </ng-container>
       </div>
-      <p>
+      <p class="text-center md:text-left">
         {{getLongDescription()}}
       </p>
-      <div class="flex gap-3 mt-6">
+      <div class="flex gap-3 mt-6 justify-center md:justify-start">
         <a [href]="projectLink" *ngIf="projectLink" class="btn btn-secondary !rounded-xl">Visit Project</a>
         <a [href]="codeLink" *ngIf="codeLink" class="btn btn-secondary btn-ghost !rounded-xl">View Code</a>
       </div>
@@ -28,7 +28,7 @@
   </div>
 
   <!-- pictures -->
-  <div class="carousel w-full h-carousel overflow-hidden relative bg-base-200">
+  <div class="carousel w-full h-carousel min-h-96 overflow-hidden relative bg-base-200">
     <div class="carousel-item absolute h-[calc(100%-2px)] w-full transition-transform duration-500"
          *ngFor="let img of imgs; let i = index"
          [ngClass]="{
@@ -41,7 +41,7 @@
   </div>
 
   <!-- point controls -->
-  <div class="absolute bottom-28 left-1/2 -translate-x-1/2 z-30 flex gap-6 items-center">
+  <div class="absolute left-1/2 -translate-x-1/2 z-30 flex gap-6 items-center" style="bottom: 10lvh">
     <div class="middle-gradient pointer-events-none"></div>
     <div class="badge badge-neutral badge-md !rounded-full drop-shadow-lg cursor-pointer"
          *ngFor="let img of imgs; let i = index"
@@ -61,6 +61,6 @@
 
 
 
-<main class="container m-auto mt-12 mb-36">
-  <project-section *ngFor="let section of getSections()" [section]="section"/>
+<main class="container m-auto mt-12 mb-24">
+  <project-section *ngFor="let section of getSections()" [section]="section" class="mb-24"/>
 </main>
