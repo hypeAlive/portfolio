@@ -4,7 +4,7 @@
   </h2>
 
   <div class="flex flex-col lg:flex-row items-center w-full">
-    <div *ngIf="isLeftImg" class="w-full flex-shrink lg:w-1/2 p-4">
+    <div appFadeIn *ngIf="isLeftImg" class="w-full flex-shrink lg:w-1/2 p-4">
       <img [src]="img" alt="Section Image" class="w-full h-auto object-cover rounded-lg shadow-md">
     </div>
 
@@ -14,14 +14,14 @@
         {{ translation?.text }}
       </p>
 
-      <a [href]="section.action_link" *ngIf="section.action_btn" class="btn btn-secondary btn-outline btn-wide !rounded-xl mb-4">
+      <a appFadeIn [href]="section.action_link" *ngIf="section.action_btn" class="btn btn-secondary btn-outline btn-wide !rounded-xl mb-4">
         {{translation?.btn_text}}
       </a>
 
     </div>
 
 
-    <div *ngIf="isRightImg" class="w-full flex-shrink lg:w-1/2 p-4">
+    <div appFadeIn *ngIf="isRightImg" class="w-full flex-shrink lg:w-1/2 p-4">
       <img [src]="img" alt="Section Image" class="w-full h-auto object-cover rounded-lg shadow-md">
     </div>
   </div>
