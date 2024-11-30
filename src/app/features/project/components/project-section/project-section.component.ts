@@ -3,6 +3,11 @@ import {ProjectSection} from "../../../../shared/models/project.interface";
 import {NgForOf, NgIf, NgOptimizedImage} from "@angular/common";
 import {FadeInDirective} from "../../../../shared/directives/fade-in.directive";
 import {getDirectusFileUrl} from "../../../../shared/models/directus.interface";
+import {SectionComponent} from "../../../../shared/components/section/section.component";
+import {
+  PointGradientComponent,
+  PointImageGradient
+} from "../../../../shared/components/point-gradient/point-gradient.component";
 
 @Component({
   selector: 'project-section',
@@ -11,7 +16,9 @@ import {getDirectusFileUrl} from "../../../../shared/models/directus.interface";
     NgIf,
     FadeInDirective,
     NgForOf,
-    NgOptimizedImage
+    NgOptimizedImage,
+    SectionComponent,
+    PointGradientComponent
   ],
   templateUrl: './project-section.component.html',
   styleUrl: './project-section.component.scss'
@@ -41,4 +48,5 @@ export class ProjectSectionComponent {
   }
 
 
+  protected readonly PointImageGradient = PointImageGradient;
 }
