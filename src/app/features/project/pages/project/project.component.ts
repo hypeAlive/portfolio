@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {ProjectCard} from "../../../home/components/card/card.component";
 import {NGXLogger} from "ngx-logger";
 import {ActivatedRoute} from "@angular/router";
-import {NgClass, NgForOf, NgIf} from "@angular/common";
+import {NgClass, NgForOf, NgIf, NgStyle} from "@angular/common";
 import {RainbowTextComponent} from "../../../../shared/components/rainbow-text/rainbow-text.component";
 import {NgIcon, provideIcons} from "@ng-icons/core";
 import {ProjectCmsResponse, ProjectSection} from "../../../../shared/models/project.interface";
@@ -16,6 +16,13 @@ import {
 import {getDirectusFileUrl} from "../../../../shared/models/directus.interface";
 import {ProjectService} from "../../../../shared/services/project.service";
 import {ProjectSectionComponent} from "../../components/project-section/project-section.component";
+import {EffectColor, getVarFromEffectColor} from "../../../../shared/models/effects.interface";
+import {HeroBlobsComponent} from "../../../../shared/components/hero-blobs/hero-blobs.component";
+import {
+  PointGradientComponent,
+  PointImageGradient
+} from "../../../../shared/components/point-gradient/point-gradient.component";
+import {DeviceDetectorService} from "ngx-device-detector";
 
 @Component({
   selector: 'app-project',
@@ -27,7 +34,10 @@ import {ProjectSectionComponent} from "../../components/project-section/project-
     NgForOf,
     NgIcon,
     NgClass,
-    ProjectSectionComponent
+    ProjectSectionComponent,
+    NgStyle,
+    HeroBlobsComponent,
+    PointGradientComponent
   ],
   styleUrl: './project.component.scss',
   viewProviders: [provideIcons({
@@ -47,7 +57,11 @@ export default class ProjectComponent implements OnInit {
   private sections: Map<number, ProjectSection> = new Map<number, ProjectSection>();
   private autoSlideInterval: any;
 
-  constructor(private logger: NGXLogger, private activatedRoute: ActivatedRoute, private projectService: ProjectService) {
+  constructor(private logger: NGXLogger, private activatedRoute: ActivatedRoute, private projectService: ProjectService, protected device: DeviceDetectorService) {
+  }
+
+  isMobile(): boolean {
+    return this.device.isMobile();
   }
 
   get projectLink(): string | null {
@@ -140,4 +154,7 @@ export default class ProjectComponent implements OnInit {
   }
 
 
+  protected readonly getVarFromEffectColor = getVarFromEffectColor;
+  protected readonly EffectColor = EffectColor;
+  protected readonly PointImageGradient = PointImageGradient;
 }

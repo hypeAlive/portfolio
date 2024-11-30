@@ -35,6 +35,7 @@ import {HeaderService} from "../../../../core/services/header.service";
 import {DeviceDetectorService} from "ngx-device-detector";
 import {ProjectService} from "../../../../shared/services/project.service";
 import {RainbowTextComponent} from "../../../../shared/components/rainbow-text/rainbow-text.component";
+import {HeroBlobsComponent} from "../../../../shared/components/hero-blobs/hero-blobs.component";
 
 interface AboutCmsResponse {
   worked_at_pictures: DirectusFile[];
@@ -65,7 +66,8 @@ interface AboutTranslations extends DirectusTranslation {
     EmojiBlobComponent,
     LottieComponent,
     RainbowTextComponent,
-    NgOptimizedImage
+    NgOptimizedImage,
+    HeroBlobsComponent
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'

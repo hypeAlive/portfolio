@@ -39,6 +39,7 @@
   bottom: 0;
   transform: rotate(180deg);
   overflow: hidden;
+  @apply drop-shadow-lg;
 
   svg {
     width: calc(148% + 1.3px);
