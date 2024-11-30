@@ -1,5 +1,74 @@
-<p>project works!</p>
-<main class="container min-h-lvh mt-52 m-auto flex justify-center">
-  <div>
+<div class="w-full absolute h-48 top-gradient z-10">
+
+</div>
+
+<div class="w-full relative min-h-96" (mouseenter)="stopAutoSlide()" (mouseleave)="startAutoSlide()">
+  <!-- text overlay -->
+  <div class="container left-1/2 -translate-x-1/2 absolute z-20 h-full p-6 lg:p-24 flex items-center">
+    <div class="max-w-xl drop-shadow-lg relative">
+      <div class="left-gradient pointer-events-none"></div>
+      <h1 class="text-center md:text-left"><app-rainbow-text [text]="getTitle()"/></h1>
+      <div class="flex gap-3 items-center relative -top-3 justify-center md:justify-start">
+        <ng-container *ngFor="let language of getLanguages()">
+          <div class="text-2xl text-glow">
+            <ng-icon [name]="language"></ng-icon>
+          </div>
+        </ng-container>
+      </div>
+      <p class="text-center md:text-left !text-bright-text-light">
+        {{getLongDescription()}}
+      </p>
+      <div class="flex gap-3 mt-6 justify-center md:justify-start">
+        <a [href]="projectLink" *ngIf="projectLink" class="btn btn-secondary !rounded-xl">Visit Project</a>
+        <a [href]="codeLink" *ngIf="codeLink" class="btn btn-secondary btn-ghost !rounded-xl !text-bright-text-light">View Code</a>
+      </div>
+    </div>
+
+
   </div>
+
+  <!-- pictures -->
+  <div class="carousel w-full h-carousel min-h-96 overflow-hidden relative bg-base-200">
+    <div class="carousel-item absolute h-[calc(100%-2px)] w-full transition-transform duration-500"
+         *ngFor="let img of imgs; let i = index"
+         [ngClass]="{
+         'translate-x-full': i > activePictureIndex,
+         '-translate-x-full': i < activePictureIndex,
+         'translate-x-0': i === activePictureIndex
+         }">
+      <img src="{{img}}" class="w-full object-cover opacity-55 blur-sm"/>
+    </div>
+  </div>
+
+  <!-- point controls -->
+  <div class="absolute left-1/2 -translate-x-1/2 z-30 flex gap-6 items-center" style="bottom: 10lvh">
+    <div class="middle-gradient pointer-events-none"></div>
+    <div class="badge badge-neutral badge-md !rounded-full drop-shadow-lg cursor-pointer"
+         *ngFor="let img of imgs; let i = index"
+         [ngClass]="{'badge-secondary badge-lg': i === this.activePictureIndex}"
+         (click)="activatePicture(i)"
+    >
+    </div>
+  </div>
+
+  <!-- wave -->
+  <div class="wave w-full">
+    <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 -8 1200 120" preserveAspectRatio="none">
+      <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" class="shape-fill"></path>
+    </svg>
+  </div>
+
+  <!-- effects -->
+  <div class="absolute top-0 left-0 w-full h-[calc(100%-6px)] overflow-hidden">
+    <app-hero-blobs class="w-full h-full"/>
+    <bg-point-gradient *ngIf="!isMobile()" class="absolute right-0 bottom-0 translate-x-1/2 translate-y-1/2 scale-x-110 w-full" [type]="PointImageGradient.POLYGON"/>
+  </div>
+  <bg-point-gradient *ngIf="!isMobile()" class="absolute -right-20 bottom-0 translate-x-1/2 translate-y-1/2 opacity-10 scale-x-110 h-full z-20" [type]="EffectColor.SECONDARY"/>
+
+</div>
+
+
+
+<main class="container m-auto mt-12 mb-24">
+  <project-section *ngFor="let section of getSections()" [section]="section" class="mb-24"/>
 </main>

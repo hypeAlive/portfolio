@@ -61,7 +61,6 @@ export class SwapComponent implements AfterViewInit, OnDestroy {
   }
 
   protected next() {
-    console.log('next', this.isChecked())
     this.stateChange.next(this.isChecked() ? 'active' : 'disabled');
   }
 

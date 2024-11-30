@@ -1,0 +1,36 @@
+<app-section [withBgImage]="PointImageGradient.POLYGON">
+  <div *ngIf="section" class="flex flex-col w-full justify-center items-center">
+    <h2 *ngIf="section.show_title && !hasImg" appFadeIn class="drop-shadow-lg text-center">
+      {{ translation?.title }}
+    </h2>
+
+    <div class="grid lg:grid-cols-2 gap-4 w-full items-stretch">
+      <!-- Linkes Bild -->
+      <div *ngIf="isLeftImg" class="p-4 flex items-center">
+        <img [src]="img" alt="Section Image"
+             class="w-auto object-contain rounded-lg shadow-md">
+      </div>
+
+      <!-- Text -->
+      <div class="max-w-3xl text-2xl text-center flex flex-col justify-center p-4">
+        <div>
+          <h2 *ngIf="section.show_title && hasImg" class="drop-shadow-lg text-center">
+            {{ translation?.title }}
+          </h2>
+          <p class="p-4">
+            {{ translation?.text }}
+          </p>
+          <a *ngIf="section.action_btn" [href]="section.action_link"
+             class="btn btn-secondary btn-outline btn-wide !rounded-xl mb-4">
+            {{ translation?.btn_text }}
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</app-section>
+
+
+
+
+

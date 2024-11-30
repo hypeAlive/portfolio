@@ -29,7 +29,7 @@ export const routes: Routes = [
     data: {
       header: {
         showMenu: false,
-        background: HeaderBackground.SHOW
+        background: HeaderBackground.BLEND_IN_ON_SCROLL
       }
     },
     resolve: {

@@ -1,7 +1,8 @@
 import {Injectable} from '@angular/core';
 import {ActivatedRouteSnapshot, Resolve, Router, RouterStateSnapshot} from '@angular/router';
 import {NGXLogger} from "ngx-logger";
-import {ProjectService} from "./project.service";
+import {ErrorStatusCode} from "../../error/models/error-state";
+import {ProjectService} from "../../../shared/services/project.service";
 
 @Injectable({
   providedIn: 'root'
@@ -15,6 +16,13 @@ export class ProjectResolver implements Resolve<Promise<any>> {
     this.logger.info('ProjectResolver initialized');
     const id = route.params['id'];
 
-    return await this.project.testing(true);
+    if (!id) {
+      return this.router.navigate([ErrorStatusCode.NotFound]);
+    }
+
+    return await this.project.getProjectByUrl(id)
+      .catch(() => {
+        return this.router.navigate([ErrorStatusCode.NotFound]);
+      });
   }
 }

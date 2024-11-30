@@ -53,20 +53,6 @@
   background: transparent;
 }
 
-@keyframes gradient {
-  0% {
-    background-position: -200%;
-  }
-  100% {
-    background-position: 200%;
-  }
-}
-
-.animate-gradient {
-  background-size: 200%;
-  animation: gradient 5s infinite;
-}
-
 @keyframes boxShadowAnimation {
   0% {
     box-shadow:

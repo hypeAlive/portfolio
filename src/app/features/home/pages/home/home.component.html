@@ -48,22 +48,14 @@
   <!-- heading -->
   <h1 class="absolute left-1/2 -translate-x-1/2 top-32 text-center w-[80%] z-30">
     <span>Building</span>
-    <span class="inline-grid">
-    <span
-      class="pointer-events-none col-start-1 row-start-1 bg-[linear-gradient(135deg,oklch(var(--s))_0%,oklch(var(--a))_50%,oklch(var(--s))_100%)] bg-clip-text blur-xl [-webkit-text-fill-color:transparent] [transform:translate3d(0,0,0)] before:content-[attr(data-text)] animate-gradient"
-      aria-hidden="true" data-text="&nbsp;Future&nbsp;"></span>
-      <span
-        class="[&amp;::selection]:text-base-content relative col-start-1 row-start-1 bg-[linear-gradient(135deg,oklch(var(--s))_0%,oklch(var(--a))_50%,oklch(var(--s))_100%)] bg-clip-text [-webkit-text-fill-color:transparent] [&amp;::selection]:bg-blue-700/20 animate-gradient">
-      &nbsp;Future&nbsp;
-      </span>
-    </span>
+    <app-rainbow-text text="Future"/>
     <span>...</span>
   </h1>
 
 
   <!-- monitor -->
   <div class="test-img-container">
-    <img class="test-img drop-shadow-lg" src="assets/render.webp" alt=""/>
+    <img class="test-img drop-shadow-lg" ngSrc="assets/render.webp" alt="" height="2160" width="3840"/>
     <div class="relative jetbrains-mono pointer-events-none select-none
     top-52 text-sm w-72
     left-1/2 md:top-64 -translate-x-1/2 md:text-base md:w-96">
@@ -90,12 +82,13 @@
   </div>
 
   <!-- press me btn -->
-  <div class="absolute left-1/2 z-30 -translate-x-1/2 md:top-[35.5rem] -bottom-2 md:bottom-auto flex flex-col items-center md:gap-0 gap-24">
+  <div
+    class="absolute left-1/2 z-30 -translate-x-1/2 md:top-[35.5rem] -bottom-2 md:bottom-auto flex flex-col items-center md:gap-0 gap-24">
     <h4 class="relative z-10 jetbrains-mono hidden md:block">
       <span>press me</span>
     </h4>
     <div class="relative z-10 block md:hidden" (mouseenter)="playEnter()" (mouseleave)="playLeave()">
-      <button class="btn btn-gradient !text-2xl whitespace-nowrap">
+      <button class="btn btn-gradient !text-2xl whitespace-nowrap" (click)="this.scrollToHi()">
         press me
       </button>
     </div>
@@ -110,39 +103,7 @@
     <bg-point-gradient [type]="EffectColor.SECONDARY" class=""/>
   </div>
 
-  <div *ngIf="!isMobile()" class="absolute h-auto opacity-5 pointer-events-none" style="width: 80rem; right: -35rem; top: -50rem">
-    <svg viewBox="150 0 600 600" xmlns="http://www.w3.org/2000/svg">
-      <g transform="translate(465.7016834355472 323.0495020264449)">
-        <path
-          d="M103.5 -108.7C136.4 -70.7 166.7 -35.4 172 5.3C177.3 46 157.6 91.9 124.8 122.8C91.9 153.6 46 169.3 0.7 168.6C-44.5 167.9 -89.1 150.8 -123.6 119.9C-158.1 89.1 -182.5 44.5 -195.6 -13.1C-208.7 -70.7 -210.4 -141.4 -175.9 -179.4C-141.4 -217.4 -70.7 -222.7 -17.7 -205C35.4 -187.4 70.7 -146.7 103.5 -108.7"
-          [ngStyle]="{'fill': getVarFromEffectColor(EffectColor.MY_SECONDARY)}">
-        </path>
-      </g>
-    </svg>
-  </div>
-
-  <div *ngIf="!isMobile()" class="absolute h-auto -top-72 opacity-10 pointer-events-none" style="width: 80rem; left: -40rem">
-    <svg viewBox="150 0 600 600" xmlns="http://www.w3.org/2000/svg">
-      <g transform="translate(465.7016834355472 323.0495020264449)">
-        <path
-          d="M103.5 -108.7C136.4 -70.7 166.7 -35.4 172 5.3C177.3 46 157.6 91.9 124.8 122.8C91.9 153.6 46 169.3 0.7 168.6C-44.5 167.9 -89.1 150.8 -123.6 119.9C-158.1 89.1 -182.5 44.5 -195.6 -13.1C-208.7 -70.7 -210.4 -141.4 -175.9 -179.4C-141.4 -217.4 -70.7 -222.7 -17.7 -205C35.4 -187.4 70.7 -146.7 103.5 -108.7"
-          [ngStyle]="{'fill': getVarFromEffectColor(EffectColor.MY_SECONDARY)}">
-        </path>
-      </g>
-    </svg>
-  </div>
-
-  <div *ngIf="!isMobile()" class="absolute h-auto -top-72 opacity-5 -z-10 pointer-events-none" style="width: 80rem; left: -40rem">
-    <svg viewBox="150 0 600 600" xmlns="http://www.w3.org/2000/svg">
-      <g transform="translate(424.80989750324267 333.1137495413227)">
-        <path
-          d="M94.8 -96C135 -54.7 188 -27.3 207.5 19.4C226.9 66.2 212.8 132.5 172.6 152C132.5 171.5 66.2 144.2 16 128.2C-34.2 112.2 -68.4 107.4 -87.1 87.9C-105.9 68.4 -109.2 34.2 -127.5 -18.3C-145.7 -70.7 -178.9 -141.4 -160.2 -182.8C-141.4 -224.1 -70.7 -236 -21.7 -214.4C27.3 -192.7 54.7 -137.3 94.8 -96"
-          [ngStyle]="{'fill': getVarFromEffectColor(EffectColor.MY_ACCENT)}">
-
-        </path>
-      </g>
-    </svg>
-  </div>
+  <app-hero-blobs/>
 
 </div>
 
