@@ -5,7 +5,7 @@ import {ActivatedRoute} from "@angular/router";
 import {NgClass, NgForOf, NgIf} from "@angular/common";
 import {RainbowTextComponent} from "../../../../shared/components/rainbow-text/rainbow-text.component";
 import {NgIcon, provideIcons} from "@ng-icons/core";
-import {ProjectCmsResponse} from "../../../../shared/models/project.interface";
+import {ProjectCmsResponse, ProjectSection} from "../../../../shared/models/project.interface";
 import {
   diAngularOriginal,
   diExpressOriginal,
@@ -14,6 +14,8 @@ import {
   diPythonOriginal, diTypescriptOriginal
 } from "@ng-icons/devicon/original";
 import {getDirectusFileUrl} from "../../../../shared/models/directus.interface";
+import {ProjectService} from "../../../../shared/services/project.service";
+import {ProjectSectionComponent} from "../../components/project-section/project-section.component";
 
 @Component({
   selector: 'app-project',
@@ -24,7 +26,8 @@ import {getDirectusFileUrl} from "../../../../shared/models/directus.interface";
     RainbowTextComponent,
     NgForOf,
     NgIcon,
-    NgClass
+    NgClass,
+    ProjectSectionComponent
   ],
   styleUrl: './project.component.scss',
   viewProviders: [provideIcons({
@@ -41,9 +44,22 @@ export default class ProjectComponent implements OnInit {
   private project: ProjectCmsResponse | undefined = undefined;
   protected activePictureIndex: number = 0;
   protected imgs: string[] = [];
+  private sections: Map<number, ProjectSection> = new Map<number, ProjectSection>();
   private autoSlideInterval: any;
 
-  constructor(private logger: NGXLogger, private activatedRoute: ActivatedRoute) {
+  constructor(private logger: NGXLogger, private activatedRoute: ActivatedRoute, private projectService: ProjectService) {
+  }
+
+  get projectLink(): string | null {
+    return this.project?.project_link || null;
+  }
+
+  getSections(): ProjectSection[] {
+    return Array.from(this.sections.values());
+  }
+
+  get codeLink(): string | null {
+    return this.project?.code_link || null;
   }
 
   ngOnInit(): void {
@@ -51,11 +67,21 @@ export default class ProjectComponent implements OnInit {
       if(data['project']) {
         this.project = data['project'];
         this.imgs = this.getImgs();
+        this.logger.log(this.project);
         this.startAutoSlide();
+
+        if(!this.project) return;
+        this.project.section.forEach((sectionId) => {
+          this.projectService.getSectionById(sectionId).then((section) => {
+            this.sections.set(sectionId, section);
+          });
+        });
+
       }
     });
     this.logger.log(this.activatedRoute.snapshot.data);
     this.logger.info('ProjectComponent initialized');
+
   }
 
   getItems(): ProjectCard[] {

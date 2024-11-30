@@ -33,7 +33,6 @@ import hljs from 'highlight.js';
 import javascript from 'highlight.js/lib/languages/javascript';
 import {HeaderService} from "../../../../core/services/header.service";
 import {DeviceDetectorService} from "ngx-device-detector";
-import {ProjectShortCmsResponse} from "../../../../shared/models/project.interface";
 import {ProjectService} from "../../../../shared/services/project.service";
 import {RainbowTextComponent} from "../../../../shared/components/rainbow-text/rainbow-text.component";
 

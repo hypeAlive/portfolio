@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {firstValueFrom} from "rxjs";
-import {ProjectCmsResponse, ProjectShortCmsResponse} from "../models/project.interface";
+import {ProjectCmsResponse, ProjectSection, ProjectShortCmsResponse} from "../models/project.interface";
 import {getDirectusFileUrl} from "../models/directus.interface";
 import {DirectusService} from "../../core/services/directus.service";
 import {environment} from "../../../environments/environment";
@@ -39,6 +39,10 @@ export class ProjectService {
     });
 
     return sortedCards;
+  }
+
+  public async getSectionById(id: number): Promise<ProjectSection> {
+    return await this.directus.readItemWithTranslation("projects_section", id);
   }
 
   public async getProjectByUrl(url: string): Promise<ProjectCmsResponse> {
