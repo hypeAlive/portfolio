@@ -65,8 +65,6 @@ export class HeaderService extends RouteConfig<HeaderConfig> {
           return currRatio > prevRatio ? current : prev;
         }, this.headerMenu[0]);
 
-      if(!mostVisibleMenu) return;
-
       if (this.activeElementsStack[0] !== mostVisibleMenu) {
         this.activeElementsStack = [mostVisibleMenu];
         this.activeMenu.next([true, mostVisibleMenu]);

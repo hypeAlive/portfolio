@@ -131,6 +131,7 @@ export class HeaderComponent implements AfterViewInit, OnDestroy, OnInit, OnChan
 
   showUnderline(element: EventTarget | null, index: number) {
     if (!(element instanceof HTMLElement)) return;
+    if(!this.headerConfig.showMenu) return;
 
     this.hoverMenuElement = index;
     const rect = element.getBoundingClientRect();
