@@ -4,33 +4,36 @@
       {{ translation?.title }}
     </h2>
 
-    <div class="grid lg:grid-cols-2 gap-4 w-full items-stretch">
-      <!-- Linkes Bild -->
-      <div *ngIf="isLeftImg" class="p-4 flex items-center">
+    <div class="flex flex-col lg:flex-row items-center w-full">
+      <div appFadeIn *ngIf="isLeftImg" class="h-fit flex-shrink lg:w-1/2 p-4 relative">
         <img [src]="img" alt="Section Image"
-             class="w-auto object-contain rounded-lg shadow-md">
+             class="max-w-1/2 h-full object-contain rounded-lg shadow-md relative z-10">
+        <bg-point-gradient class="absolute w-full top-1/2 -translate-y-1/2 opacity-15 z-0 scale-y-90"/>
       </div>
 
-      <!-- Text -->
-      <div class="max-w-3xl text-2xl text-center flex flex-col justify-center p-4">
-        <div>
-          <h2 *ngIf="section.show_title && hasImg" class="drop-shadow-lg text-center">
-            {{ translation?.title }}
-          </h2>
-          <p class="p-4">
-            {{ translation?.text }}
-          </p>
-          <a *ngIf="section.action_btn" [href]="section.action_link"
-             class="btn btn-secondary btn-outline btn-wide !rounded-xl mb-4">
-            {{ translation?.btn_text }}
-          </a>
-        </div>
+      <div class="flex-grow max-w-3xl text-2xl text-center lg:w-1/2">
+
+        <h2 *ngIf="section.show_title && hasImg" appFadeIn class="drop-shadow-lg text-center">
+          {{ translation?.title }}
+        </h2>
+
+        <p appFadeIn class="p-4">
+          {{ translation?.text }}
+        </p>
+
+        <a appFadeIn [href]="section.action_link" *ngIf="section.action_btn"
+           class="btn btn-secondary btn-outline btn-wide !rounded-xl mb-4">
+          {{ translation?.btn_text }}
+        </a>
+
+      </div>
+
+      <div appFadeIn *ngIf="isRightImg" class="w-full flex-shrink lg:w-1/2 p-4 relative">
+        <img [src]="img" alt="Section Image"
+             class="w-auto max-w-1/2 h-full object-contain rounded-lg shadow-md relative z-10">
+        <bg-point-gradient class="absolute w-full top-1/2 -translate-y-1/2 opacity-15 z-0 scale-y-90"/>
       </div>
     </div>
+
   </div>
 </app-section>
-
-
-
-
-
