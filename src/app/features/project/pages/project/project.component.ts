@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {ProjectCard} from "../../../home/components/card/card.component";
 import {NGXLogger} from "ngx-logger";
 import {ActivatedRoute} from "@angular/router";
-import {NgClass, NgForOf, NgIf, NgStyle} from "@angular/common";
+import {NgClass, NgForOf, NgIf} from "@angular/common";
 import {RainbowTextComponent} from "../../../../shared/components/rainbow-text/rainbow-text.component";
 import {NgIcon, provideIcons} from "@ng-icons/core";
 import {ProjectCmsResponse, ProjectSection} from "../../../../shared/models/project.interface";
@@ -22,32 +22,30 @@ import {
   PointGradientComponent,
   PointImageGradient
 } from "../../../../shared/components/point-gradient/point-gradient.component";
-import {DeviceDetectorService} from "ngx-device-detector";
+import {NavigatorService} from "../../../../core/services/navigator.service";
 
 @Component({
-  selector: 'app-project',
-  standalone: true,
-  templateUrl: './project.component.html',
-  imports: [
-    NgIf,
-    RainbowTextComponent,
-    NgForOf,
-    NgIcon,
-    NgClass,
-    ProjectSectionComponent,
-    NgStyle,
-    HeroBlobsComponent,
-    PointGradientComponent
-  ],
-  styleUrl: './project.component.scss',
-  viewProviders: [provideIcons({
-    diAngularOriginal,
-    diExpressOriginal,
-    diJavaOriginal,
-    diJavascriptOriginal,
-    diPythonOriginal,
-    diTypescriptOriginal
-  })]
+    selector: 'app-project',
+    templateUrl: './project.component.html',
+    imports: [
+        NgIf,
+        RainbowTextComponent,
+        NgForOf,
+        NgIcon,
+        NgClass,
+        ProjectSectionComponent,
+        HeroBlobsComponent,
+        PointGradientComponent
+    ],
+    styleUrl: './project.component.scss',
+    viewProviders: [provideIcons({
+            diAngularOriginal,
+            diExpressOriginal,
+            diJavaOriginal,
+            diJavascriptOriginal,
+            diPythonOriginal,
+            diTypescriptOriginal
+        })]
 })
 export default class ProjectComponent implements OnInit {
 
@@ -57,7 +55,7 @@ export default class ProjectComponent implements OnInit {
   private sections: Map<number, ProjectSection> = new Map<number, ProjectSection>();
   private autoSlideInterval: any;
 
-  constructor(private logger: NGXLogger, private activatedRoute: ActivatedRoute, private projectService: ProjectService, protected device: DeviceDetectorService) {
+  constructor(private logger: NGXLogger, private activatedRoute: ActivatedRoute, private projectService: ProjectService, protected device: NavigatorService) {
   }
 
   isMobile(): boolean {

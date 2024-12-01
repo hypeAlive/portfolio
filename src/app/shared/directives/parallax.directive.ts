@@ -3,15 +3,15 @@ import {
   ElementRef,
   HostListener,
   Inject,
-  Input,
   OnDestroy,
   OnInit,
   PLATFORM_ID,
-  Renderer2
+  Renderer2,
+  input
 } from '@angular/core';
 import {isPlatformBrowser} from "@angular/common";
-import {DeviceDetectorService} from "ngx-device-detector";
 import {NGXLogger} from "ngx-logger";
+import {NavigatorService} from "../../core/services/navigator.service";
 
 /**
  * Enum für die Richtung des Parallax-Effekts.
@@ -145,8 +145,8 @@ export class ParallaxDirective implements OnInit, OnDestroy {
    * @param {number} strength - Die Stärke des Parallax-Effekts.
    * @param {number} scrollStart - Der Scroll-Wert, bei dem der Parallax-Effekt beginnt.
    */
-  @Input('parallax') builder: ParallaxBuilder | undefined;
-  @Input('active') active: boolean = true;
+  readonly builder = input<ParallaxBuilder>(undefined, { alias: "parallax" });
+  readonly active = input<boolean>(true);
 
   private config: ParallaxConfig | undefined;
 
@@ -169,7 +169,7 @@ export class ParallaxDirective implements OnInit, OnDestroy {
       this.renderer.setStyle(this.ele.nativeElement, this.config.valueName, this.config.default + this.config.unit);
     }
 
-    if (!this.active || this.config === undefined) {
+    if (!this.active() || this.config === undefined) {
       return;
     }
     if ((event !== null && this.isOutsideViewport(this.ele)) && window.scrollY > 50) {
@@ -210,10 +210,10 @@ export class ParallaxDirective implements OnInit, OnDestroy {
   constructor(
     @Inject(PLATFORM_ID) private platformId: Object,
     private ele: ElementRef,
+    private device: NavigatorService,
     private logger: NGXLogger,
-    private device: DeviceDetectorService,
     private renderer: Renderer2) {
-    this.config = this.builder?.build();
+    this.config = this.builder()?.build();
   }
 
   /**
@@ -221,7 +221,7 @@ export class ParallaxDirective implements OnInit, OnDestroy {
    * setzt die standartmäßigen CSS-Eigenschaften für die Direktive.
    */
   ngOnInit(): void {
-    this.config = this.builder?.build();
+    this.config = this.builder()?.build();
 
     if (this.config === undefined) return;
 
@@ -245,7 +245,7 @@ export class ParallaxDirective implements OnInit, OnDestroy {
    * @param {boolean} active - Der neue aktive Status der Direktive.
    */
   private setActive(active: boolean) {
-    this.active = active;
+    this.active.apply(active);
   }
 
   /**

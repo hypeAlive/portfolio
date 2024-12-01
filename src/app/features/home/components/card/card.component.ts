@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, OnInit, input} from '@angular/core';
 import {NgIcon, provideIcons} from "@ng-icons/core";
 import {
   diAngularOriginal,
@@ -27,31 +27,29 @@ export type ProjectCard = {
 }
 
 @Component({
-  selector: 'project-card',
-  standalone: true,
-  imports: [
-    NgIcon,
-    NgForOf,
-    NgClass,
-    MouseLightEffectDirective,
-    NgOptimizedImage,
-    NgIf,
-    PointGradientComponent
-  ],
-  templateUrl: './card.component.html',
-  styleUrl: './card.component.scss',
-  viewProviders: [provideIcons({
-    diAngularOriginal,
-    diExpressOriginal,
-    diJavaOriginal,
-    diJavascriptOriginal,
-    diPythonOriginal,
-    diTypescriptOriginal
-  })]
+    selector: 'project-card',
+    imports: [
+        NgIcon,
+        NgForOf,
+        NgClass,
+        MouseLightEffectDirective,
+        NgIf,
+        PointGradientComponent
+    ],
+    templateUrl: './card.component.html',
+    styleUrl: './card.component.scss',
+    viewProviders: [provideIcons({
+            diAngularOriginal,
+            diExpressOriginal,
+            diJavaOriginal,
+            diJavascriptOriginal,
+            diPythonOriginal,
+            diTypescriptOriginal
+        })]
 })
 export class CardComponent implements OnInit{
-  @Input('card') infos: ProjectCard | undefined = undefined;
-  @Input('preActivate') preActivate = false;
+  readonly infos = input<ProjectCard>(undefined, { alias: "card" });
+  readonly preActivate = input(false);
 
   constructor(private logger: NGXLogger, private router: Router) {
   }
@@ -59,7 +57,7 @@ export class CardComponent implements OnInit{
   protected active = false;
 
   protected getLanguages(): string[] {
-    return this.infos?.languages as any as string[];
+    return this.infos()?.languages as any as string[];
   }
 
 
@@ -72,19 +70,20 @@ export class CardComponent implements OnInit{
   }
 
   protected isLoaded(): boolean {
-    return this.infos !== undefined;
+    return this.infos() !== undefined;
   }
 
   protected navigateToProject(): void {
-    if(!this.infos) {
+    const infos = this.infos();
+    if(!infos) {
       this.logger.error('No infos to navigate to project');
       return;
     }
-    this.router.navigate(['project'], { queryParams: { id: this.infos.url } }).then();
+    this.router.navigate(['project'], { queryParams: { id: infos.url } }).then();
   }
 
   ngOnInit(): void {
-    if(this.preActivate) {
+    if(this.preActivate()) {
       this.activate();
     }
   }

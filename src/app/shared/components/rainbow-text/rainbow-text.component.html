@@ -1,10 +1,10 @@
 <span class="inline-grid">
     <span
       class="pointer-events-none col-start-1 row-start-1 bg-[linear-gradient(135deg,oklch(var(--s))_0%,oklch(var(--a))_50%,oklch(var(--s))_100%)] bg-clip-text blur-xl [-webkit-text-fill-color:transparent] [transform:translate3d(0,0,0)] before:content-[attr(data-text)]"
-      [ngClass]="{'animate-gradient': animate}"
-      aria-hidden="true" [attr.data-text]="'&nbsp;' + this.text + '&nbsp;'"></span>
+      [ngClass]="{'animate-gradient': animate()}"
+      aria-hidden="true" [attr.data-text]="'&nbsp;' + text() + '&nbsp;'"></span>
       <span
         class="[&amp;::selection]:text-base-content relative col-start-1 row-start-1 bg-[linear-gradient(135deg,oklch(var(--s))_0%,oklch(var(--a))_50%,oklch(var(--s))_100%)] bg-clip-text [-webkit-text-fill-color:transparent] [&amp;::selection]:bg-blue-700/20 animate-gradient">
-      {{ text }}
+      {{ text() }}
       </span>
     </span>

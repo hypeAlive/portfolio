@@ -1,29 +1,29 @@
 import {
   Component,
-  ViewChild,
   HostListener,
   Output,
   EventEmitter,
   OnDestroy,
-  ViewEncapsulation, Input, OnChanges,
+  ViewEncapsulation, OnChanges,
   SimpleChanges,
+  input,
+  viewChild
 } from '@angular/core';
 import {AnimationOptions, LottieComponent} from "ngx-lottie";
 import {NGXLogger} from "ngx-logger";
 
 @Component({
-  selector: 'app-keyboard',
-  standalone: true,
-  imports: [
-    LottieComponent
-  ],
-  templateUrl: './keyboard.component.html',
-  styleUrls: ['./keyboard.component.scss'],
-  encapsulation: ViewEncapsulation.None
+    selector: 'app-keyboard',
+    imports: [
+        LottieComponent
+    ],
+    templateUrl: './keyboard.component.html',
+    styleUrls: ['./keyboard.component.scss'],
+    encapsulation: ViewEncapsulation.None
 })
 export class KeyboardComponent implements OnDestroy, OnChanges {
-  @ViewChild(LottieComponent) lottieComponent!: LottieComponent;
-  @Input('listenToKeyboard') listenToKeyboard: boolean = true;
+  readonly lottieComponent = viewChild.required(LottieComponent);
+  readonly listenToKeyboard = input<boolean>(true);
 
   options: AnimationOptions = {
     path: 'https://cms.nicolasfritz.dev/assets/24d8ec04-ba2b-4885-8c33-99ea9efe843c',

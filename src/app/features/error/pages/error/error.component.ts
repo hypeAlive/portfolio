@@ -2,24 +2,22 @@ import {Component} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {NgIcon, provideIcons} from "@ng-icons/core";
 import {hugePlugSocket, hugeSettingError03} from "@ng-icons/huge-icons";
-import {NgClass, NgIf} from "@angular/common";
+import {NgIf} from "@angular/common";
 import {ErrorStatusCode} from "../../models/error-state";
 import {ErrorApiResponse} from "../../models/error.interface";
 
 @Component({
-  selector: 'app-error',
-  standalone: true,
-  imports: [
-    NgIcon,
-    NgClass,
-    NgIf
-  ],
-  viewProviders: [provideIcons({
-    hugePlugSocket,
-    hugeSettingError03
-  })],
-  templateUrl: './error.component.html',
-  styles: []
+    selector: 'app-error',
+    imports: [
+        NgIcon,
+        NgIf
+    ],
+    viewProviders: [provideIcons({
+            hugePlugSocket,
+            hugeSettingError03
+        })],
+    templateUrl: './error.component.html',
+    styles: []
 })
 export default class ErrorComponent {
 

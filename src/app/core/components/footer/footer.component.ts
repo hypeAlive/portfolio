@@ -4,10 +4,11 @@ import { bootstrapDiscord, bootstrapGithub, bootstrapLinkedin, bootstrapTwitterX
 import { FooterBackground, FooterService } from "../../services/footer.service";
 
 @Component({
-  selector: 'core-footer',
-  templateUrl: './footer.component.html',
-  styleUrls: ['./footer.component.scss'],
-  viewProviders: [provideIcons({ bootstrapDiscord, bootstrapGithub, bootstrapLinkedin, bootstrapTwitterX })]
+    selector: 'core-footer',
+    templateUrl: './footer.component.html',
+    styleUrls: ['./footer.component.scss'],
+    viewProviders: [provideIcons({ bootstrapDiscord, bootstrapGithub, bootstrapLinkedin, bootstrapTwitterX })],
+    standalone: false
 })
 export class FooterComponent implements OnInit {
 

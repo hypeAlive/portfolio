@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component, input} from '@angular/core';
 import {NgClass, NgIf} from "@angular/common";
 import {
   PointGradientComponent, PointImageGradient
@@ -13,28 +13,29 @@ export enum SectionWave {
 }
 
 @Component({
-  selector: 'app-section',
-  standalone: true,
+    selector: 'app-section',
     imports: [
         NgIf,
         NgClass,
         PointGradientComponent
     ],
-  templateUrl: './section.component.html',
-  styleUrl: './section.component.scss'
+    templateUrl: './section.component.html',
+    styleUrl: './section.component.scss'
 })
 export class SectionComponent {
 
-  @Input('withWave') withWave: SectionWave = SectionWave.NONE;
-  @Input('withGradient') withGradient = false;
-  @Input('withBgImage') withBgImage: PointImageGradient | undefined = undefined;
+  readonly withWave = input<SectionWave>(SectionWave.NONE);
+  readonly withGradient = input(false);
+  readonly withBgImage = input<PointImageGradient>();
 
   protected isWaveTop(): boolean {
-    return this.withWave === SectionWave.TOP || this.withWave === SectionWave.BOTH;
+    const withWave = this.withWave();
+    return withWave === SectionWave.TOP || withWave === SectionWave.BOTH;
   }
 
   protected isWaveBottom(): boolean {
-    return this.withWave === SectionWave.BOTTOM || this.withWave === SectionWave.BOTH;
+    const withWave = this.withWave();
+    return withWave === SectionWave.BOTTOM || withWave === SectionWave.BOTH;
   }
 
   protected readonly PointColorGradient = EffectColor;

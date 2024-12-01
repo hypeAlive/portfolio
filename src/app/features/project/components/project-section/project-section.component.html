@@ -1,6 +1,6 @@
 <app-section [withBgImage]="PointImageGradient.POLYGON">
-  <div *ngIf="section" class="flex flex-col w-full justify-center items-center">
-    <h2 *ngIf="section.show_title && !hasImg" appFadeIn class="drop-shadow-lg text-center">
+  <div *ngIf="section()" class="flex flex-col w-full justify-center items-center">
+    <h2 *ngIf="section()?.show_title && !hasImg" appFadeIn class="drop-shadow-lg text-center">
       {{ translation?.title }}
     </h2>
 
@@ -13,7 +13,7 @@
 
       <div class="flex-grow max-w-3xl text-2xl text-center lg:w-1/2">
 
-        <h2 *ngIf="section.show_title && hasImg" appFadeIn class="drop-shadow-lg text-center">
+        <h2 *ngIf="section()?.show_title && hasImg" appFadeIn class="drop-shadow-lg text-center">
           {{ translation?.title }}
         </h2>
 
@@ -21,7 +21,7 @@
           {{ translation?.text }}
         </p>
 
-        <a appFadeIn [href]="section.action_link" *ngIf="section.action_btn"
+        <a appFadeIn [href]="section()?.action_link" *ngIf="section()?.action_btn"
            class="btn btn-secondary btn-outline btn-wide !rounded-xl mb-4">
           {{ translation?.btn_text }}
         </a>

@@ -1,4 +1,4 @@
-import {Directive, ElementRef, Input, OnDestroy, OnInit, Renderer2} from '@angular/core';
+import {Directive, ElementRef, OnDestroy, OnInit, Renderer2, input} from '@angular/core';
 import {NGXLogger} from "ngx-logger";
 
 @Directive({
@@ -7,11 +7,11 @@ import {NGXLogger} from "ngx-logger";
 })
 export class FadeInDirective implements OnInit, OnDestroy {
 
-  @Input() delay: string = '0s';
+  readonly delay = input<string>('0s');
   /**
    * If true, the element will fade in again when it comes back into view
    */
-  @Input() reFade: boolean = true;
+  readonly reFade = input<boolean>(true);
 
   private static observer: IntersectionObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
@@ -38,8 +38,8 @@ export class FadeInDirective implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.renderer.addClass(this.element.nativeElement, 'fade');
-    this.renderer.setAttribute(this.element.nativeElement, 'fade-in-delay', `${this.delay}`);
-    this.renderer.setAttribute(this.element.nativeElement, 'fade-in-re-fade', `${this.reFade}`);
+    this.renderer.setAttribute(this.element.nativeElement, 'fade-in-delay', `${this.delay()}`);
+    this.renderer.setAttribute(this.element.nativeElement, 'fade-in-re-fade', `${this.reFade()}`);
     this.observer.observe(this.element.nativeElement);
   }
 

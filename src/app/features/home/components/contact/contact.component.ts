@@ -9,16 +9,15 @@ import {EffectColor} from "../../../../shared/models/effects.interface";
 import {PointGradientComponent} from "../../../../shared/components/point-gradient/point-gradient.component";
 
 @Component({
-  selector: 'home-contact',
-  standalone: true,
-  imports: [
-    ReactiveFormsModule,
-    NgClass,
-    FadeInDirective,
-    PointGradientComponent
-  ],
-  templateUrl: './contact.component.html',
-  styles: []
+    selector: 'home-contact',
+    imports: [
+        ReactiveFormsModule,
+        NgClass,
+        FadeInDirective,
+        PointGradientComponent
+    ],
+    templateUrl: './contact.component.html',
+    styles: []
 })
 export class ContactComponent implements OnInit {
 

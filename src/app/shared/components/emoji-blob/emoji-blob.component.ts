@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component, input} from '@angular/core';
 import {NgIcon, provideIcons} from "@ng-icons/core";
 import {hugeMail01, hugeMailbox01} from "@ng-icons/huge-icons";
 import {NgClass, NgIf, NgStyle} from "@angular/common";
@@ -21,7 +21,6 @@ export type EmojiBackground = {
 
 @Component({
   selector: 'app-emoji-blob',
-  standalone: true,
   imports: [
     NgIcon,
     NgIf,
@@ -44,28 +43,28 @@ export type EmojiBackground = {
 })
 export class EmojiBlobComponent {
 
-  @Input('background')background: EmojiBackground = {
+  readonly background = input<EmojiBackground>({
     type: EmojiBackgroundType.BLOB2,
     color: EffectColor.GRADIENT,
     glow: EffectColor.ACCENT
-  };
-  @Input('mirrorIcon') iconMirror: boolean = false;
-  @Input('dropShadow') dropShadow: boolean = false;
-  @Input('iconSize') size: string = '1';
-  @Input('bgSize') bgSize: string = '3';
+});
+  readonly iconMirror = input<boolean>(false, { alias: "mirrorIcon" });
+  readonly dropShadow = input<boolean>(false);
+  readonly size = input<string>('1', { alias: "iconSize" });
+  readonly bgSize = input<string>('3');
 
-  @Input('name') name: string = 'hugeMailbox01';
+  readonly name = input<string>('hugeMailbox01');
 
   protected isBackground(bg: EmojiBackgroundType): boolean {
-    return this.background.type === bg
+    return this.background().type === bg
   }
 
   protected getBackgroundColor(): string {
-    return getVarFromEffectColor(this.background.color);
+    return getVarFromEffectColor(this.background().color);
   }
 
   protected isFillGradient(): boolean {
-    return this.background.color === EffectColor.GRADIENT;
+    return this.background().color === EffectColor.GRADIENT;
   }
 
   protected getFillStyle(): { [key: string]: string } {

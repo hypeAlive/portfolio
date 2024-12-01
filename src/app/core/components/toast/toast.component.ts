@@ -4,14 +4,13 @@ import {NgClass, NgIf} from "@angular/common";
 import {NGXLogger} from "ngx-logger";
 
 @Component({
-  selector: 'core-toast',
-  standalone: true,
-  imports: [
-    NgClass,
-    NgIf
-  ],
-  templateUrl: './toast.component.html',
-  styles: []
+    selector: 'core-toast',
+    imports: [
+        NgClass,
+        NgIf
+    ],
+    templateUrl: './toast.component.html',
+    styles: []
 })
 export class ToastComponent extends Toast {
 

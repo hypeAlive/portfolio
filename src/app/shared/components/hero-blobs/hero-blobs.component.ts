@@ -1,21 +1,20 @@
 import { Component } from '@angular/core';
 import {EffectColor, getVarFromEffectColor} from "../../models/effects.interface";
 import {NgIf, NgStyle} from "@angular/common";
-import {DeviceDetectorService} from "ngx-device-detector";
+import {NavigatorService} from "../../../core/services/navigator.service";
 
 @Component({
-  selector: 'app-hero-blobs',
-  standalone: true,
-  imports: [
-    NgIf,
-    NgStyle
-  ],
-  templateUrl: './hero-blobs.component.html',
-  styleUrl: './hero-blobs.component.scss'
+    selector: 'app-hero-blobs',
+    imports: [
+        NgIf,
+        NgStyle
+    ],
+    templateUrl: './hero-blobs.component.html',
+    styleUrl: './hero-blobs.component.scss'
 })
 export class HeroBlobsComponent {
 
-  constructor(protected device: DeviceDetectorService,) {
+  constructor(protected device: NavigatorService) {
   }
 
   isMobile(): boolean {

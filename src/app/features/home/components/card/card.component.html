@@ -13,14 +13,14 @@
         [type]="PointColorGradient.ACCENT"
         class="absolute opacity-40 h-full right-0 -translate-y-1/2 translate-x-1/2 top-0"/>
       <div class="absolute right-0 top-0 w-full h-full card-overlay" [ngClass]="{'active': active}"></div>
-      <img src="{{ infos?.imgUrl }}" alt="card"/>
+      <img src="{{ infos()?.imgUrl }}" alt="card"/>
       <h1 class="absolute uppercase bg-text">
-        {{ infos?.title }}
+        {{ infos()?.title }}
       </h1>
     </figure>
     <div class="card-body" [ngClass]="{'active': this.active}">
       <h2 class="card-title justify-center drop-shadow-2x text-center !text-3xl md:!text-4xl" style="margin: 0;">
-        {{ infos?.title }}
+        {{ infos()?.title }}
       </h2>
       <div class="card-actions justify-center">
         <ng-container *ngFor="let language of getLanguages()">
@@ -30,7 +30,7 @@
         </ng-container>
       </div>
       <p class="text-center jetbrains-mono transition-all !text-sm md:!text-base" style="color: oklch(var(--bc))" [ngClass]="{'h-6': !active}">
-        {{ infos?.description }}
+        {{ infos()?.description }}
       </p>
       <div class="card-actions justify-center">
         <button

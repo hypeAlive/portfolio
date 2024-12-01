@@ -1,24 +1,23 @@
-import {AfterViewInit, Component, Input, OnChanges, QueryList, SimpleChanges, ViewChildren} from '@angular/core';
+import {AfterViewInit, Component, OnChanges, SimpleChanges, input, viewChildren} from '@angular/core';
 import {CardComponent, ProjectCard} from "../card/card.component";
 import {NgClass, NgForOf} from "@angular/common";
 import {FadeInDirective} from "../../../../shared/directives/fade-in.directive";
 
 @Component({
-  selector: 'card-carousel',
-  standalone: true,
-  imports: [
-    CardComponent,
-    NgForOf,
-    NgClass,
-    FadeInDirective
-  ],
-  templateUrl: './card-carousel.component.html',
-  styleUrl: './card-carousel.component.scss'
+    selector: 'card-carousel',
+    imports: [
+        CardComponent,
+        NgForOf,
+        NgClass,
+        FadeInDirective
+    ],
+    templateUrl: './card-carousel.component.html',
+    styleUrl: './card-carousel.component.scss'
 })
 export class CardCarouselComponent {
 
-  @ViewChildren('cards') cards!: QueryList<CardComponent>;
-  @Input('cards') items: ProjectCard[] | undefined = undefined;
+  readonly cards = viewChildren<CardComponent>('cards');
+  readonly items = input<ProjectCard[] | undefined>(undefined, {alias: "cards"});
 
   private selectedIndex = 2;
   private blocked = false;
@@ -48,7 +47,7 @@ export class CardCarouselComponent {
   }
 
   protected getItems() {
-    return this.items || new Array(5).fill(undefined);
+    return this.items() || new Array(5).fill(undefined);
   }
 
   protected isActive(index: number) {
@@ -58,8 +57,8 @@ export class CardCarouselComponent {
   protected onRadioChange(goToIndex: number): void {
     if (this.blocked) return;
 
-    const currentCard = this.cards.get(this.selectedIndex);
-    const nextCard = this.cards.get(goToIndex);
+    const currentCard = this.cards().at(this.selectedIndex);
+    const nextCard = this.cards().at(goToIndex);
     if (!currentCard || !nextCard) throw new Error('Could not find card');
 
     const nextIndex = this.plusLoop();

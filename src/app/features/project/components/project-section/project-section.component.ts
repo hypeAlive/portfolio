@@ -1,6 +1,6 @@
-import {Component, Input} from '@angular/core';
+import {Component, input} from '@angular/core';
 import {ProjectSection} from "../../../../shared/models/project.interface";
-import {NgForOf, NgIf, NgOptimizedImage} from "@angular/common";
+import {NgIf} from "@angular/common";
 import {FadeInDirective} from "../../../../shared/directives/fade-in.directive";
 import {getDirectusFileUrl} from "../../../../shared/models/directus.interface";
 import {SectionComponent} from "../../../../shared/components/section/section.component";
@@ -10,41 +10,39 @@ import {
 } from "../../../../shared/components/point-gradient/point-gradient.component";
 
 @Component({
-  selector: 'project-section',
-  standalone: true,
-  imports: [
-    NgIf,
-    FadeInDirective,
-    NgForOf,
-    NgOptimizedImage,
-    SectionComponent,
-    PointGradientComponent
-  ],
-  templateUrl: './project-section.component.html',
-  styleUrl: './project-section.component.scss'
+    selector: 'project-section',
+    imports: [
+        NgIf,
+        FadeInDirective,
+        SectionComponent,
+        PointGradientComponent
+    ],
+    templateUrl: './project-section.component.html',
+    styleUrl: './project-section.component.scss'
 })
 export class ProjectSectionComponent {
 
-  @Input() section: ProjectSection | undefined = undefined;
+  readonly section = input<ProjectSection>();
 
   get translation() {
-    return this.section?.translations[0];
+    return this.section()?.translations[0];
   }
 
   get isLeftImg() {
-    return this.section?.has_img === 'left';
+    return this.section()?.has_img === 'left';
   }
 
   get isRightImg() {
-    return this.section?.has_img === 'right';
+    return this.section()?.has_img === 'right';
   }
 
   get hasImg() {
-    return this.section?.has_img !== 'hidden';
+    return this.section()?.has_img !== 'hidden';
   }
 
   get img() {
-    return this.section ? getDirectusFileUrl(this.section.img) : '';
+    const section = this.section();
+    return section ? getDirectusFileUrl(section.img) : '';
   }
 
 

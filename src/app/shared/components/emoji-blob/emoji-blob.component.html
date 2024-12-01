@@ -1,12 +1,12 @@
-<div class="relative" [ngStyle]="{'font-size': size + 'em'}">
+<div class="relative" [ngStyle]="{'font-size': size() + 'em'}">
   <bg-point-gradient
-    *ngIf="background.glow"
-    [type]="background.glow"
+    *ngIf="background().glow"
+    [type]="background().glow"
     class="absolute opacity-10 top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/4 h-full scale-x-150"/>
-  <ng-icon name="{{name}}"
+  <ng-icon name="{{name()}}"
            class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
-           [ngClass]="{'-scale-x-100': iconMirror, 'drop-shadow-lg': dropShadow}"/>
-  <div class="svg-container" [ngStyle]="{'width': bgSize + 'em'}">
+           [ngClass]="{'-scale-x-100': iconMirror(), 'drop-shadow-lg': dropShadow()}"/>
+  <div class="svg-container" [ngStyle]="{'width': bgSize() + 'em'}">
     <svg *ngIf="isBackground(EmojiBackgroundType.BLOB1)" viewBox="150 0 600 600" xmlns="http://www.w3.org/2000/svg">
       <g transform="translate(440.18428373029775 283.10954926874376)">
         <defs>

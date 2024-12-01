@@ -1,25 +1,29 @@
-import {AfterViewInit, Component, ElementRef, Input, OnDestroy, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, OnDestroy, input, viewChild} from '@angular/core';
 import {NgIcon, NgIconComponent} from "@ng-icons/core";
 import {Subject, Subscription} from "rxjs";
 
 export type SwapState = 'active' | 'disabled';
 
 @Component({
-  selector: 'btn-swap',
-  standalone: true,
-  imports: [
-    NgIcon
-  ],
-  templateUrl: './swap.component.html',
-  styleUrl: './swap.component.scss'
+    selector: 'btn-swap',
+    imports: [
+        NgIcon
+    ],
+    templateUrl: './swap.component.html',
+    styleUrl: './swap.component.scss'
 })
 export class SwapComponent implements AfterViewInit, OnDestroy {
 
-  @ViewChild('checkbox') checkbox!: ElementRef;
-  @ViewChild('onIcon') onIcon!: NgIconComponent;
-  @ViewChild('offIcon') offIcon!: NgIconComponent;
-  @Input('icons') public icons!: [string, string] | [string];
-  @ViewChild('nativeElement') elementRef!: ElementRef;
+  readonly checkbox = viewChild.required<ElementRef>('checkbox');
+  readonly onIcon = viewChild.required<NgIconComponent>('onIcon');
+  readonly offIcon = viewChild.required<NgIconComponent>('offIcon');
+  public readonly icons = input.required<[
+    string,
+    string
+] | [
+    string
+]>();
+  readonly elementRef = viewChild.required<ElementRef>('nativeElement');
 
   private stateChange: Subject<SwapState> = new Subject<SwapState>();
 
@@ -27,8 +31,9 @@ export class SwapComponent implements AfterViewInit, OnDestroy {
   }
 
   ngAfterViewInit(): void {
-    this.onIcon.svg = this.icons[1] || this.icons[0];
-    this.offIcon.svg = this.icons[0];
+    const icons = this.icons();
+    this.onIcon().svg = icons[1] || icons[0];
+    this.offIcon().svg = this.icons()[0];
   }
 
   ngOnDestroy(): void {
@@ -36,19 +41,19 @@ export class SwapComponent implements AfterViewInit, OnDestroy {
   }
 
   get nativeElement() {
-    return this.elementRef.nativeElement;
+    return this.elementRef().nativeElement;
   }
 
   public isChecked() {
-    return this.checkbox.nativeElement.checked;
+    return this.checkbox().nativeElement.checked;
   }
 
   public check() {
-    this.checkbox.nativeElement.checked = true;
+    this.checkbox().nativeElement.checked = true;
   }
 
   public uncheck() {
-    this.checkbox.nativeElement.checked = false;
+    this.checkbox().nativeElement.checked = false;
     this.next();
   }
 

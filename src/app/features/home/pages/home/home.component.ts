@@ -3,18 +3,15 @@ import {
   ChangeDetectorRef,
   Component,
   ElementRef,
-  Inject,
   NgZone,
   OnInit,
-  PLATFORM_ID,
-  QueryList,
-  ViewChild,
-  ViewChildren
+  viewChild,
+  viewChildren
 } from '@angular/core';
-import {CardComponent, ProjectCard} from "../../components/card/card.component";
+import {ProjectCard} from "../../components/card/card.component";
 import {CardCarouselComponent} from "../../components/card-carousel/card-carousel.component";
 import {ContactComponent} from "../../components/contact/contact.component";
-import {NgForOf, NgIf, NgOptimizedImage, NgStyle} from "@angular/common";
+import {NgForOf, NgIf, NgOptimizedImage} from "@angular/common";
 import {DirectusService} from '../../../../core/services/directus.service';
 import {KeyboardComponent} from "../../components/keyboard/keyboard.component";
 import {DirectusFile, DirectusTranslation, getDirectusFileUrl} from "../../../../shared/models/directus.interface";
@@ -32,10 +29,10 @@ import {AnimationItem} from "lottie-web";
 import hljs from 'highlight.js';
 import javascript from 'highlight.js/lib/languages/javascript';
 import {HeaderService} from "../../../../core/services/header.service";
-import {DeviceDetectorService} from "ngx-device-detector";
 import {ProjectService} from "../../../../shared/services/project.service";
 import {RainbowTextComponent} from "../../../../shared/components/rainbow-text/rainbow-text.component";
 import {HeroBlobsComponent} from "../../../../shared/components/hero-blobs/hero-blobs.component";
+import {NavigatorService} from "../../../../core/services/navigator.service";
 
 interface AboutCmsResponse {
   worked_at_pictures: DirectusFile[];
@@ -50,44 +47,42 @@ interface AboutTranslations extends DirectusTranslation {
 }
 
 @Component({
-  selector: 'app-home-page',
-  standalone: true,
-  imports: [
-    CardCarouselComponent,
-    ContactComponent,
-    KeyboardComponent,
-    NgForOf,
-    SectionComponent,
-    WaveHandComponent,
-    FadeInDirective,
-    NgStyle,
-    PointGradientComponent,
-    NgIf,
-    EmojiBlobComponent,
-    LottieComponent,
-    RainbowTextComponent,
-    NgOptimizedImage,
-    HeroBlobsComponent
-  ],
-  templateUrl: './home.component.html',
-  styleUrl: './home.component.scss'
+    selector: 'app-home-page',
+    imports: [
+        CardCarouselComponent,
+        ContactComponent,
+        KeyboardComponent,
+        NgForOf,
+        SectionComponent,
+        WaveHandComponent,
+        FadeInDirective,
+        PointGradientComponent,
+        NgIf,
+        EmojiBlobComponent,
+        LottieComponent,
+        RainbowTextComponent,
+        NgOptimizedImage,
+        HeroBlobsComponent
+    ],
+    templateUrl: './home.component.html',
+    styleUrl: './home.component.scss'
 })
 export default class HomeComponent implements OnInit, AfterViewInit {
 
   protected projectCards: ProjectCard[] | undefined = undefined;
 
-  @ViewChild('hi') hi!: ElementRef;
-  @ViewChildren('menuSection') menuSections!: QueryList<ElementRef>;
+  readonly hi = viewChild.required<ElementRef>('hi');
+  readonly menuSections = viewChildren<ElementRef>('menuSection');
 
   private aboutCms: AboutCmsResponse | undefined = undefined;
 
-  @ViewChild('arrow') arrow!: HTMLCanvasElement;
+  readonly arrow = viewChild.required<HTMLCanvasElement>('arrow');
   private animationItem!: AnimationItem;
 
   constructor(
     private directus: DirectusService,
     private ngZone: NgZone,
-    protected device: DeviceDetectorService,
+    protected device: NavigatorService,
     private cdr: ChangeDetectorRef,
     private project: ProjectService,
     private headerService: HeaderService) {
@@ -167,7 +162,7 @@ export default class HomeComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit(): void {
     hljs.registerLanguage('javascript', javascript);
-    this.menuSections.forEach((section) => {
+    this.menuSections().forEach((section) => {
       this.registerSectionToHeader(section.nativeElement);
     });
     this.copyCode();
@@ -212,7 +207,7 @@ protected hightlightedCode: string = '';
 protected code: string[] = [];
 
   protected scrollToHi() {
-    this.hi.nativeElement.scrollIntoView({ behavior: 'smooth' });
+    this.hi().nativeElement.scrollIntoView({ behavior: 'smooth' });
   }
 
   protected readonly EmojiBackgroundType = EmojiBackgroundType;
