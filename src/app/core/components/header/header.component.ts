@@ -1,13 +1,13 @@
 import {
   AfterViewInit,
-  Component,
+  Component, computed, effect,
   ElementRef,
   HostListener,
   Inject, OnChanges,
   OnDestroy,
   OnInit,
   PLATFORM_ID,
-  QueryList, SimpleChanges,
+  SimpleChanges,
   viewChild,
   viewChildren
 } from '@angular/core';
@@ -16,7 +16,7 @@ import {featherMenu} from "@ng-icons/feather-icons";
 import {heroMoon, heroSun} from "@ng-icons/heroicons/outline";
 import {heroBars3Solid, heroXMarkSolid} from "@ng-icons/heroicons/solid";
 import {ThemeService} from "../../services/theme.service";
-import {Subscription, window} from "rxjs";
+import {Subscription} from "rxjs";
 import {SwapComponent} from "../../../shared/components/swap/swap.component";
 import {isPlatformBrowser} from "@angular/common";
 import {Direction, ParallaxBuilder} from "../../../shared/directives/parallax.directive";
@@ -24,7 +24,6 @@ import {Themes} from "../../models/themes";
 import {HeaderBackground, HeaderConfig, HeaderService} from "../../services/header.service";
 import {NGXLogger} from "ngx-logger";
 import {Router} from "@angular/router";
-import {state} from "@angular/animations";
 
 export type HeaderMenu = {
   title: string,
@@ -57,6 +56,12 @@ export class HeaderComponent implements AfterViewInit, OnDestroy, OnInit, OnChan
   readonly underlineElement = viewChild.required<ElementRef>('underline');
   readonly navbarCenter = viewChild.required<ElementRef>('navbarCenter');
   readonly menuElements = viewChildren<ElementRef>('menuElement');
+  readonly menuElementComputes = computed(() => {
+    this.menuElements().forEach((element, index) => {
+      this.initMenuElement(element.nativeElement, index);
+    });
+    return this.menuElements();
+  });
 
   protected headerConfig: HeaderConfig = HeaderService.DEFAULT_CONFIG;
 
@@ -82,6 +87,9 @@ export class HeaderComponent implements AfterViewInit, OnDestroy, OnInit, OnChan
               private headerService: HeaderService,
               private router: Router,
               private logger: NGXLogger) {
+    effect(() => {
+      this.menuElementComputes();
+    });
   }
 
   initMenuElement(menuElement: EventTarget | null, index: number) {
@@ -92,7 +100,6 @@ export class HeaderComponent implements AfterViewInit, OnDestroy, OnInit, OnChan
   @HostListener('window:scroll', [])
   onScroll(): void {
     if (!isPlatformBrowser(this.platformId)) return;
-    // @ts-ignore
     this.screenTop = window.scrollY || document.documentElement.scrollTop || document.body.scrollTop || 0;
   }
 
@@ -105,14 +112,8 @@ export class HeaderComponent implements AfterViewInit, OnDestroy, OnInit, OnChan
       .subscribeStateChange((state) => {
         this.themeService.switchTheme(state === 'disabled' ? Themes.DARK : Themes.LIGHT);
       });
-    /* todo: update to v19
-    this.menuElements().changes.subscribe((data: QueryList<ElementRef>) => {
-      data.forEach((element, index) => {
-        this.logger.info(`Init menu element: ${element.nativeElement}`);
-        this.initMenuElement(element.nativeElement, index);
-      });
-    });
-     */
+
+    this.logger.log(this.menuElements())
   }
 
   ngOnDestroy() {
@@ -147,14 +148,12 @@ export class HeaderComponent implements AfterViewInit, OnDestroy, OnInit, OnChan
       const element = document.getElementById(menu.activateOnScreenId);
       if (!element) return;
       const headerOffset = 100;
-      // @ts-ignore
       const elementPosition = element.getBoundingClientRect().top + window.scrollY;
       const offsetPosition = elementPosition - headerOffset;
 
       this.blockUntil = i;
       this.activeUnderline(event, i)
 
-      // @ts-ignore
       window.scrollTo({
         top: offsetPosition,
         behavior: 'smooth'
@@ -226,6 +225,7 @@ export class HeaderComponent implements AfterViewInit, OnDestroy, OnInit, OnChan
   protected readonly HeaderBackground = HeaderBackground;
 
   ngOnChanges(changes: SimpleChanges): void {
+    console.log('Header changes');
     console.log(changes);
   }
 }

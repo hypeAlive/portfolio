@@ -20,7 +20,16 @@ function localeFactory(): string {
 
 export const appConfig: ApplicationConfig = {
   providers: [
-    provideRouter(routes, withInMemoryScrolling({scrollPositionRestoration: 'top', anchorScrolling: 'enabled'})),
+    provideRouter(routes, withInMemoryScrolling({
+      get scrollPositionRestoration() {
+        const params = new URLSearchParams(window.location.search);
+        if (params.get('id')) {
+          return 'top' as const;
+        }
+        return 'disabled' as const;
+      },
+      anchorScrolling: 'enabled'
+    })),
     provideLottieOptions({
       player: () => import('lottie-web')
     }),
