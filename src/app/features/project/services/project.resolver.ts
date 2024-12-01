@@ -14,7 +14,7 @@ export class ProjectResolver implements Resolve<Promise<any>> {
 
   async resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Promise<any> {
     this.logger.info('ProjectResolver initialized');
-    const id = route.params['id'];
+    const id = route.queryParams['id'];
 
     if (!id) {
       return this.router.navigate([ErrorStatusCode.NotFound]);

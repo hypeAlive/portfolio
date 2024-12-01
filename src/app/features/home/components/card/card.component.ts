@@ -80,7 +80,7 @@ export class CardComponent implements OnInit{
       this.logger.error('No infos to navigate to project');
       return;
     }
-    this.router.navigate(['project', this.infos.url]).then();
+    this.router.navigate(['project'], { queryParams: { id: this.infos.url } }).then();
   }
 
   ngOnInit(): void {

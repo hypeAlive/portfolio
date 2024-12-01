@@ -22,7 +22,7 @@ export const routes: Routes = [
     }
   },
   {
-    path: "project/:id",
+    path: "project",
     loadComponent: () => import("./features/project/pages/project/project.component"),
     title: "Project",
     canActivate: [MaintenanceGuard],
