@@ -83,7 +83,7 @@
 
   <!-- press me btn -->
   <div
-    class="absolute left-1/2 z-30 -translate-x-1/2 md:top-[35.5rem] -bottom-2 md:bottom-auto flex flex-col items-center md:gap-0 gap-24">
+    class="absolute left-1/2 z-30 -translate-x-1/2 md:top-[35.5rem] -bottom-2 md:bottom-auto flex flex-col items-center md:gap-0 gap-24 pointer-events-none">
     <h4 class="relative z-10 jetbrains-mono hidden md:block">
       <span i18n="@@homePressMe">
         klick mich
@@ -96,7 +96,7 @@
         klick mich
       </button>
     </div>
-    <ng-lottie containerClass="test" class="relative z-0 w-28 h-28 pointer-events-none bottom-12"
+    <ng-lottie containerClass="test" class="relative z-0 w-28 h-28 !pointer-events-none bottom-12"
                [options]="options"
                (animationCreated)="animationCreated($event)">
     </ng-lottie>
