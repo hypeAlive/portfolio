@@ -39,7 +39,7 @@
         <source>Impressum</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/core/components/footer/footer.component.html</context>
-          <context context-type="linenumber">17,20</context>
+          <context context-type="linenumber">17,19</context>
         </context-group>
       </trans-unit>
       <trans-unit id="coreCopyright" datatype="html">
@@ -63,6 +63,13 @@
           <context context-type="linenumber">40,42</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="contactNameLabel" datatype="html">
+        <source>Name</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/home/components/contact/contact.component.html</context>
+          <context context-type="linenumber">10,12</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="contactNamePlaceholder" datatype="html">
         <source>Max Mustermann</source>
         <context-group purpose="location">
@@ -70,15 +77,29 @@
           <context context-type="linenumber">15,16</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="contactMailLabel" datatype="html">
+        <source>Email</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/home/components/contact/contact.component.html</context>
+          <context context-type="linenumber">22,24</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="contactMailPlaceholder" datatype="html">
-        <source>e.g. max@mustermann.com</source>
+        <source>z.B. max@mustermann.com</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/home/components/contact/contact.component.html</context>
           <context context-type="linenumber">27,28</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="contactTextareaLabel" datatype="html">
+        <source>Nachricht</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/home/components/contact/contact.component.html</context>
+          <context context-type="linenumber">35,37</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="contactTextareaPlaceholder" datatype="html">
-        <source>I am interested in your work...</source>
+        <source>Ich möchte dich kontaktieren...</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/home/components/contact/contact.component.html</context>
           <context context-type="linenumber">40,41</context>
@@ -106,14 +127,14 @@
         </context-group>
       </trans-unit>
       <trans-unit id="homePressMe" datatype="html">
-        <source> drück mich </source>
+        <source> klick mich </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/home/pages/home/home.component.html</context>
           <context context-type="linenumber">89,91</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/home/pages/home/home.component.html</context>
-          <context context-type="linenumber">96,98</context>
+          <context context-type="linenumber">96,97</context>
         </context-group>
       </trans-unit>
       <trans-unit id="projectSectionHeading" datatype="html">
@@ -142,6 +163,20 @@
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/home/pages/home/home.component.ts</context>
           <context context-type="linenumber">74</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="projectSideVisitProjectButton" datatype="html">
+        <source>Zum Projekt</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/project/pages/project/project.component.html</context>
+          <context context-type="linenumber">22,23</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="projectSideViewCodeButton" datatype="html">
+        <source>Zum Code</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/project/pages/project/project.component.html</context>
+          <context context-type="linenumber">23,28</context>
         </context-group>
       </trans-unit>
     </body>

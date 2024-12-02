@@ -7,7 +7,7 @@
   <div class="flex gap-3 sm:flex-row flex-col items-center">
     <label class="form-control w-full max-w-md">
       <div class="label">
-        <span class="label-text">Name</span>
+        <span class="label-text" i18n="@@contactNameLabel">Name</span>
       </div>
       <input appFadeIn
              type="text"
@@ -19,12 +19,12 @@
     </label>
     <label class="form-control w-full max-w-md">
       <div class="label">
-        <span class="label-text">Email</span>
+        <span class="label-text" i18n="@@contactMailLabel">Email</span>
       </div>
       <input appFadeIn
              type="text"
              formControlName="mail"
-             placeholder="e.g. max@mustermann.com"
+             placeholder="z.B. max@mustermann.com"
              class="input input-bordered w-full !rounded-lg"
              i18n-placeholder="@@contactMailPlaceholder"
       />
@@ -32,12 +32,12 @@
   </div>
   <label class="form-control max-w-md sm:max-w-full w-full mx-auto">
     <div class="label block sm:hidden">
-      <span class="label-text">Nachricht</span>
+      <span class="label-text" i18n="@@contactTextareaLabel">Nachricht</span>
     </div>
     <textarea appFadeIn
               formControlName="message"
               class="textarea textarea-lg textarea-bordered w-full resize-none h-40 !rounded-lg"
-              placeholder="I am interested in your work..."
+              placeholder="Ich möchte dich kontaktieren..."
               i18n-placeholder="@@contactTextareaPlaceholder">
   </textarea>
   </label>

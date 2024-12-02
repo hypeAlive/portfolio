@@ -97,7 +97,9 @@
             "development": {
               "optimization": false,
               "extractLicenses": false,
-              "sourceMap": true
+              "sourceMap": true,
+              "localize": ["en"],
+              "baseHref": "/en/"
             }
           },
           "defaultConfiguration": "production"
@@ -110,9 +112,6 @@
             },
             "development": {
               "buildTarget": "portfolio:build:development"
-            },
-            "de": {
-              "buildTarget": "angular.io-example:build:development,de"
             }
           },
           "defaultConfiguration": "development"
