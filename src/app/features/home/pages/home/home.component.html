@@ -47,9 +47,9 @@
   <bg-point-gradient [type]="PointImageGradient.LINES" class="opacity-30"/>
   <!-- heading -->
   <h1 class="absolute left-1/2 -translate-x-1/2 top-32 text-center w-[80%] z-30">
-    <span>Building</span>
-    <app-rainbow-text text="Future"/>
-    <span>...</span>
+    <span i18n="@@homeHeadingBuilding">Building</span>
+    <app-rainbow-text [text]="futureTranslated"/>
+    <span i18n="@@homeHeadingPoints">...</span>
   </h1>
 
 
@@ -85,11 +85,15 @@
   <div
     class="absolute left-1/2 z-30 -translate-x-1/2 md:top-[35.5rem] -bottom-2 md:bottom-auto flex flex-col items-center md:gap-0 gap-24">
     <h4 class="relative z-10 jetbrains-mono hidden md:block">
-      <span>press me</span>
+      <span i18n="@@homePressMe">
+        drück mich
+      </span>
     </h4>
     <div class="relative z-10 block md:hidden" (mouseenter)="playEnter()" (mouseleave)="playLeave()">
-      <button class="btn btn-gradient !text-2xl whitespace-nowrap" (click)="this.scrollToHi()">
-        press me
+      <button class="btn btn-gradient !text-2xl whitespace-nowrap"
+              (click)="this.scrollToHi()"
+              i18n="@@homePressMe">
+        drück mich
       </button>
     </div>
     <ng-lottie containerClass="test" class="relative z-0 w-28 h-28 pointer-events-none bottom-12"

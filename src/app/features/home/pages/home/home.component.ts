@@ -71,6 +71,8 @@ export default class HomeComponent implements OnInit, AfterViewInit {
 
   protected projectCards: ProjectCard[] | undefined = undefined;
 
+  protected futureTranslated = $localize`:@@coreHeadingFuture:Future`;
+
   readonly hi = viewChild.required<ElementRef>('hi');
   readonly menuSections = viewChildren<ElementRef>('menuSection');
 
@@ -211,4 +213,5 @@ protected code: string[] = [];
   }
 
   protected readonly EmojiBackgroundType = EmojiBackgroundType;
+  protected readonly $localize = $localize;
 }
