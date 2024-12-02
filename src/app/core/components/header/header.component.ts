@@ -46,10 +46,10 @@ export type InternalHeaderMenu = HeaderMenu & {
 export class HeaderComponent implements AfterViewInit, OnDestroy, OnInit, OnChanges {
 
   private static readonly DEFAULT_MENU: HeaderMenu[] = [
-    {title: 'Home', link: '/', activateOnScreenId: 'home'},
-    {title: 'About', link: '/', activateOnScreenId: 'about'},
-    {title: 'Projects', link: '/', activateOnScreenId: 'projects'},
-    {title: 'Contact', link: '/', activateOnScreenId: 'contact'}
+    {title: $localize`:@@coreStartPage:Startseite`, link: '/', activateOnScreenId: 'home'},
+    {title: $localize`:@@coreAbout:Über mich`, link: '/', activateOnScreenId: 'about'},
+    {title: $localize`:@@coreProjects:Projekte`, link: '/', activateOnScreenId: 'projects'},
+    {title: $localize`:@@coreContact:Kontakt`, link: '/', activateOnScreenId: 'contact'}
   ];
 
   readonly themeSwitch = viewChild.required<SwapComponent>('themeSwitch');

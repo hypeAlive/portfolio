@@ -8,6 +8,10 @@
           <context context-type="sourcefile">src/app/core/components/footer/footer.component.html</context>
           <context context-type="linenumber">14,15</context>
         </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/core/components/header/header.component.ts</context>
+          <context context-type="linenumber">49</context>
+        </context-group>
       </trans-unit>
       <trans-unit id="coreProjects" datatype="html">
         <source>Projekte</source>
@@ -16,8 +20,8 @@
           <context context-type="linenumber">15,16</context>
         </context-group>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/core/components/header/header.component.html</context>
-          <context context-type="linenumber">35,37</context>
+          <context context-type="sourcefile">src/app/core/components/header/header.component.ts</context>
+          <context context-type="linenumber">51</context>
         </context-group>
       </trans-unit>
       <trans-unit id="coreContact" datatype="html">
@@ -27,15 +31,15 @@
           <context context-type="linenumber">16,17</context>
         </context-group>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/core/components/header/header.component.html</context>
-          <context context-type="linenumber">41,43</context>
+          <context context-type="sourcefile">src/app/core/components/header/header.component.ts</context>
+          <context context-type="linenumber">52</context>
         </context-group>
       </trans-unit>
       <trans-unit id="coreImprint" datatype="html">
         <source>Impressum</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/core/components/footer/footer.component.html</context>
-          <context context-type="linenumber">17,19</context>
+          <context context-type="linenumber">17,20</context>
         </context-group>
       </trans-unit>
       <trans-unit id="coreCopyright" datatype="html">
@@ -48,15 +52,8 @@
       <trans-unit id="coreAbout" datatype="html">
         <source>Über mich</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/core/components/header/header.component.html</context>
-          <context context-type="linenumber">23,24</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="coreExperience" datatype="html">
-        <source>Erfahrung</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/core/components/header/header.component.html</context>
-          <context context-type="linenumber">29,31</context>
+          <context context-type="sourcefile">src/app/core/components/header/header.component.ts</context>
+          <context context-type="linenumber">50</context>
         </context-group>
       </trans-unit>
       <trans-unit id="cardViewProjectButton" datatype="html">
@@ -67,52 +64,52 @@
         </context-group>
       </trans-unit>
       <trans-unit id="contactNamePlaceholder" datatype="html">
-        <source>Name</source>
+        <source>Max Mustermann</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/home/components/contact/contact.component.html</context>
-          <context context-type="linenumber">10</context>
+          <context context-type="linenumber">15,16</context>
         </context-group>
       </trans-unit>
       <trans-unit id="contactMailPlaceholder" datatype="html">
-        <source>Email</source>
+        <source>e.g. max@mustermann.com</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/home/components/contact/contact.component.html</context>
-          <context context-type="linenumber">17</context>
+          <context context-type="linenumber">27,28</context>
         </context-group>
       </trans-unit>
       <trans-unit id="contactTextareaPlaceholder" datatype="html">
-        <source>Nachricht</source>
+        <source>I am interested in your work...</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/home/components/contact/contact.component.html</context>
-          <context context-type="linenumber">24,25</context>
+          <context context-type="linenumber">40,41</context>
         </context-group>
       </trans-unit>
       <trans-unit id="contactSubmit" datatype="html">
         <source> Senden </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/home/components/contact/contact.component.html</context>
-          <context context-type="linenumber">32,35</context>
+          <context context-type="linenumber">49,52</context>
         </context-group>
       </trans-unit>
       <trans-unit id="projectSectionHeading" datatype="html">
         <source> Meine Projekte </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/home/pages/home/home.component.html</context>
-          <context context-type="linenumber">40,42</context>
+          <context context-type="linenumber">146,148</context>
         </context-group>
       </trans-unit>
       <trans-unit id="contactSectionHeading" datatype="html">
         <source>Lust auf mehr?</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/home/pages/home/home.component.html</context>
-          <context context-type="linenumber">53,54</context>
+          <context context-type="linenumber">159,160</context>
         </context-group>
       </trans-unit>
       <trans-unit id="contactSectionDescription" datatype="html">
         <source> Hab ich dein Interesse geweckt? Dann schreib mir einfach – ich freue mich, von dir zu hören! </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/home/pages/home/home.component.html</context>
-          <context context-type="linenumber">55,57</context>
+          <context context-type="linenumber">161,163</context>
         </context-group>
       </trans-unit>
     </body>
