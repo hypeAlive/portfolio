@@ -1,0 +1,5 @@
+User-agent: *
+Disallow: /admin/
+Disallow: /imprint
+
+Sitemap: https://nicolasfritz.dev/sitemap.xml
