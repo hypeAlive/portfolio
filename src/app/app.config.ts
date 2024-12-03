@@ -1,4 +1,4 @@
-import {APP_INITIALIZER, ApplicationConfig, importProvidersFrom, LOCALE_ID} from '@angular/core';
+import {APP_INITIALIZER, ApplicationConfig, importProvidersFrom, isDevMode, LOCALE_ID} from '@angular/core';
 import {provideRouter, withInMemoryScrolling} from '@angular/router';
 
 import {routes} from './app.routes';
@@ -10,6 +10,7 @@ import {LoggerModule} from "ngx-logger";
 import {environment} from "../environments/environment";
 import {provideCoreServices} from "./core/core.module";
 import {provideLottieOptions} from "ngx-lottie";
+import {provideServiceWorker} from "@angular/service-worker";
 
 function localeFactory(): string {
   if(!environment.production) return 'de';
@@ -44,5 +45,9 @@ export const appConfig: ApplicationConfig = {
     provideCoreServices(),
     provideAnimationsAsync(),
     { provide: LOCALE_ID, useValue: localeFactory() },
+    provideServiceWorker('ngsw-worker.js', {
+      enabled: !isDevMode(),
+      registrationStrategy: 'registerWhenStable:30000'
+    })
   ]
 };
