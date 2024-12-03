@@ -12,7 +12,7 @@ export abstract class RouteConfig<C> implements OnDestroy {
   private currentConfig: C;
 
   private route = inject(ActivatedRoute);
-  private router = inject(Router);
+  protected router = inject(Router);
 
 
   protected constructor(snapshotKey: string, defaultConfig: C) {

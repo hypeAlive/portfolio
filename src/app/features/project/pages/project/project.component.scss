@@ -3,7 +3,7 @@
 }
 
 .shape-fill {
-  fill: oklch(var(--b1));
+  fill: oklch(var(--b1)) !important;
 }
 
 .top-gradient {

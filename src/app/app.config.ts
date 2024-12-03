@@ -22,13 +22,15 @@ export const appConfig: ApplicationConfig = {
   providers: [
     provideRouter(routes, withInMemoryScrolling({
       get scrollPositionRestoration() {
+        console.log("scrollPositionRestoration");
         const params = new URLSearchParams(window.location.search);
         if (params.get('id')) {
+          console.log("has id");
           return 'top' as const;
         }
         return 'disabled' as const;
       },
-      anchorScrolling: 'enabled'
+      anchorScrolling: 'enabled',
     })),
     provideLottieOptions({
       player: () => import('lottie-web')

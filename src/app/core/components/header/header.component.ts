@@ -45,13 +45,6 @@ export type InternalHeaderMenu = HeaderMenu & {
 })
 export class HeaderComponent implements AfterViewInit, OnDestroy, OnInit, OnChanges {
 
-  private static readonly DEFAULT_MENU: HeaderMenu[] = [
-    {title: $localize`:@@coreStartPage:Startseite`, link: '/', activateOnScreenId: 'home'},
-    {title: $localize`:@@coreAbout:Über mich`, link: '/', activateOnScreenId: 'about'},
-    {title: $localize`:@@coreProjects:Projekte`, link: '/', activateOnScreenId: 'projects'},
-    {title: $localize`:@@coreContact:Kontakt`, link: '/', activateOnScreenId: 'contact'}
-  ];
-
   readonly themeSwitch = viewChild.required<SwapComponent>('themeSwitch');
   readonly underlineElement = viewChild.required<ElementRef>('underline');
   readonly navbarCenter = viewChild.required<ElementRef>('navbarCenter');
@@ -104,7 +97,7 @@ export class HeaderComponent implements AfterViewInit, OnDestroy, OnInit, OnChan
   }
 
   protected get menu(): HeaderMenu[] {
-    return HeaderComponent.DEFAULT_MENU
+    return HeaderService.DEFAULT_MENU
   }
 
   ngAfterViewInit(): void {
@@ -144,21 +137,9 @@ export class HeaderComponent implements AfterViewInit, OnDestroy, OnInit, OnChan
 
   protected scrollToElement(menu: HeaderMenu, event: EventTarget | null, i :number) {
 
-    this.router.navigate([menu.link]).then(() => {
-      if (!menu.activateOnScreenId) return;
-      const element = document.getElementById(menu.activateOnScreenId);
-      if (!element) return;
-      const headerOffset = 100;
-      const elementPosition = element.getBoundingClientRect().top + window.scrollY;
-      const offsetPosition = elementPosition - headerOffset;
-
+    this.headerService.scrollToElement(menu).then(() => {
       this.blockUntil = i;
-      this.activeUnderline(event, i)
-
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: 'smooth'
-      });
+      this.activeUnderline(event, i);
     });
 
   }

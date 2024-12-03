@@ -102,6 +102,7 @@ export default class HomeComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
+    window.scroll(0, 0);
     // get about section data from cms
     this.directus.readItemWithTranslation<AboutCmsResponse>("about", {
       fields: ['*', {translations: ['*'], worked_at_pictures: ['*']}],

@@ -15,7 +15,7 @@ import {NgIcon} from "@ng-icons/core";
 import {provideToastr} from "ngx-toastr";
 import {ToastComponent} from "./components/toast/toast.component";
 import {NotifyService} from "./services/notify.service";
-import {TitleStrategy} from "@angular/router";
+import {RouterLink, TitleStrategy} from "@angular/router";
 import {CoreTitleStrategy} from "./services/core-tilte.strategy";
 import {DirectusService} from "./services/directus.service";
 import {FooterService} from "./services/footer.service";
@@ -53,12 +53,13 @@ export const provideCoreServices = () => [
     FooterComponent,
     HeaderComponent
   ],
-  imports: [
-    CommonModule,
-    ParallaxDirective,
-    SwapComponent,
-    NgIcon
-  ],
+    imports: [
+        CommonModule,
+        ParallaxDirective,
+        SwapComponent,
+        NgIcon,
+        RouterLink
+    ],
   providers: [],
   exports: [
     HeaderComponent,

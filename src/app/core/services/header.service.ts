@@ -2,7 +2,8 @@ import {Injectable} from '@angular/core';
 import {Subject} from "rxjs";
 import {CoreModule} from "../core.module";
 import {RouteConfig} from "../models/RouteConfig";
-import {InternalHeaderMenu} from '../components/header/header.component';
+import {HeaderMenu, InternalHeaderMenu} from '../components/header/header.component';
+import {Router} from "@angular/router";
 
 export type HeaderConfig = {
   showMenu: boolean,
@@ -19,6 +20,17 @@ export enum HeaderBackground {
   providedIn: CoreModule
 })
 export class HeaderService extends RouteConfig<HeaderConfig> {
+
+  public static readonly DEFAULT_MENU: HeaderMenu[] = [
+    {title: $localize`:@@coreStartPage:Startseite`, link: '/', activateOnScreenId: 'home'},
+    {title: $localize`:@@coreAbout:Über mich`, link: '/', activateOnScreenId: 'about'},
+    {title: $localize`:@@coreProjects:Projekte`, link: '/', activateOnScreenId: 'projects'},
+    {title: $localize`:@@coreContact:Kontakt`, link: '/', activateOnScreenId: 'contact'}
+  ];
+
+  public getDefaultMenuById(id: string): HeaderMenu | undefined {
+    return HeaderService.DEFAULT_MENU.find(menu => menu.activateOnScreenId === id) || undefined;
+  }
 
   public static readonly DEFAULT_CONFIG: HeaderConfig = {
     showMenu: false,
@@ -73,5 +85,44 @@ export class HeaderService extends RouteConfig<HeaderConfig> {
       this.checkAnimationFrame();
     });
   }
+
+  public async scrollToElement(menu: HeaderMenu) {
+    const currentUrl = this.router.url;
+    const targetUrl = this.router.createUrlTree([menu.link]).toString();
+
+    const isSameUrl = currentUrl === targetUrl;
+
+    if (!isSameUrl) {
+      if (menu.activateOnScreenId === 'home') {
+        return this.router.navigate([menu.link], {queryParams: {id: 'home'}}).then(() => {
+          setTimeout(() => {
+            this.router.navigate([menu.link], {queryParams: {id: null}, queryParamsHandling: 'merge'});
+          }, 50);
+        });
+      }
+    }
+
+    return this.router.navigate([menu.link]).then(() => {
+      setTimeout(() => {
+        if (!menu.activateOnScreenId) return;
+        const element = document.getElementById(menu.activateOnScreenId);
+        if (!element) return;
+        const headerOffset = 100;
+        const elementPosition = element.getBoundingClientRect().top + window.scrollY;
+        const offsetPosition = elementPosition - headerOffset;
+
+        console.log(offsetPosition);
+
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: 'smooth'
+        });
+      }, isSameUrl ? 0 : 100);
+
+
+
+    });
+  }
+
 
 }

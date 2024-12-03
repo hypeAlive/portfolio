@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { provideIcons } from "@ng-icons/core";
 import { bootstrapDiscord, bootstrapGithub, bootstrapLinkedin, bootstrapTwitterX } from "@ng-icons/bootstrap-icons";
 import { FooterBackground, FooterService } from "../../services/footer.service";
+import {HeaderService} from "../../services/header.service";
 
 @Component({
     selector: 'core-footer',
@@ -14,10 +15,16 @@ export class FooterComponent implements OnInit {
 
   protected currentYear!: number;
 
-  constructor(private footerService: FooterService) {}
+  constructor(private footerService: FooterService, private headerService: HeaderService) {}
 
   ngOnInit(): void {
     this.currentYear = new Date().getFullYear();
+  }
+
+  protected goToMenu(id: string) {
+    const menu = this.headerService.getDefaultMenuById(id);
+    if (!menu) return;
+    this.headerService.scrollToElement(menu).then();
   }
 
   protected isSmall(): boolean {
