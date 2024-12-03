@@ -42,7 +42,6 @@ export class ContactComponent implements OnInit {
         this.contactForm.controls['message'].setValue('');
       })
       .catch(err => {
-        console.log(err)
         this.notify.error('Failed to send message', {timeOut: 3000});
       });
   }

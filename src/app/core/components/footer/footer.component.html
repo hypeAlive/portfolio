@@ -8,24 +8,36 @@
     'footer-fixed': isFixed()
   }"
 >
-  <div *ngIf="isHalfOpacity()" class="footer-bg" style="width: 100vw; height: 100%; top: 0; left: 0; z-index: -1;"></div>
+  <div *ngIf="isHalfOpacity()" class="footer-bg"
+       style="width: 100vw; height: 100%; top: 0; left: 0; z-index: -1;"></div>
   <div>
     <nav *ngIf="!isSmall()" class="grid grid-flow-col gap-4">
       <a routerLink="/" class="link link-hover hidden sm:block" i18n="@@coreStartPage" (click)="goToMenu('home')">Startseite</a>
-      <a routerLink="/" fragment="projects" class="link link-hover" i18n="@@coreProjects" (click)="goToMenu('projects')">Projekte</a>
-      <a routerLink="/" fragment="contact" class="link link-hover hidden sm:block" i18n="@@coreContact" (click)="goToMenu('contact')">Kontakt</a>
+      <a routerLink="/" fragment="projects" class="link link-hover" i18n="@@coreProjects"
+         (click)="goToMenu('projects')">Projekte</a>
+      <a routerLink="/" fragment="contact" class="link link-hover hidden sm:block" i18n="@@coreContact"
+         (click)="goToMenu('contact')">Kontakt</a>
       <a href="https://preiscxn.de/imprint" class="link link-hover" i18n="@@coreImprint">Impressum</a>
     </nav>
     <nav>
       <div class="grid grid-flow-col gap-4" [ngClass]="{'text-3xl': !isSmall(), 'text-2xl': isSmall()}">
-        <ng-icon class="my-clickable" name="bootstrapDiscord"></ng-icon>
-        <ng-icon class="my-clickable" name="bootstrapGithub"></ng-icon>
-        <ng-icon class="my-clickable" name="bootstrapTwitterX"></ng-icon>
-        <ng-icon class="my-clickable" name="bootstrapLinkedin"></ng-icon>
+        <a href="https://discord.com/users/225984128309264384" class="my-clickable">
+          <ng-icon name="bootstrapDiscord"></ng-icon>
+        </a>
+        <a href="https://github.com/hypeAlive" class="my-clickable">
+          <ng-icon class="my-clickable" name="bootstrapGithub"></ng-icon>
+        </a>
+        <a href="https://twitter.com/nico00227" class="my-clickable">
+          <ng-icon class="my-clickable" name="bootstrapTwitterX"></ng-icon>
+        </a>
+        <a href="https://www.linkedin.com/in/nicolas-fritz-1b9072297/" class="my-clickable">
+          <ng-icon class="my-clickable" name="bootstrapLinkedin"></ng-icon>
+        </a>
       </div>
     </nav>
     <aside>
-      <p i18n="@@coreCopyright" [ngClass]="{'clear-margin ': isSmall()}">Copyright © {{ currentYear }} - Alle Rechte vorbehalten.</p>
+      <p i18n="@@coreCopyright" [ngClass]="{'clear-margin ': isSmall()}">Copyright © {{ currentYear }} - Alle Rechte
+        vorbehalten.</p>
     </aside>
   </div>
 </footer>

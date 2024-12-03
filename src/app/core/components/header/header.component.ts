@@ -43,7 +43,7 @@ export type InternalHeaderMenu = HeaderMenu & {
     providers: [provideIcons({ featherMenu, heroSun, heroMoon, heroXMarkSolid, heroBars3Solid })],
     standalone: false
 })
-export class HeaderComponent implements AfterViewInit, OnDestroy, OnInit, OnChanges {
+export class HeaderComponent implements AfterViewInit, OnDestroy, OnInit {
 
   readonly themeSwitch = viewChild.required<SwapComponent>('themeSwitch');
   readonly underlineElement = viewChild.required<ElementRef>('underline');
@@ -87,7 +87,7 @@ export class HeaderComponent implements AfterViewInit, OnDestroy, OnInit, OnChan
 
   initMenuElement(menuElement: EventTarget | null, index: number) {
     if (!(menuElement instanceof HTMLElement)) return;
-    this.headerService.headerMenu.push({id: index, element: menuElement, ...this.menu[index]});
+    this.headerService.headerMenu.set(index, {id: index, element: menuElement, ...this.menu[index]});
   }
 
   @HostListener('window:scroll', [])
@@ -205,9 +205,4 @@ export class HeaderComponent implements AfterViewInit, OnDestroy, OnInit, OnChan
   }
 
   protected readonly HeaderBackground = HeaderBackground;
-
-  ngOnChanges(changes: SimpleChanges): void {
-    console.log('Header changes');
-    console.log(changes);
-  }
 }

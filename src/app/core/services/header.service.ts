@@ -41,14 +41,14 @@ export class HeaderService extends RouteConfig<HeaderConfig> {
   private activeElementsStack: InternalHeaderMenu[] = [];
   private intersectionObserver: IntersectionObserver;
 
-  public headerMenu: InternalHeaderMenu[] = [];
+  public headerMenu: Map<number, InternalHeaderMenu> = new Map<number, InternalHeaderMenu>();
 
   constructor() {
     super('header', HeaderService.DEFAULT_CONFIG);
 
     this.intersectionObserver = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
-        const menuItem = this.headerMenu.find(menu => menu.activateOnScreenId === entry.target.id);
+        const menuItem = Array.from(this.headerMenu.values()).find(menu => menu.activateOnScreenId === entry.target.id);
         if (menuItem) {
           (entry.target as HTMLElement).dataset['intersectionRatio'] = entry.intersectionRatio.toString();
         }
@@ -69,13 +69,13 @@ export class HeaderService extends RouteConfig<HeaderConfig> {
 
   private checkAnimationFrame() {
     requestAnimationFrame(() => {
-      const mostVisibleMenu = this.headerMenu
+      const mostVisibleMenu = Array.from(this.headerMenu.values())
         .filter(menu => menu.activateOnScreenId != null)
         .reduce((prev, current) => {
           const prevRatio = parseFloat(document.getElementById(prev.activateOnScreenId!)?.dataset['intersectionRatio'] ?? '0');
           const currRatio = parseFloat(document.getElementById(current.activateOnScreenId!)?.dataset['intersectionRatio'] ?? '0');
           return currRatio > prevRatio ? current : prev;
-        }, this.headerMenu[0]);
+        }, {} as InternalHeaderMenu);
 
       if (this.activeElementsStack[0] !== mostVisibleMenu) {
         this.activeElementsStack = [mostVisibleMenu];
@@ -111,15 +111,11 @@ export class HeaderService extends RouteConfig<HeaderConfig> {
         const elementPosition = element.getBoundingClientRect().top + window.scrollY;
         const offsetPosition = elementPosition - headerOffset;
 
-        console.log(offsetPosition);
-
         window.scrollTo({
           top: offsetPosition,
           behavior: 'smooth'
         });
       }, isSameUrl ? 0 : 100);
-
-
 
     });
   }
