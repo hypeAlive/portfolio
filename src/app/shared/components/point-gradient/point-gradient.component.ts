@@ -2,13 +2,14 @@ import {Component, input} from '@angular/core';
 import {NgClass, NgStyle} from "@angular/common";
 import {FadeInDirective} from "../../directives/fade-in.directive";
 import {EffectColor} from "../../models/effects.interface";
+import {environment} from "../../../../environments/environment";
 
 export type PointGradientType = EffectColor | PointImageGradient;
 
 export enum PointImageGradient {
-  POLYGON = 'poly.png',
-  HEXAGON = 'hexagon.png',
-  LINES = 'lines.png',
+  POLYGON = '83a81ead-ec70-44a5-a4fc-de96e44799b5',
+  HEXAGON = 'db78e3cf-bccb-4259-9844-18ba0963fe40',
+  LINES = 'fb471dc1-967c-4db4-8c89-fdfcfb463534',
 }
 
 @Component({
@@ -41,7 +42,7 @@ export class PointGradientComponent {
   }
 
   protected getImageUrl(): string {
-    return `../../../../assets/bgs/${this.type()}`;
+    return environment.cmsUrl + `/assets/${this.type()}`;
   }
 
 }
