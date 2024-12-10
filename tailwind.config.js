@@ -14,6 +14,9 @@ module.exports = {
       }
     },
   },
+  safelist: [
+    'font-extrabold'
+  ],
   plugins: [
     require("@tailwindcss/typography"),
     require('daisyui'),
