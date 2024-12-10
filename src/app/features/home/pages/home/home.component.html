@@ -123,8 +123,7 @@
           <home-wave-hand class="text-7xl"/>
           <span>{{ helloTitle }}</span>
         </h1>
-        <p *ngFor="let description of descriptions" appFadeIn class="max-w-3xl text-2xl text-center pl-3 pr-3 md:p-0">
-          {{ description.text }}
+        <p *ngFor="let description of descriptions" appFadeIn class="max-w-3xl text-2xl text-center pl-3 pr-3 md:p-0" [innerHTML]="description.text">
         </p>
       </div>
     </div>
